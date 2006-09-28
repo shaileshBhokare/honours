@@ -34,6 +34,7 @@ namespace BirthdayBook
             this.cbxCulture = new System.Windows.Forms.ComboBox();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.lbxResult = new System.Windows.Forms.ListBox();
+            this.btnSortKey = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -71,7 +72,7 @@ namespace BirthdayBook
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(141, 119);
+            this.btnUpdate.Location = new System.Drawing.Point(89, 119);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
             this.btnUpdate.TabIndex = 4;
@@ -87,11 +88,22 @@ namespace BirthdayBook
             this.lbxResult.Size = new System.Drawing.Size(328, 134);
             this.lbxResult.TabIndex = 5;
             // 
+            // btnSortKey
+            // 
+            this.btnSortKey.Location = new System.Drawing.Point(205, 119);
+            this.btnSortKey.Name = "btnSortKey";
+            this.btnSortKey.Size = new System.Drawing.Size(135, 23);
+            this.btnSortKey.TabIndex = 6;
+            this.btnSortKey.Text = "[USING SORT KEY]";
+            this.btnSortKey.UseVisualStyleBackColor = true;
+            this.btnSortKey.Click += new System.EventHandler(this.btnSortKey_Click);
+            // 
             // frmSearch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(365, 345);
+            this.Controls.Add(this.btnSortKey);
             this.Controls.Add(this.lbxResult);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.cbxCulture);
@@ -114,5 +126,6 @@ namespace BirthdayBook
         private System.Windows.Forms.ComboBox cbxCulture;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.ListBox lbxResult;
+        private System.Windows.Forms.Button btnSortKey;
     }
 }
