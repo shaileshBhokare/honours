@@ -139,5 +139,10 @@ namespace BirthdayBook
         private void cmdViewXML_Click(object sender, EventArgs e) {
             MessageBox.Show(m_ds.GetXml().ToString());
         }
+
+        private void btnDetails_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

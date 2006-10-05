@@ -39,6 +39,7 @@ namespace BirthdayBook
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmdSelect = new System.Windows.Forms.Button();
             this.cmdViewXML = new System.Windows.Forms.Button();
+            this.btnDetails = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BBookGrid)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -55,7 +56,7 @@ namespace BirthdayBook
             // cmdExit
             // 
             this.cmdExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdExit.Location = new System.Drawing.Point(27, 190);
+            this.cmdExit.Location = new System.Drawing.Point(166, 231);
             this.cmdExit.Name = "cmdExit";
             this.cmdExit.Size = new System.Drawing.Size(75, 23);
             this.cmdExit.TabIndex = 1;
@@ -122,19 +123,31 @@ namespace BirthdayBook
             // cmdViewXML
             // 
             this.cmdViewXML.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmdViewXML.Location = new System.Drawing.Point(97, 231);
+            this.cmdViewXML.Location = new System.Drawing.Point(25, 190);
             this.cmdViewXML.Name = "cmdViewXML";
             this.cmdViewXML.Size = new System.Drawing.Size(75, 23);
             this.cmdViewXML.TabIndex = 4;
-            this.cmdViewXML.Text = "XML";
+            this.cmdViewXML.Text = "[XML]";
             this.cmdViewXML.UseVisualStyleBackColor = true;
             this.cmdViewXML.Click += new System.EventHandler(this.cmdViewXML_Click);
+            // 
+            // btnDetails
+            // 
+            this.btnDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDetails.Location = new System.Drawing.Point(25, 231);
+            this.btnDetails.Name = "btnDetails";
+            this.btnDetails.Size = new System.Drawing.Size(75, 23);
+            this.btnDetails.TabIndex = 5;
+            this.btnDetails.Text = "[DETAILS]";
+            this.btnDetails.UseVisualStyleBackColor = true;
+            this.btnDetails.Click += new System.EventHandler(this.btnDetails_Click);
             // 
             // BBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 266);
+            this.Controls.Add(this.btnDetails);
             this.Controls.Add(this.cmdViewXML);
             this.Controls.Add(this.cmdSelect);
             this.Controls.Add(this.cmdExit);
@@ -165,6 +178,7 @@ namespace BirthdayBook
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Button cmdSelect;
         private System.Windows.Forms.Button cmdViewXML;
+        private System.Windows.Forms.Button btnDetails;
     }
 }
 

@@ -7,3 +7,4 @@ bin\Debug\BBookWk6.exe
 bin\Debug\BBookWk6.pdb
 obj\Debug\BBookWk6.exe
 obj\Debug\BBookWk6.pdb
+obj\Debug\BBookWk6.frmDetails.resources
