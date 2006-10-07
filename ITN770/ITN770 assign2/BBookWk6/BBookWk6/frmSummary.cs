@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace BBookWk6
 {
-    public partial class frmDetails : Form
+    public partial class frmSummary : Form
     {
-        public frmDetails()
+        public frmSummary()
         {
             InitializeComponent();
         }

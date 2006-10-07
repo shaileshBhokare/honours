@@ -1,6 +1,6 @@
 namespace BBookWk6
 {
-    partial class frmDetails
+    partial class frmSummary
     {
         /// <summary>
         /// Required designer variable.
