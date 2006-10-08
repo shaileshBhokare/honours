@@ -35,13 +35,15 @@ namespace BirthdayBook
         }
 
         private void LoadUIStrings() {
-            ResourceManager res = new ResourceManager("BirthdayBook.UIStrings", this.GetType().Assembly);
+            StringResManager res = new StringResManager("BirthdayBook.UIStrings", this.GetType().Assembly);
             //Form 
             this.Text = res.GetString("[BBOOK]");
 
             //Buttons
             this.cmdExit.Text = res.GetString("[EXIT]");
             this.cmdSelect.Text = res.GetString("[SETCULTURE]");
+            this.cmdViewXML.Text = res.GetString("[XML]");
+            this.btnSummary.Text = res.GetString("[SUMMARY]");
 
             //Menus
             this.fileToolStripMenuItem.Text = res.GetString("[FILE]");
@@ -142,7 +144,13 @@ namespace BirthdayBook
 
         private void btnDetails_Click(object sender, EventArgs e)
         {
+            frmSummary summary = new frmSummary(this);
+            summary.ShowDialog();
+        }
 
+        public DataTable BBookTable
+        {
+            get { return this.m_BBookTable; }
         }
     }
 }

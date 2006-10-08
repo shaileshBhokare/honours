@@ -1,0 +1,14 @@
+<BBData>
+  <Birthdays>
+    <_x005B_NAME_x005D_>kel</_x005B_NAME_x005D_>
+    <_x005B_BIRTHDAY_x005D_>2011-11-11T00:00:00+10:00</_x005B_BIRTHDAY_x005D_>
+  </Birthdays>
+  <Birthdays>
+    <_x005B_NAME_x005D_>mag</_x005B_NAME_x005D_>
+    <_x005B_BIRTHDAY_x005D_>2011-11-12T00:00:00+10:00</_x005B_BIRTHDAY_x005D_>
+  </Birthdays>
+  <Birthdays>
+    <_x005B_NAME_x005D_>abc</_x005B_NAME_x005D_>
+    <_x005B_BIRTHDAY_x005D_>2006-12-30T00:00:00+10:00</_x005B_BIRTHDAY_x005D_>
+  </Birthdays>
+</BBData>
