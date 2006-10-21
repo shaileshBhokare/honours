@@ -1,0 +1,12 @@
+IT Resource - Java / Web Services
+
+Posted: 11 Oct 2006, 09:08am
+
+Closing Date	26th October
+Duties	Assist develop web services as needs dictate and assist configure business rules for use in an open source BPMS environment
+Hours	Negotiable min 20 hrs p/w
+Location	Brisbane City
+Requirements	Development effort would be focused within the HTML, XML, Javascript, XSLT environments. Understanding of or familiarity with web services infrastructure components (such as Web Servers, J2EE Application Servers, Portal Servers or other middleware). Experience in the following highly regarded: Java, relational database design and implementation.
+Vacancies	1
+Wages	Approx $2,100 - $2,300 per fortnight (based on 36hr week)
+Contact Details:	peter.hoffenberg@dlgpsr.qld.gov.au 07 32379841
