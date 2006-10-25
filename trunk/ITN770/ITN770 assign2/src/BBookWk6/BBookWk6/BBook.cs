@@ -25,6 +25,9 @@ namespace BirthdayBook
         private string strTextFiles = "[Text Files]";
         private string strAllFiles = "[All Files]";
         private string strFatalError = "[Fatal Error]";
+        private Boolean RTL = false;
+        private string messageboxButton = "";
+        private string messageCaption = "";
 
         private DataSet m_ds;
         private DataTable m_BBookTable;	        //stores the birthdays 
@@ -59,6 +62,21 @@ namespace BirthdayBook
             this.strAllFiles = res.GetString("[ALLFILES]");
             this.strTextFiles = res.GetString("[TEXTFILES]");
             this.strFatalError = res.GetString("[FATALERROR]");
+
+            //Right to left mirroring
+            if (res.GetString("RTL") == "Yes")
+            {
+                this.RightToLeft = RightToLeft.Yes;
+                this.RTL = true;
+            }
+            else
+            {
+                this.RightToLeft = RightToLeft.No;
+            }
+
+            //messagebox button
+            this.messageboxButton = res.GetString("[OK]");
+            this.messageCaption = res.GetString("[DATASET]");
         }
 
         private void cmdExit_Click(object sender, EventArgs e)
@@ -82,7 +100,8 @@ namespace BirthdayBook
             //Set up a better looking table 
             BBookGrid.Columns[NameCol].Width = (BBookGrid.Width - BBookGrid.RowHeadersWidth - 2 * GridLineWidth) / NumColumns 
                                                 - GridLineWidth;
-            BBookGrid.Columns[DateCol].Width = BBookGrid.Columns[NameCol].Width; 
+            BBookGrid.Columns[DateCol].Width = BBookGrid.Columns[NameCol].Width;
+            LoadUIStrings();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -139,7 +158,19 @@ namespace BirthdayBook
         }
 
         private void cmdViewXML_Click(object sender, EventArgs e) {
-            MessageBox.Show(m_ds.GetXml().ToString());
+            if (this.RTL == true)
+            {
+                MessageBoxOptions option = (MessageBoxOptions)0;
+                option = MessageBoxOptions.RtlReading |
+               MessageBoxOptions.RightAlign;
+
+                MessageBoxEx.Show(m_ds.GetXml().ToString(), this.messageCaption, MessageBoxIcon.Question, MessageBoxButtons.OK,option, this.messageboxButton);
+            }
+            else
+            {
+                //MessageBox.Show(m_ds.GetXml().ToString(),"DataSet",btnOk);
+                MessageBoxEx.Show(m_ds.GetXml().ToString(), this.messageCaption, MessageBoxIcon.Question, MessageBoxButtons.OK, this.messageboxButton);
+            }
         }
 
         private void btnDetails_Click(object sender, EventArgs e)

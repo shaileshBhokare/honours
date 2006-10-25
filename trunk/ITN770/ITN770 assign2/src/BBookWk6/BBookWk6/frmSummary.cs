@@ -34,6 +34,16 @@ namespace BirthdayBook
 
             //groupbox
             this.gbxInfo.Text = res.GetString("[INFORMATION]");
+
+            //Right to left mirroring
+            if (res.GetString("RTL") == "Yes")
+            {
+                this.RightToLeft = RightToLeft.Yes;
+            }
+            else
+            {
+                this.RightToLeft = RightToLeft.No;
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)

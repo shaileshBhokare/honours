@@ -42,6 +42,7 @@
     <Compile Include="BBook.designer.cs">
       <DependentUpon>BBook.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomMessageButtons.cs" />
     <Compile Include="frmSummary.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +76,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIStrings.resx">
       <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UIStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIStrings.zh-TW.resx">
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -97,6 +103,11 @@
       <DependentUpon>SelectCulture.cs</DependentUpon>
     </Compile>
     <Compile Include="StringResManager.cs" />
+    <Compile Include="UIStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UIStrings.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

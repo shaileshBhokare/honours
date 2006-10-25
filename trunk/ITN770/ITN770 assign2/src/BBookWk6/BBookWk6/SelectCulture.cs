@@ -17,12 +17,47 @@ namespace BirthdayBook
             InitializeComponent();
         }
 
+        private void LoadUIStrings()
+        {
+            StringResManager res = new StringResManager("BirthdayBook.UIStrings", this.GetType().Assembly);
+            //Form 
+            this.Text = res.GetString("[SELECT CULTURE]");
+
+            //Buttons
+            this.cmdOK.Text = res.GetString("[OK]");
+            this.cmdCancel.Text = res.GetString("[CANCEL]");
+
+            //labels
+            this.lblIntroduction.Text = res.GetString("[SETCULTURELABEL]");
+            this.lblInstalledCul.Text = res.GetString("[INSTALLED CULTURE]");
+            this.lblInstalledUICul.Text = res.GetString("[INSTALLED UI CULTURE]");
+            this.lblSelectCul.Text = res.GetString("[SELECT CULTURE]");
+            this.lblSelectUICul.Text = res.GetString("[SELECT UI CULTURE]");
+
+            //check box and radio buttons.
+            this.chbShowAllCultures.Text = res.GetString("[SHOW ALL CULTURES]");
+            this.radDispalyName.Text = res.GetString("[DISPLAY NAME]");
+            this.radEnglishName.Text = res.GetString("[ENGLISH NAME]");
+            this.radNativeName.Text = res.GetString("[NATIVE NAME]");
+
+            //Right to left mirroring
+            if (res.GetString("RTL") == "Yes")
+            {
+                this.RightToLeft = RightToLeft.Yes;
+            }
+            else
+            {
+                this.RightToLeft = RightToLeft.No;
+            }
+
+        }
+
         private void LoadCultures() {
             CultureInfo[] list; 
             String name; 
 
             //Get a list of cultures - either all or installed
-            if (chkShowAll.Checked) { 
+            if (chbShowAllCultures.Checked) { 
                 list = CultureInfo.GetCultures(CultureTypes.AllCultures); 
             } else { 
                 list = CultureInfo.GetCultures(CultureTypes.InstalledWin32Cultures);
@@ -34,9 +69,9 @@ namespace BirthdayBook
 
             //There is a name and a display name
             foreach (CultureInfo ci in list) { 
-                if (optEnglishName.Checked) {
+                if (radEnglishName.Checked) {
                     name = ci.EnglishName;
-                } else if (optNativeName.Checked) {
+                } else if (radNativeName.Checked) {
                     name = ci.NativeName;
                 } else {
                     name = ci.DisplayName;
@@ -145,6 +180,9 @@ namespace BirthdayBook
             //These are not subject to the selection made 
             lblCulture.Text = Thread.CurrentThread.CurrentCulture.EnglishName;
             lblUICulture.Text = Thread.CurrentThread.CurrentUICulture.EnglishName;
+
+            LoadUIStrings();
         }
+
     }
 }

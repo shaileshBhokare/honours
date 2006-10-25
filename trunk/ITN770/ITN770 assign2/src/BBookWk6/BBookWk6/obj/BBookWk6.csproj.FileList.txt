@@ -15,3 +15,6 @@ obj\Debug\en\BBookWk6.resources.dll
 bin\Debug\nn-NO\BBookWk6.resources.dll
 obj\Debug\BirthdayBook.UIStrings.nn-NO.resources
 obj\Debug\nn-NO\BBookWk6.resources.dll
+bin\Debug\zh-TW\BBookWk6.resources.dll
+obj\Debug\BirthdayBook.UIStrings.zh-TW.resources
+obj\Debug\zh-TW\BBookWk6.resources.dll
