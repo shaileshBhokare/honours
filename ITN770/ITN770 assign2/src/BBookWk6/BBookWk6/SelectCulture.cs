@@ -178,8 +178,8 @@ namespace BirthdayBook
 
             //Display the current cultures of the thread.
             //These are not subject to the selection made 
-            lblCulture.Text = Thread.CurrentThread.CurrentCulture.EnglishName;
-            lblUICulture.Text = Thread.CurrentThread.CurrentUICulture.EnglishName;
+            lblCulture.Text = Thread.CurrentThread.CurrentCulture.NativeName;
+            lblUICulture.Text = Thread.CurrentThread.CurrentUICulture.NativeName;
 
             LoadUIStrings();
         }

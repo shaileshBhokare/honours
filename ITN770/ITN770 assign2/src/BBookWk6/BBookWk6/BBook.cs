@@ -28,6 +28,8 @@ namespace BirthdayBook
         private Boolean RTL = false;
         private string messageboxButton = "";
         private string messageCaption = "";
+        private string openDialogTitle = "";
+        private string saveDialogTitle = "";
 
         private DataSet m_ds;
         private DataTable m_BBookTable;	        //stores the birthdays 
@@ -77,6 +79,10 @@ namespace BirthdayBook
             //messagebox button
             this.messageboxButton = res.GetString("[OK]");
             this.messageCaption = res.GetString("[DATASET]");
+
+            //open and close file dialog
+            this.openDialogTitle = res.GetString("[OPEN]");
+            this.saveDialogTitle = res.GetString("[SAVE AS]");
         }
 
         private void cmdExit_Click(object sender, EventArgs e)
@@ -113,6 +119,7 @@ namespace BirthdayBook
         {
             OpenDialog.Reset();
             OpenDialog.InitialDirectory = Directory.GetCurrentDirectory();
+            OpenDialog.Title = this.openDialogTitle;
             OpenDialog.RestoreDirectory = false;
             OpenDialog.Filter = String.Format("{0} (*.txt)|*.txt|{1} (*.*)|*.*", this.strTextFiles,
                                                 this.strAllFiles);
@@ -134,6 +141,7 @@ namespace BirthdayBook
         {
             SaveDialog.Reset();
             SaveDialog.InitialDirectory = Directory.GetCurrentDirectory();
+            SaveDialog.Title = this.saveDialogTitle;
             SaveDialog.RestoreDirectory = false;
             SaveDialog.Filter = String.Format("{0} (*.txt)|*.txt|{1} (*.*)|*.*", this.strTextFiles,
                                                 this.strAllFiles);
