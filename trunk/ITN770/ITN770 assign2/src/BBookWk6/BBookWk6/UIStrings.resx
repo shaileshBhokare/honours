@@ -153,6 +153,12 @@
   <data name="[FATALERROR]" xml:space="preserve">
     <value>Fatal Error-def</value>
   </data>
+  <data name="[FILE NAME]" xml:space="preserve">
+    <value>File Name-def</value>
+  </data>
+  <data name="[FILE OF TYPE]" xml:space="preserve">
+    <value>File of Type-def</value>
+  </data>
   <data name="[FILE]" xml:space="preserve">
     <value>File-def</value>
   </data>
@@ -167,6 +173,9 @@
   </data>
   <data name="[INSTALLED UI CULTURE]" xml:space="preserve">
     <value>Installed UI Culture-def</value>
+  </data>
+  <data name="[LOOK IN]" xml:space="preserve">
+    <value>Lock in-def</value>
   </data>
   <data name="[NAME]" xml:space="preserve">
     <value>Name-def</value>
@@ -185,6 +194,15 @@
   </data>
   <data name="[ROW NUMBER]" xml:space="preserve">
     <value>Row Number-def</value>
+  </data>
+  <data name="[SAVE AS TYPE]" xml:space="preserve">
+    <value>Save as type-def</value>
+  </data>
+  <data name="[SAVE AS]" xml:space="preserve">
+    <value>Save as-def</value>
+  </data>
+  <data name="[SAVE IN]" xml:space="preserve">
+    <value>Save in-def</value>
   </data>
   <data name="[SAVE]" xml:space="preserve">
     <value>Save-def</value>

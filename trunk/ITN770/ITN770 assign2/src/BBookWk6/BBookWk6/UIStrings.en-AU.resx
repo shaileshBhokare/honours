@@ -118,118 +118,118 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="[ALLFILES]" xml:space="preserve">
-    <value>All Files-nn</value>
+    <value>All Files-au</value>
   </data>
   <data name="[BBOOK]" xml:space="preserve">
-    <value>Birthday Book-nn</value>
+    <value>Birthday Book-au</value>
   </data>
   <data name="[BIRTHDAY]" xml:space="preserve">
-    <value>Birthday-nn</value>
+    <value>Birthday-au</value>
   </data>
   <data name="[CANCEL]" xml:space="preserve">
-    <value>Cancel-nn</value>
+    <value>Cancel-au</value>
   </data>
   <data name="[CLOSE]" xml:space="preserve">
-    <value>Close-nn</value>
+    <value>Close-au</value>
   </data>
   <data name="[COLUMN NAME]" xml:space="preserve">
-    <value>Column Name-nn</value>
+    <value>Column Name-au</value>
   </data>
   <data name="[COLUMN NUMBER]" xml:space="preserve">
-    <value>Column Number-nn</value>
+    <value>Column Number-au</value>
   </data>
   <data name="[DATASET]" xml:space="preserve">
-    <value>Dataset-nn</value>
+    <value>Dataset-au</value>
   </data>
   <data name="[DISPLAY NAME]" xml:space="preserve">
-    <value>Display Name-nn</value>
+    <value>Display Name-au</value>
   </data>
   <data name="[ENGLISH NAME]" xml:space="preserve">
-    <value>English Name-nn</value>
+    <value>English Name-au</value>
   </data>
   <data name="[EXIT]" xml:space="preserve">
-    <value>Exit-nn</value>
+    <value>Exit-au</value>
   </data>
   <data name="[FATALERROR]" xml:space="preserve">
-    <value>Fatal Error-nn</value>
+    <value>Fatal Error-au</value>
   </data>
   <data name="[FILE NAME]" xml:space="preserve">
-    <value>File Name-nn</value>
+    <value>File Name-au</value>
   </data>
   <data name="[FILE OF TYPE]" xml:space="preserve">
-    <value>File of Type-nn</value>
+    <value>File of Type-au</value>
   </data>
   <data name="[FILE]" xml:space="preserve">
-    <value>File-nn</value>
+    <value>File-au</value>
   </data>
   <data name="[GREETING]" xml:space="preserve">
-    <value>Greeting-nn</value>
+    <value>Greeting-au</value>
   </data>
   <data name="[INFORMATION]" xml:space="preserve">
-    <value>Information-nn</value>
+    <value>Information-au</value>
   </data>
   <data name="[INSTALLED CULTURE]" xml:space="preserve">
-    <value>Installed Culture-nn</value>
+    <value>Installed Culture-au</value>
   </data>
   <data name="[INSTALLED UI CULTURE]" xml:space="preserve">
-    <value>Installed UI Culture-nn</value>
+    <value>Installed UI Culture-au</value>
   </data>
   <data name="[LOOK IN]" xml:space="preserve">
-    <value>Lock in-nn</value>
+    <value>Lock in-au</value>
   </data>
   <data name="[NAME]" xml:space="preserve">
-    <value>Name-nn</value>
+    <value>Name-au</value>
   </data>
   <data name="[NATIVE NAME]" xml:space="preserve">
-    <value>Native Name-nn</value>
+    <value>Native Name-au</value>
   </data>
   <data name="[NOROWERROR]" xml:space="preserve">
-    <value>No Row found-nn</value>
+    <value>No Row found-auau</value>
   </data>
   <data name="[OK]" xml:space="preserve">
-    <value>OK-nn</value>
+    <value>OK-au</value>
   </data>
   <data name="[OPEN]" xml:space="preserve">
-    <value>Open-nn</value>
+    <value>Open-au</value>
   </data>
   <data name="[ROW NUMBER]" xml:space="preserve">
-    <value>Row Number-nn</value>
+    <value>Row Number-au</value>
   </data>
   <data name="[SAVE AS TYPE]" xml:space="preserve">
-    <value>Save as type-nn</value>
+    <value>Save as type-au</value>
   </data>
   <data name="[SAVE AS]" xml:space="preserve">
-    <value>Save as-nn</value>
+    <value>Save as-au</value>
   </data>
   <data name="[SAVE IN]" xml:space="preserve">
-    <value>Save in-nn</value>
+    <value>Save in-au</value>
   </data>
   <data name="[SAVE]" xml:space="preserve">
-    <value>Save-nn</value>
+    <value>Save-au</value>
   </data>
   <data name="[SELECT CULTURE]" xml:space="preserve">
-    <value>Select Culture-nn</value>
+    <value>Select Culture-au</value>
   </data>
   <data name="[SELECT UI CULTURE]" xml:space="preserve">
-    <value>Select UI Culture-nn</value>
+    <value>Select UI Culture-au</value>
   </data>
   <data name="[SETCULTURE]" xml:space="preserve">
-    <value>Set Culture-nn</value>
+    <value>Set Culture-au</value>
   </data>
   <data name="[SETCULTURELABEL]" xml:space="preserve">
-    <value>This application startup from allows you to reset the culture and user interrface culture before starting an application. Use exit to terminate immediately. -nn</value>
+    <value>This application startup from allows you to reset the culture and user interrface culture before starting an application. Use exit to terminate immediately. -au</value>
   </data>
   <data name="[SHOW ALL CULTURES]" xml:space="preserve">
-    <value>Show All Cultures-nn</value>
+    <value>Show All Cultures-au</value>
   </data>
   <data name="[SUMMARY]" xml:space="preserve">
-    <value>Summary-nn</value>
+    <value>Summary-au</value>
   </data>
   <data name="[TEXTFILES]" xml:space="preserve">
-    <value>Text Files-nn</value>
+    <value>Text Files-au</value>
   </data>
   <data name="[XML]" xml:space="preserve">
-    <value>XML-nn</value>
+    <value>XML-au</value>
   </data>
   <data name="RTL" xml:space="preserve">
     <value>No</value>
