@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="[ALLFILES]" space="xml:preserve">
+    <value>All Files-jp</value>
+  </data>
+  <data name="[BBOOK]" space="xml:preserve">
+    <value>Birthday Book-jp</value>
+  </data>
+  <data name="[BIRTHDAY]" space="xml:preserve">
+    <value>Birthday-jp</value>
+  </data>
+  <data name="[CANCEL]" space="xml:preserve">
+    <value>Cancel-jp</value>
+  </data>
+  <data name="[CLOSE]" space="xml:preserve">
+    <value>Close-jp</value>
+  </data>
+  <data name="[COLUMN NAME]" space="xml:preserve">
+    <value>Column Name-jp</value>
+  </data>
+  <data name="[COLUMN NUMBER]" space="xml:preserve">
+    <value>Column Number-jp</value>
+  </data>
+  <data name="[DATASET]" space="xml:preserve">
+    <value>Dataset-jp</value>
+  </data>
+  <data name="[DISPLAY NAME]" space="xml:preserve">
+    <value>Display Name-jp</value>
+  </data>
+  <data name="[ENGLISH NAME]" space="xml:preserve">
+    <value>English Name-jp</value>
+  </data>
+  <data name="[EXIT]" space="xml:preserve">
+    <value>Exit-jp</value>
+  </data>
+  <data name="[FATALERROR]" space="xml:preserve">
+    <value>Fatal Error-jp</value>
+  </data>
+  <data name="[FILE NAME]" space="xml:preserve">
+    <value>File Name-jp</value>
+  </data>
+  <data name="[FILE OF TYPE]" space="xml:preserve">
+    <value>File of Type-jp</value>
+  </data>
+  <data name="[FILE]" space="xml:preserve">
+    <value>File-jp</value>
+  </data>
+  <data name="[GREETING]" space="xml:preserve">
+    <value>Greeting-jp</value>
+  </data>
+  <data name="[INFORMATION]" space="xml:preserve">
+    <value>Information-jp</value>
+  </data>
+  <data name="[INSTALLED CULTURE]" space="xml:preserve">
+    <value>Installed Culture-jp</value>
+  </data>
+  <data name="[INSTALLED UI CULTURE]" space="xml:preserve">
+    <value>Installed UI Culture-jp</value>
+  </data>
+  <data name="[LOOK IN]" space="xml:preserve">
+    <value>Lock in-jp</value>
+  </data>
+  <data name="[NAME]" space="xml:preserve">
+    <value>Name-jp</value>
+  </data>
+  <data name="[NATIVE NAME]" space="xml:preserve">
+    <value>Native Name-jp</value>
+  </data>
+  <data name="[NOROWERROR]" space="xml:preserve">
+    <value>No Row found-jpau</value>
+  </data>
+  <data name="[OK]" space="xml:preserve">
+    <value>OK-jp</value>
+  </data>
+  <data name="[OPEN]" space="xml:preserve">
+    <value>Open-jp</value>
+  </data>
+  <data name="[ROW NUMBER]" space="xml:preserve">
+    <value>Row Number-jp</value>
+  </data>
+  <data name="[SAVE AS TYPE]" space="xml:preserve">
+    <value>Save as type-jp</value>
+  </data>
+  <data name="[SAVE AS]" space="xml:preserve">
+    <value>Save as-jp</value>
+  </data>
+  <data name="[SAVE IN]" space="xml:preserve">
+    <value>Save in-jp</value>
+  </data>
+  <data name="[SAVE]" space="xml:preserve">
+    <value>Save-jp</value>
+  </data>
+  <data name="[SELECT CULTURE]" space="xml:preserve">
+    <value>Select Culture-jp</value>
+  </data>
+  <data name="[SELECT UI CULTURE]" space="xml:preserve">
+    <value>Select UI Culture-jp</value>
+  </data>
+  <data name="[SETCULTURE]" space="xml:preserve">
+    <value>Set Culture-jp</value>
+  </data>
+  <data name="[SETCULTURELABEL]" space="xml:preserve">
+    <value>This application startup from allows you to reset the culture and user interrface culture before starting an application. Use exit to terminate immediately. -jp</value>
+  </data>
+  <data name="[SHOW ALL CULTURES]" space="xml:preserve">
+    <value>Show All Cultures-jp</value>
+  </data>
+  <data name="[SUMMARY]" space="xml:preserve">
+    <value>Summary-jp</value>
+  </data>
+  <data name="[TEXTFILES]" space="xml:preserve">
+    <value>Text Files-jp</value>
+  </data>
+  <data name="[XML]" space="xml:preserve">
+    <value>XML-jp</value>
+  </data>
+  <data name="RTL" space="xml:preserve">
+    <value>No</value>
+  </data>
+</root>
+
