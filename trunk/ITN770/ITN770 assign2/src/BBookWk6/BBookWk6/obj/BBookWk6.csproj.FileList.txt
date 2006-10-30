@@ -34,3 +34,6 @@ obj\Debug\BirthdayBook.UIStrings.de.resources
 obj\Debug\BirthdayBook.UIStrings.de-DE.resources
 obj\Debug\de\BBookWk6.resources.dll
 obj\Debug\de-DE\BBookWk6.resources.dll
+bin\Debug\he-IL\BBookWk6.resources.dll
+obj\Debug\BirthdayBook.UIStrings.he-IL.resources
+obj\Debug\he-IL\BBookWk6.resources.dll

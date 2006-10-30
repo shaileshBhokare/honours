@@ -31,6 +31,8 @@ namespace BirthdayBook
         private string openDialogTitle = "";
         private string saveDialogTitle = "";
 
+        private Boolean firstTime = true;      //check whether the form is loaded for the fist time
+
         private DataSet m_ds;
         private DataTable m_BBookTable;	        //stores the birthdays 
 
@@ -107,6 +109,13 @@ namespace BirthdayBook
             BBookGrid.Columns[NameCol].Width = (BBookGrid.Width - BBookGrid.RowHeadersWidth - 2 * GridLineWidth) / NumColumns 
                                                 - GridLineWidth;
             BBookGrid.Columns[DateCol].Width = BBookGrid.Columns[NameCol].Width;
+
+            if (firstTime)
+            {
+                Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
+                firstTime = false;
+            }
+            
             LoadUIStrings();
         }
 
