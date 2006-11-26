@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomoeConfig>
+  <useSystemDictionaries/>
+  <dictionary file="readingtest.xml"/>
+  <dictionary file="all.xml" system="yes"/>
+  <dictionary file="kanjidic2.xml" system="yes" dontLoad="yes"/>
+  <dictionary file="readingtest.xml" system="yes" dontLoad="yes"/>
+</tomoeConfig>
