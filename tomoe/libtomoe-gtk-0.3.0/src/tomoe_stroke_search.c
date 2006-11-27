@@ -279,7 +279,7 @@ on_find_button_clicked (GtkButton *button, gpointer user_data)
     g_return_if_fail (TOMOE_IS_STROKE_SEARCH (strokeSearch));
     g_return_if_fail (TOMOE_IS_CANVAS (strokeSearch->canvas));
 
-    tomoe_canvas_find (TOMOE_CANVAS (strokeSearch->canvas));
+    tomoe_canvas_find (TOMOE_CANVAS (strokeSearch->canvas));//this line should be the search method
 }
 
 static void
