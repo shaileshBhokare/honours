@@ -1,0 +1,135 @@
+2005-10-29  HIGUCHI Daisuke <daih@users.sourceforge.jp>
+
+	* version 0.1.0.
+	- configure.ac: 0.1.0
+
+2005-10-18  HIGUCHI Daisuke <daih@users.sourceforge.jp>
+
+	* Set canvas size
+	- src/tomoe_canvas.c
+	  (_TomoeCanvasPriv): Added size.
+	  (tomoe_canvas_init): Ditto and modified.
+	  (tomoe_canvas_real_find): Modified.
+	  (normalize_size): Ditto.
+	  (normalize_position): Ditto.
+	  (tomoe_canvas_draw_axis): Ditto.
+	  (tomoe_canvas_set_size): New function.
+	- src/tomoe_canvas.h: Modified.
+
+	* Generalize normalize_size and tomoe_canvas_position.
+	- src/tomoe_canvas.c
+	  (normalize_size): Removed.
+	  (normalize_position): Ditto.
+	  (tomoe_canvas_resize): New function.
+	  (tomoe_canvas_position): Ditto.
+	  (tomoe_canvas_real_normalize): Modified.
+
+2005-10-17  HIGUCHI Daisuke <daih@users.sourceforge.jp>
+
+	* Implement drawing axis.
+	- src/tomoe_canvas.c
+	  (tomoe_canvas_draw_axis): New Function.
+	  (tomoe_canvas_refresh): Calling tomoe_canvas_draw_axis.
+	  (tomoe_canvas_draw_background): Ditto.
+
+	* Rename draw_index to draw_annotate.
+	- src/tomoe_canvas.c 
+	  (draw_index): Removed.
+	  (draw_annotate): Added.
+	  (tomoe_canvas_button_release_event): Modified.
+	  (tomoe_canvas_refresh): Ditto.
+	  (tomoe_canvas_draw_background): Ditto.
+	  (draw_stroke): Ditto.
+
+	* Separate Graphics Contexts.
+	- src/tomoe_canvas.c 
+	  (_TomoeCanvasPriv): Added adjust_line_gc, annotate_gc, axis_gc.
+	  (tomoe_canvas_init): Ditto.
+	  (tomoe_canvas_dispose): Ditto.
+	  (tomoe_canvas_gc_set_foreground): New function.
+	  (tomoe_canvas_set_handwrite_line_color): Ditto.
+	  (tomoe_canvas_set_adjust_line_color): Ditto.
+	  (tomoe_canvas_set_annotate_color): Ditto.
+	  (tomoe_canvas_set_axis_color): Ditto.
+	  (tomoe_canvas_real_find): Using tomoe_canvas_set_adjust_line_color.
+	  (tomoe_canvas_draw_line): Using tomoe_canvas_set_handwrite_line_color.
+	  (draw_annotate): Using tomoe_canvas_set_annotate_color.
+	- src/tomoe_canvas.h: Modified.
+
+2005-10-15  Takuro Ashie <ashie@homa.ne.jp>
+
+	* src/tomoe_canvas.c, src/tomoe_candidates_view.c:
+	Fix indent. Remove "MS Gothic".
+
+2005-10-14  HIGUCHI Daisuke <daih@users.sourceforge.jp>
+
+	* src/tomoe_canvas.c: bugfix.
+	  (draw_index): Fixed position calculating.
+
+2005-10-14  Hiroyuki Ikezoe <poincare@ikezoe.net>
+
+	* src/tomoe_canvas.c:
+	minor fixes for gcc-2.9x.
+
+2005-10-12  HIGUCHI Daisuke <daih@users.sourceforge.jp>
+
+	* Implement normalization.
+	* tomoe_canvas.h
+	  (_TomoeCanvasClass): Added normalize.
+	* tomoe_canvas.c
+	  (TOMOE_CANVAS_DEFAULT_RATE): New definiton.
+	  (enum): Added NORMALIZE_SIGNAL.
+	  (tomoe_canvas_class_init): Added canvas_signals[NORMALIZE_SIGNAL].
+	  Added klass->normalize.
+	  (_CharSize): New struct.
+	  (get_char_size): New function.
+	  (normalize_size): Ditto.
+	  (normalize_position): Ditto.
+	  (tomoe_canvas_real_normalize): Ditto.
+	  (tomoe_canvas_normalize): Ditto.
+	* tomoe_window.h
+	  (_TomoeWindow): Added normalize_button.
+	* tomoe_window.c
+	  (tomoe_window_init): Modified.
+	  (tomoe_window_set_sensitive): Ditto.
+	  (on_normalize_button_clicked): New function.
+	* AUTHORS: Removed zoe's entry by his request.
+
+2005-10-11  HIGUCHI Daisuke <daih@users.sourceforge.jp>
+
+	* src/tomoe_canvas.c: Use PangoFontDescription.
+	- (tomoe_canvas_class_init): Modified.
+	* src/tomoe_canvas.c: Move draw_index from
+	  tomoe_canvas_button_press_event to
+	  tomoe_canvas_button_release_event.
+	- (tomoe_canvas_button_press_event): Removed draw_index.
+	- (tomoe_canvas_button_release_event): Added draw_index.
+	- (draw_stroke): Modified.
+	* src/tomoe_canvas.c: Remove unused variable.
+	- (draw_stroke): Removed TomoeCanvasPriv *priv.
+	* src/tomoe_canvas.c: Implement the algorithm for placing the digit.
+	  This algorithm is derived from kanjipad 2.0.0's
+	  pad_area_annotate_stroke.
+	- (draw_index): Modified. 
+	- (tomoe_canvas_button_release_event): Ditto.
+	- (draw_stroke): Ditto.
+	* src/tomoe_window.c: gettextize.
+	- (tomoe_window_init): Modified.
+	* po/ja.po: Translated and fixed.
+
+2005-10-07  HIGUCHI Daisuke <daih@users.sourceforge.jp>
+
+	* src/tomoe_canvas.c: Draw index number.
+	- (tomoe_canvas_button_press_event): Modified.
+	- (tomoe_canvas_refresh): Ditto.
+	- (draw_stroke): Ditto.
+	- (draw_index): Added.
+
+2005-10-07  Hiroyuki Ikezoe <poincare@ikezoe.net>
+
+	* autoge.sh:
+	run glib-gettextize.
+
+2005-10-06  Hiroyuki Ikezoe <poincare@ikezoe.net>
+
+	* gettextize.
