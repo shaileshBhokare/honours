@@ -1,0 +1,415 @@
+/* toolbar and banner styles */
+@import "/shared/css/tool_ban/ws_toolbar.css";
+@import "/shared/css/tool_ban/ws_banner.css";
+
+/* 16/12/05 OLD IMPORTS REMOVED - SECURITY BUG IN WIN 2k - SL 
+@import "http://www.bbc.co.uk/iftoolbar/styles/toolbar.css";
+@import "http://www.bbc.co.uk/iftoolbar/styles/banner.css";
+*/
+#ift-extra {padding-top:4px;}
+.ift-languages img#ift-bannerimage {margin-left:0;}
+
+/* -------------- GENERAL -------------- */
+body{background-color:#FFFFFF;border:0px;margin:0px;font-size:13px;font-weight:normal;color:#000000;}
+table{}
+tr{}
+td{font-size:13px;}
+b{font-weight:bold;}
+p{}
+div{}
+a{text-decoration:none;}
+.o{}/* - in to help object codeing should be left empty- */
+/* ---------- GENERAL LINKS ----------- */
+a:link   {text-decoration:none;color:#000099;font-size:12px;}
+a:visited{text-decoration:none;color:#000066;font-size:12px;}
+a:active {text-decoration:none;color:#000099;font-size:12px;}
+a:hover  {color:#6666CC;text-decoration:underline;font-size:12px;}
+
+a.lp:link{color:#990000;font-size:14px;font-weight:bold;}
+a.lp:active{color:#990000;font-size:14px;font-weight:bold;}
+a.lp:visited{color:#990000;font-size:14px;font-weight:bold;}
+a.lp:hover{color:#CC6666;font-size:14px;font-weight:bold;}
+
+a.tsh:link{font-size:20px;font-weight:bold;color:#000099;}	
+a.tsh:visited{font-size:20px;font-weight:bold;color:#000066;}
+a.tsh:hover{font-size:20px;font-weight:bold;color:#6666CC;}
+a.tsh:active{font-size:20px;font-weight:bold;color:#000099;}
+
+a.tsl:link{color:#000099;padding-bottom:3px;}
+a.tsl:visited{color:#000066;padding-bottom:3px;}
+a.tsl:hover{color:#6666CC;padding-bottom:3px;}
+a.tsl:active{color:#000099;padding-bottom:3px;}
+
+a.shl:link{color:#000099;font-size:13px;font-weight:bold;text-decoration:none;}
+a.shl:visited{color:#000066;font-size:13px;font-weight:bold;text-decoration:none;}
+a.shl:hover{color:#6666CC;font-size:13px;font-weight:bold;text-decoration:underline;}
+a.shl:active{color:#000099;font-size:13px;font-weight:bold;text-decoration:none;}
+
+a.sshl:link{color:#000099;font-weight:bold;font-size:13px;text-decoration:none;}
+a.sshl:visited{color:#6666CC;font-weight:bold;font-size:13px;text-decoration:none;}
+a.sshl:hover{color:#000099;font-weight:bold;font-size:13px;text-decoration:underline;}
+a.sshl:active{color:#000099;font-weight:bold;font-size:13px;text-decoration:none;}
+
+a.bl:link{color:#6699CC;}
+a.bl:active{color:#6699CC;}
+a.bl:visited{color:#6699CC;}
+a.bl:hover{color:#CCCCCC;}
+
+a.sel:link{color:#99CCFF;}
+a.sel:active{color:#99CCFF;}
+a.sel:visited{color:#99CCFF;}
+a.sel:hover{color:#CCCCCC;}
+
+a.epl:link{font-size:12px;}		
+a.epl:active{font-size:12px;}
+a.epl:visited{font-size:12px;}
+a.epl:hover{font-size:12px;}
+
+/*a.pbl:link{font-size:12px;}		
+a.pbl:active{font-size:12px;}
+a.pbl:visited{font-size:12px;}
+a.pbl:hover{font-size:12px;}*/
+
+/* ---------- GENERAL TEXT ----------- */
+.bt{font-size:13px;}
+.sh{font-size:20px;font-weight:bold;color:#000000;}
+.ish{font-size:16px;font-weight:bold;color:#666666;margin-top:5px;}
+.rhst{font-size:13px;}
+.nlp{font-size:13px;font-weight:bold;color:#666666;}
+.nlpuff{font-size:13px;font-weight:bold;}
+.nlpa{font-size:13px;font-weight:bold;color:#000000;}/*style a*/
+.ds{font-size:12px;color:#000000;} 
+.di{font-size:12px;color:#666666;}
+.la{font-size:12px;font-weight:bold;color:#666666;} 
+.lu{font-size:12px;color:#666666;} 
+.tun{font-size:12px;color:#000000;padding-bottom:3px;}
+/* ---------- GENERAL ----------- */
+.bull{background-image:url("/chinese/img/bullet.gif");background-repeat:no-repeat;padding-left:10px;font-size:13px; padding-bottom:3px;}
+.arr {background-image:url("/chinese/img/800_arrow.gif");background-repeat:no-repeat;padding-left:7px;padding-bottom:3px;}
+
+.arry{background-image:url("/chinese/img/800_arrow.gif");background-repeat:no-repeat;padding-left:7px;padding-bottom:3px;}
+.arrup {background-image:url("/chinese/img/up_arrow.gif");background-repeat:no-repeat;padding-left:7px;padding-bottom:3px;}
+.arrdo {background-image:url("/chinese/img/down_arrow.gif");background-repeat:no-repeat;padding-left:7px;padding-bottom:3px;}
+ .sabull {background-image:url("/chinese/img/bullet.gif");background-repeat:no-repeat;padding-left:7px;padding-bottom:3px;} 
+/* ---------- LHS NAV ----------- */
+.lhs{text-align:right;font-size:14px;background-color:#EEEEEE;border:1px;width:121px;padding-top:5px;}
+.lhsad{text-align:right;font-size:14px;background-color:#EEEEEE;border:1px;width:121px;padding-top:5px;}
+.lhsb{padding-bottom:2px;padding-top:2px;padding-right:6px;font-weight:bold;}
+.lhsl{padding-bottom:2px;padding-top:2px;padding-right:6px;}
+.lhssq{background-repeat:repeat-y;background-color:#999999;padding-bottom:2px; padding-top:2px; padding-right:6px;font-weight:bold;}
+.lhssqs{background-image:url("/chinese/img/nav/v3_3366cc_square.gif");background-repeat:repeat-y;background-color:#9C9C9C;padding-bottom:2px;padding-top:2px;padding-right:6px;font-weight:bold;}
+.lhsbsn{background-image:url("http://newsimg.bbc.co.uk/nol/shared/img/nav/v3_990033_square.gif");background-color:#EFEFEF;padding-bottom:2px;padding-top:2px;padding-right:6px;}
+.lhslt{padding-bottom:2px;padding-top:2px;padding-right:6px;background-color:#cccccc;}
+.lhsdl{font-size:11px;color:#999999;padding-right:6px;}
+.lhsnlp{font-size:14px;color:#636563;font-weight:bold;padding-bottom:4px;padding-top:2px;padding-right:6px;}
+.lhsmi{background-color:#cccccc;}
+.lhssp{font-size:14px; color:#eeeeee;}
+.lhsgo{padding-top:4px;padding-right:6px;}
+.lhsql{font-size:14px;background-color:#EEEEEE;padding-left:6px;}
+.lhsssl{padding-bottom:2px;padding-top:2px;padding-left:12px;}
+.lhssqp{background-image:url("http://newsimg.bbc.co.uk/nol/shared/img/nav/v3_000000_square.gif");background-repeat:repeat-y;background-color:#FFCC00;padding-bottom:2px;padding-top:2px;padding-left:12px;font-weight:bold;}
+table.lhs{background-color:#EEEEEE;}
+a.lhsnl:link{color:#990000;text-decoration:none;}		
+a.lhsnl:active{color:#990000;text-decoration:none;}
+a.lhsnl:visited{color:#660000;text-decoration:none;}
+a.lhsnl:hover{color:#CC6666;text-decoration:underline;}
+.lhsdl{color:#CCCCCC;}
+.lhs a:visited{color:#000099;}
+
+ul#lhsOtherSites{
+	list-style:none;
+	margin:0;
+	padding:0;
+	background:#eee;
+	font-family:Verdana,Arial,Helvetica,sans-serif,"MS sans serif";
+}
+ul#lhsOtherSites li{text-align:right;padding:0 5px 0 0;}
+a.relatedSitesLink:link{font-size:11px;}		
+a.relatedSitesLink:active{font-size:11px;}
+a.relatedSitesLink:visited{color:#000099;font-size:11px;}
+a.relatedSitesLink:hover{font-size:11px;}
+/* ---------- FOOTER NAV ----------- */
+table.fs{margin-top:20px;}
+td.fo {background-color:#003399;color:#99CCFF;font-size:12px;padding-top:2px;}
+.sebii{background:#990000;color:#CCCC99;text-decoration:none;font-weight:bold;}
+a.fl:link{font-size:14px;color:#000099;}
+a.fl:visited{font-size:14px;color:#000099;}
+a.fl:hover{font-size:14px;color:#6666CC;}
+a.fl:active{font-size:14px;color:#000099;}
+
+a.flb:link{font-size:14px;color:#000099;font-weight:bold;}
+a.flb:visited{font-size:14px;color:#000099;font-weight:bold;}
+a.flb:hover{font-size:14px;color:#6666CC;font-weight:bold;}
+a.flb:active{font-size:14px;color:#000099;font-weight:bold;}
+.f{margin-left:131px;width:629px;margin-bottom:10px;font-size:13px;}
+
+/* ---------- BBC TOOLBAR ----------- */
+.tbsh {background-color:#828282;}
+.tbshl {border-left:2px solid #828282;}
+.tbb {background:#999999 url(/shared/img/v3_tb/v.gif) repeat-y;}
+.tbs1 {background:#003399 url(/shared/img/v3_tb/sl.gif) no-repeat;}
+.tbs {background:#003399 url(/shared/img/v3_tb/st.gif) repeat-x;}
+.tbs2 {background:#003399 url(/shared/img/v3_tb/st.gif) repeat-x 0 0;}
+.tbsra {background:#999999 url(/shared/img/v3_tb/sra.gif) no-repeat;}
+.tbsrb {background:#999999 url(/shared/img/v3_tb/srb.gif) no-repeat;}
+.tbbl {background-color:#000000;}
+.tbblu {background-color:#003399;}
+.tbg, .tbshl {background-color:#999999;}
+.tbwl,font.tbwl,a.tbwl,a.tbwl:link,a.tbwl:hover,a.tbwl:visited {color:#ffffff;text-decoration:none;font-family:verdana,arial,helvetica,sans-serif;padding:1px 4px;}
+#tbtbl {background:url("http://newsimg.bbc.co.uk/shared/img/v3_tb/blt.gif")  no-repeat;}
+td.ba{background-color:#003399;color:#FFFFFF;font-size:11px;padding-bottom:2px;padding-top:2px;}
+/* -------------- padding and margins -------------- */
+.mva{margin:5px;} 
+.mvt{margin-top:5px;}
+.mvtl{margin-top:5px;margin-left:5px;}  
+.mvl{margin-left:5px;}
+.mvr{margin-right:5px;}
+.mvtb{margin-top:5px;margin-bottom:5px;}
+.mxtb{margin-top:10px;margin-bottom:10px;}
+.mvb{margin-bottom:5px;}
+.mxb{margin-bottom:15px;}
+.mxvb{margin-bottom:15px;}
+.mvbl{margin-bottom:5px;margin-left:5px;}
+.miiia{margin:3px;}
+.miiil{margin-left:3px;}
+.miiir{margin-right:3px;}
+.miiitb{margin-top:3px;margin-bottom:3px;}
+.miiib{margin-bottom:3px;}
+/*.miiit{margin-top:3px;}*/
+.miiilr{margin-left:3px;margin-right:3px;}
+.miitb{margin-top:2px;margin-bottom:2px;}
+.pva{padding:5px;}
+.pvl{padding-left:5px;}
+.pvr{padding-right:5px;}
+.pvt{padding-top:5px;}
+.pvtb{padding-top:5px;padding-bottom:5px;}
+.pvtbl{padding-top:5px;padding-bottom:5px;padding-left:5px;}
+.pvlb{padding-left:5px;padding-bottom:5px;}
+.pvb{padding-bottom:5px;}
+.piiia{padding:3px;}
+.piiil{padding-left:3px;}
+.piiir{padding-right:3px;}
+.piiitb{padding-top:3px;padding-bottom:3px;}
+.piiit{padding-top:3px;}
+.piit{padding-top:2px;}
+.piiib{padding-bottom:3px;}
+.pxl{padding-left:10px;}
+.imvr{margin-right:5px;}
+/* -------------- GUTTERS -------------- */
+.gffffff{background-color:#FFFFFF;}
+.gddddbb{background-color:#ddddbb;}
+.gcccccc{background-color:#CCCCCC;}
+.g000000{background-color:#000000;}
+.gc3d3f2{background-color:#C3D3F2;}
+/* -------------- SPACERS -------------- */
+.svtb{padding-top:5px;padding-bottom:5px;}
+
+/* ---------- INDEX MODULES ----------- */
+.vb{background-color:#E3EDF7;color:#000000;font-size:13px;border:1px;width:203px;padding-bottom:5px;}
+.vh{padding-left:5px;background-color:#365FAC;font-size:13px;color:#FFFFFF;padding-top:2px;padding-bottom:2px;font-weight:bold;}
+.vdi{font-size:12px;color:#000000;}
+/* ---------- PROMO STRIP ----------- */
+.pb{background-color:#C3D3F2;color:#000000;width:203px;}
+/* ---------- AV ----------- */
+.avh{background-color:#365FAC;color:#FFFFFF;font-size:13px;padding-top:2px;padding-bottom:0px;padding-left:5px;font-weight:bold;}
+.avsh{background-color:#8BA4D4;color:#FFFFFF;font-size:13px;padding-top:2px;padding-bottom:0px;padding-left:5px;}
+.avlh{background-color:#990000;color:#FFFFFF;font-size:13px;padding-top:2px;padding-bottom:0px;padding-left:5px;}
+.avb{width:203px;}
+.avt{font-size:11px;}
+/* ---------- FILLERS ----------- */
+.spb{background-color:#FFFFCC;border:1px;width:203px;}
+.spbe{background-color:#FFFF33;border-top:1px dashed;border-bottom:1px dashed;padding-top:3px;padding-bottom:3px;}
+.gnb{background-color:#639C31;color:#FFFFFF;border:1px;padding-top:5px;padding-bottom:5px;padding-left:5px;}
+.bglb{background-color:#E3EDF7;color:#FFFFFF;border:1px;padding-top:0px;padding-bottom:5px;padding-left:5px;}
+.tqub{background-color:#99CCCC;color:#000000;border:1px;padding-top:5px;padding-bottom:5px;padding-left:5px;}
+/* ---------- HYPER PUFFS ----------- */
+.mpb{width:203px;}
+.mph{background-color:#999966;color:#FFFFFF;font-size:12px;padding-left:5px;	padding-top:2px;padding-bottom:2px;}	
+.mphp{background-color:#999966;color:#ffffff;font-size:12px;padding-left:5px;	padding-top:2px;padding-bottom:2px;background-color:#993366;}
+.wshp{background-color:#315DAD;color:#ffffff;font-size:12px;padding-left:5px;	padding-top:2px;padding-bottom:2px;}	
+/* ---------- DROP DOWN MODULES ----------- */
+.ddb{background-color:#ffffff;border:1px;font-size:12px;padding-bottom:5px;padding-top:2px;padding-left:5px;color:#000000;}	
+.ddh{font-size:13px;color:#000000;}	
+.ddt{margin-bottom:5px;font-size:12px;}
+/* ---------- STORY RHS MODULES ----------- */
+.sah	{background-color:#365FAC;color:#ffffff;font-size:13px;padding-left:5px;padding-top:2px;font-weight:bold;margin-bottom:4px;}
+.sab{width:203px;}	
+.sad{font-size:11px;color:#666666;}
+.sph	{background-color:#6699cc;color:#ffffff;font-size:13px;padding-top:2px;padding-bottom:2px;padding-left:5px;}
+.lep	{background-color:#009999;color:#ffffff;font-size:13px;padding-top:2px;padding-bottom:2px;padding-left:5px;}
+.spop	{background-color:#ffcc00;color:#ffffff;font-size:13px;padding-top:2px;padding-bottom:2px;padding-left:5px;}
+.snh{font-size:12px;background-color:#999999;color:#ffffff;padding-left:5px;padding-top:2px;padding-bottom:2px;font-weight:bold;}
+.sng{background-color:#cccccc;}
+/* ---------- STORY INLINE MODULES ----------- */
+td.sibt{font-size:13px;}
+td.sibtbg{font-size:13px;background-color:#E3EDF7;}
+.sih{font-size:13px;background-color:#365FAC;color:#FFFFFF;padding-left:5px;padding-top:2px;padding-bottom:2px;font-weight:bold;}
+.sibf{font-size:13px;background-color:#E3EDF7;}
+/* ---------- form tags ----------- */
+.formatStyle{width:145px;}
+form{padding:0px;margin:0px;}
+/* --------- HAVE YOUR SAY SEARCH ----------*/
+table.hys{background-color:#dddddd;}
+td.hyst{color:#000000; font-size:13px;}
+/* ---------- Story pages----------- */
+.cap{font-size:11px;color:#666666}
+.bys{font-size:12px;color:#000000}
+.byl{font-size:12px;color:#666666}
+.byd{font-size:11px;color:#000000}
+.msd{font-size:12px;color:#666666}
+/* ---------- Weather Page ----------- */
+.st { font-size:12px;font-weight:bold;color:#CC3300; }
+.winf { font-size:12px;font-weight:normal;color:#000000; }
+.cname { font-size:14px;font-weight:bold;color:#000000; }
+/* ---- Programme Index + Pages --- */
+.pdd { width:350px; }
+/* ---- Partners Page --- */
+.pgt { font-size:12px;font-weight:bold;color:#666666; }
+
+/*------------ TICKER ------------*/
+a.tickl{ font-size:12px; line-height:12px; text-decoration:none; color:#000099;font-weight:bold;}
+a.tickl:hover{color:#6666CC; font-size:12px; text-decoration:none;}
+.ticki{width:629px;height:13px;overflow:hidden;padding-top:2px}
+.ticko{width:629px;border-top:1px solid #cccccc;border-bottom:1px solid #cccccc;padding:4px 0 4px 0; margin:4px 0 2px 0;display:block;}
+.tickh{display:none;}
+.tickls{color:#666666;}
+
+/*------------ MARKETDATA ------------*/
+.dataph{color:#666633;font-size:18px;font-weight:bold;margin-top:10px;}
+
+.datah{color:#666666;font-size:12px;margin-top:10px;}
+.datat{font-size:11px;}
+/*graphs*/
+.graphb{border:1px solid #999999;width:203px;}
+.graphred{font-size:11px;color:#CC3300;font-weight:bold;}  
+.graphtable{background:#999999;}  
+/*table*/
+td.datatdh{height:15px;font-size:11px;background-color:#ffffff;}
+.tablehead{color:#666666;font-weight:bold;font-size:11px;}
+
+/*-----------ENCODING BOX------------*/
+.enco{background-color:#eeeeee;border-bottom:2px solid #999999;padding-top:3px;padding-bottom:3px;padding-left:6px;}
+/*.enci{font-size:14px;color:#990000;float:left;padding-top:2px;}*/
+
+/*date stamp*/
+.ds{font-size:12px;padding-top:4px;}
+
+/*weather box*/
+.wth{background-color:#669933;color:#FFFFFF;font-size:13px;padding-top:2px;padding-bottom:0px;padding-left:5px;font-weight:bold;}
+.sectionHeader{font-size:16px;font-weight:bold;color:#666666;margin-top:5px;border-bottom:1px #999999 solid;}
+
+/* inline links */
+a.inlineText:link{font-size:13px;}
+a.inlineText:active{font-size:13px;}
+a.inlineText:visited{font-size:13px;}
+a.inlineText:hover{font-size:13px;}
+
+/* ----- Pic gallery styles */
+.galMain .galImg{width:416px;height:305px;text-align:center;}
+.picGalCaption{height:4.5em;font-size:13px;margin:0px;padding:0px;}
+.rollOver{font-size:11px;color:#666666;font-weight:bold;font-family:Verdana, Arial, Helvetica, sans-serif;margin-bottom:2px;position: relative;display:none;}
+
+.galMain p{margin:0px;padding:5px 0px;}
+.galMain .galLoading{width:416px;height:300px;text-align:center;padding-top:60px;}
+.galMain .rollOver{height:3em;}
+
+.galMain .navBox{height:4em;display:none;}
+.galMain .navBox1{width:70px;}
+.galMain .navBox2{width:276px;text-align:center;}
+.galMain .navBox3{width:70px;text-align:right;}
+
+.clear{clear:both;}
+
+.galMain a.back{font-weight:bold;padding:0px 0px 0px 12px;background:url("http://newsimg.bbc.co.uk/nol/shared/spl/hi/picture_gallery/img/back.gif") no-repeat 5px 4px;}
+.backOff{color:#ccc;font-weight:bold;padding:0px 0px 0px 12px;background:url("http://newsimg.bbc.co.uk/nol/shared/spl/hi/picture_gallery/img/back.gif") no-repeat 5px 4px;font-size:11px;}
+
+.galMain a.next{font-weight:bold;padding:0px 14px 0px 0px;background:url("http://newsimg.bbc.co.uk/nol/shared/spl/hi/picture_gallery/img/fwd.gif") no-repeat 27px 4px;}
+.nextOff{color:#ccc;font-weight:bold;padding:0px 14px 0px 0px;background:url("http://newsimg.bbc.co.uk/nol/shared/spl/hi/picture_gallery/img/fwd.gif") no-repeat 62px 4px;font-size:11px;}
+
+
+.galMain .navBox .navBox2 a{color:#fff;font-weight:bold;background:#009;margin:0px;padding:5px;text-align:center;line-height:26px;}
+.galMain .navBox .navBox2 a.sel{color:#fff;font-weight:bold;background:#6A6dbe;margin:0px;padding:5px;text-align:center;line-height:26px;} 
+
+/* gallery styles */
+a.lnkbn:link{color:#000099;text-decoration:none;font-family:Verdana, Arial, Helvetica, sans-serif;font-weight:bold;font-size:11px;}
+a.lnkbn:active{color:#000099;text-decoration:none;font-family:Verdana, Arial, Helvetica, sans-serif;font-weight:bold;font-size:11px;}
+a.lnkbn:visited{color:#000099;text-decoration:none;font-family:Verdana, Arial, Helvetica, sans-serif;font-weight:bold;font-size:11px;}
+a.lnkbn:hover{color:#000099;text-decoration:underline;font-family:Verdana, Arial, Helvetica, sans-serif;font-weight:bold;font-size:11px;}
+
+a.rlOver:link{color:#ffffff;text-decoration:none;font-family:Verdana, Arial, Helvetica, sans-serif;font-weight:bold;font-size:11px;margin-bottom:2px;}
+a.rlOver:active{color:#ffffff;text-decoration:none;font-family:Verdana, Arial, Helvetica, sans-serif;font-weight:bold;font-size:11px;margin-bottom:2px;}
+a.rlOver:visited{color:#ffffff;text-decoration:none;font-family:Verdana, Arial, Helvetica, sans-serif;font-weight:bold;font-size:11px;margin-bottom:2px;}
+a.rlOver:hover{color:#ffffff;text-decoration:underline;font-family:Verdana, Arial, Helvetica, sans-serif;font-weight:bold;font-size:11px;margin-bottom:2px;}
+
+/* SIP styles */
+.topStoryH{color:#666;font-size:14px;font-weight:bold;margin:0 0 5px 0;text-transform:uppercase;}
+.seeAlsoH{color:#666;font-size:14px;font-weight:bold;margin:0 0 5px 0;text-transform:uppercase;}
+.mostReadH{color:#666;font-size:14px;font-weight:bold;margin:0 0 5px 0;text-transform:uppercase;}
+.mostReadB{color:#666;font-size:14px;margin:0 0 5px 0;}
+
+.bigPictureH{font-size:14px;padding:0px;margin:0;color:#333;}
+.bigPictureB{margin:0px;padding:0 0 10px 0;}
+.inPicturesH{font-size:18px;padding:0px;margin:0;color:#333;font-weight:bold;}
+.inPicturesH a:link,.inPicturesH a:visited,.inPicturesH a:active,.inPicturesH a:hover{font-size:18px;}
+.inPicturesB{margin:0px;padding:0 0 10px 0;}
+
+ul.bulletList{padding:0px;margin:0 0 0 20px;list-style-type:none;}
+ul.bulletList li{padding:0 0 3px; 0;margin:0px;list-style-type:disc;}
+
+/*  av stacker   */
+/*.avmode{margin:0;padding:0;height:15px;background:#900 url("http://newsimg.bbc.co.uk/nol/shared/img/v3/avstrapbar.gif") repeat-x top;color:#fff;font-size:10px;}*/
+.avmode{margin:0;padding:0;background:#039;color:#fff;font-size:14px;border-bottom:2px solid #000;}
+
+a.hide:link,a.hide:visited,a.hide:active,a.hide:hover{color:#fff;font-size:14px;padding:0 17px 0 10px;background:url("http://newsimg.bbc.co.uk/nol/shared/img/v3/avhide.gif") no-repeat right;}
+a.show:link,a.show:visited,a.show:active,a.show:hover{padding:0 17px 0 10px;font-size:14px;background:url("http://newsimg.bbc.co.uk/nol/shared/img/v3/avshow.gif") no-repeat right;}
+
+.avmodestrap{margin:0;padding:1px 2px 1px 5px;float:left;font-weight:bold;}
+.avmodeaction{margin:0;padding:1px 2px 1px 5px;float:right;}
+.avmodeaction a:link,.avmodeaction a:visited,.avmodeaction a:active,.avmodeaction a:hover{color:#fff;font-size:14px;text-transform:uppercase;}
+hr.avmode{color:#ccc;height:1px;border:0px;background:#ccc;}
+hr.avhr{color:#ccc;height:1px;border:0px;background:#ccc;}
+
+.avstack{padding:3px 0 0 0;border-top:3px solid #ccc;}
+ul.stackList{padding:0px;margin:0px;list-style:none;}
+ul.stackList li{padding:2px 0px;margin:0px;}
+.stackCol{width:213px;float:left;}
+.stackCol2{width:203px;float:left;}
+.stackList li.stackarr{padding:0 0 2px 7px;background:url("http://newsimg.bbc.co.uk/nol/shared/img/v3/arrow.gif") no-repeat 0px 2px;line-height:16px;}
+/* end SIP styles */
+
+
+
+/*  service strip for sip   */
+.serviceStripPromo{background:#eee;height:95px;}
+.serviceStripPromo h4{font-size:10px;margin:0px;color:#333;padding:2px 0 5px 0px;clear:both;background:#eee;}
+
+.footermain{width:760px;}
+.serviceStripStory ul{padding:0px;margin:0px;list-style:none;background:#eee;}
+.serviceStripStory{background:#eee;height:40px;padding:0 0 0 131px;}
+.serviceStripStory h4{font-size:15px;margin:0px;color:#333;padding:2px 0 5px 0;clear:both;background:#eee;}
+.serviceStripStory ul li{display:inline;text-align:center;background:#eee;padding:0 20px 0 0;}
+.serviceStripStory ul li a:link,.serviceStripStory ul li a:visited,.serviceStripStory ul li a:active,.serviceStripStory ul li a:hover{font-weight:bold;}
+
+/*  FOOTER for sip   */
+#footer1{clear:both;width:760px;margin:10px 0 0 0;}
+ul#footList{margin:5px 0 10px 131px;padding:0px;}	
+ul#footList li{list-style-type: none;display:inline;padding:2px 0;}
+ul#footList li a{padding: 0 8px 0 0;}
+ul#footList li a{border-right:1px solid #000;}
+ul#footList li a.none{border:none;}
+#footList a{font-size:13px;}
+#footList li a.none{border:none;}
+
+ul#serviceBar{background:#039;list-style:none;margin:0;padding:5px 0;width:760px;height:15px;}
+ul#serviceBar li{padding:0px;}
+
+ul#serviceBar li.copyright{float:left;width:85px;border:1px solid #039;}
+ul#serviceBar li.footermostpop{float:left;width:585px;background:#039;color:#fff;font-size:11px;text-align:center;}
+ul#serviceBar li.footertotop{float:right;width:90px;color:#fff;font-size:11px;text-align:right;padding:0 5px 0 0;}
+
+ul#serviceBar li a{color:#fff;}
+ul#serviceBar li.copyright a{float: left;text-indent:-1000px;width:83px;background:url("http://newsimg.bbc.co.uk/shared/img/v3/bbc_copyright_fff.gif") no-repeat 3px 3px;border:none;}
+
+/* New RSS style */
+.feedslink{margin:-4px 0px 4px 0px;}
+.feedbar{color:#999;}
