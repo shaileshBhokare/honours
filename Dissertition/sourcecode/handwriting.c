@@ -1,28 +1,36 @@
-/* example-start scribble-simple scribble-simple.c */
+/*review version 0.4
+1. added in quantilisation.
+*/
 
-/* GTK - The GIMP Toolkit
- * Copyright (C) 1995-1997 Peter Mattis, Spencer Kimball and Josh MacDonald
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- * Boston, MA 02111-1307, USA.
- */
+/*review version 0.3
+1. add in smooth feature
+*/
+
+/*review version 0.2
+1. add in training function
+2. add in save function
+*/
+
+/*review version 0.1
+1. fix line break problem
+2. remove starting point drawing
+*/
 
 #include <gtk/gtk.h>
+#include <stdio.h>
 
+#define True 1
+#define False 0
 /* Backing pixmap for drawing area */
 static GdkPixmap *pixmap = NULL;
+static int x1 ;
+static int x2 ;
+static int y1 ;
+static int y2 ;
+static int training ;
+static char *file = "./data/data.txt";
+static FILE *fp;
+static int firstStroke = True;
 
 /* Create a new backing pixmap of the appropriate size */
 static gint
@@ -59,16 +67,17 @@ expose_event (GtkWidget *widget, GdkEventExpose *event)
   return FALSE;
 }
 
+
 /* Draw a rectangle on the screen */
 static void
 draw_brush (GtkWidget *widget, gdouble x, gdouble y)
 {
   GdkRectangle update_rect;
 
-  update_rect.x = x - 5;
-  update_rect.y = y - 5;
-  update_rect.width = 10;
-  update_rect.height = 10;
+  update_rect.x = x ;
+  update_rect.y = y ;
+  update_rect.width = 1;
+  update_rect.height = 1;
   gdk_draw_rectangle (pixmap,
 		      widget->style->black_gc,
 		      TRUE,
@@ -77,16 +86,63 @@ draw_brush (GtkWidget *widget, gdouble x, gdouble y)
   gtk_widget_draw (widget, &update_rect);
 }
 
-static gint
-button_press_event (GtkWidget *widget, GdkEventButton *event)
-{
-  if (event->button == 1 && pixmap != NULL)
-    draw_brush (widget, event->x, event->y);
 
-  return TRUE;
+/* draw a line on the screen */
+static void
+draw_line (GtkWidget *widget, gdouble x1, gdouble y1, gdouble x2, gdouble y2)
+{
+  /*GdkRectangle update_rect;
+
+  update_rect.x = x1 ;
+  update_rect.y = y1 ;
+  update_rect.width = 1;
+  update_rect.height = 1;*/
+  
+  gint x, y, width, height;
+  x = MIN(x1,x2);
+  y = MIN(y1,y2);
+  width = 100;
+  height = 100;
+
+  gdk_draw_line (pixmap,
+		 widget->style->black_gc,
+		 x1, y1,
+		 x2, y2);
+  //gtk_widget_draw (widget, &update_rect);
+  gtk_widget_queue_draw_area (widget, x, y, width, height);
 }
 
 static gint
+button_press_event (GtkWidget *widget, GdkEventButton *event)
+{
+  if (event->button == 1 /* 1 represent the left button */ && pixmap != NULL)
+    {
+       draw_brush (widget, event->x, event->y);
+
+	/* flush the memory */
+       x1 = 0;
+       y1 = 0;
+       x2 = event->x;
+       y2 = event->y;
+       
+       printf("%d", x2);
+       printf("\t\t\t");
+       printf("%d", y2);
+       printf("\n");
+       
+       if(fp != NULL && training == True && firstStroke == True)
+      	{
+        	fprintf(fp, "<s>\n(%d,%d)", x2, y2);
+        	firstStroke = False;
+      	}else if(fp != NULL && training == True)
+      	{
+      		fprintf(fp, "\n</s>\n<s>\n(%d,%d)", x2, y2);
+      	}
+    }
+  return TRUE;
+}
+
+/*static gint
 motion_notify_event (GtkWidget *widget, GdkEventMotion *event)
 {
   int x, y;
@@ -102,7 +158,51 @@ motion_notify_event (GtkWidget *widget, GdkEventMotion *event)
     }
     
   if (state & GDK_BUTTON1_MASK && pixmap != NULL)
-    draw_brush (widget, x, y);
+    {
+      draw_brush (widget, x, y);
+	//printf("Test");
+      printf("%d", &event->x);
+      printf("\t\t\t");
+      printf("%d", &event->y);
+      printf("\n");
+    }
+  
+  return TRUE;
+}*/
+
+static gint
+motion_notify_event (GtkWidget *widget, GdkEventMotion *event)
+{
+  x1 = x2;
+  y1 = y2;
+
+  GdkModifierType state;
+
+  if (event->is_hint)
+    gdk_window_get_pointer (event->window, &x2, &y2, &state);
+  else
+    {
+      x2 = event->x;
+      y2 = event->y;
+      state = event->state;
+    }
+    
+  if (state & GDK_BUTTON1_MASK && pixmap != NULL)
+    {
+      draw_line (widget, x1, y1, x2, y2);
+	//printf("Test");
+      printf("%d", x2);
+      printf("\t\t\t");
+      printf("%d", y2);
+      printf("\n");
+      //char buf[256];
+      //springf(buf,"%g\t%g",x2,y2); 
+      if(fp != NULL && training == True)
+      {
+        fprintf(fp, "\n(%d,%d)",x2, y2);
+	//fprintf(fp, "\n%s", buf);
+      }
+    }
   
   return TRUE;
 }
@@ -113,6 +213,22 @@ quit ()
   gtk_exit (0);
 }
 
+/* training function - open the target file to save the training data */
+void
+train_function ()
+{
+  training = True;
+  fp = fopen(file, "w");
+}
+
+void
+save_function ()
+{
+  training = False;
+  fprintf(fp, "\n</s>");
+  fclose(fp);
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -121,6 +237,9 @@ main (int argc, char *argv[])
   GtkWidget *vbox;
 
   GtkWidget *button;
+  GtkWidget *btnTraining;
+  GtkWidget *btnClear;
+  GtkWidget *btnSave;
 
   gtk_init (&argc, &argv);
 
@@ -162,19 +281,52 @@ main (int argc, char *argv[])
 			 | GDK_POINTER_MOTION_MASK
 			 | GDK_POINTER_MOTION_HINT_MASK);
 
-  /* .. And a quit button */
+  /* Add a quit button */
   button = gtk_button_new_with_label ("Quit");
   gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
-
   gtk_signal_connect_object (GTK_OBJECT (button), "clicked",
 			     GTK_SIGNAL_FUNC (gtk_widget_destroy),
 			     GTK_OBJECT (window));
   gtk_widget_show (button);
 
+  /* Add a training button */
+  btnTraining = gtk_button_new_with_label ("Train");
+  gtk_box_pack_start (GTK_BOX (vbox), btnTraining, FALSE, FALSE, 0); 
+  /*gtk_signal_connet_object (GTK_OBJECT (btnTraining), "clicked",
+			    GTK_SIGNAL_FUNC (gtk_widget_destroy),
+			    GTK_OBJECT (window));*/
+  gtk_signal_connect (GTK_OBJECT (btnTraining), "clicked",
+		      GTK_SIGNAL_FUNC (train_function), NULL);
+  gtk_widget_show (btnTraining);
+  
+    /* add a Save button */
+  btnSave = gtk_button_new_with_label ("Save");
+  gtk_box_pack_start (GTK_BOX (vbox), btnSave, FALSE, FALSE, 0);
+  /*gtk_signal_connect_object (GTK_OBJECT (btnSave), "clicked",
+			     GTK_SIGNAL_FUNC (gtk_widget_destroy),
+			     GTK_OBJECT (window));*/
+  gtk_signal_connect (GTK_OBJECT (btnSave), "clicked",
+		      GTK_SIGNAL_FUNC (save_function), NULL);
+  gtk_widget_show (btnSave);
+  
+  
+
+  /* Add a clear button */
+  btnClear = gtk_button_new_with_label ("Clear");
+  gtk_box_pack_start (GTK_BOX(vbox), btnClear, FALSE, FALSE, 0);
+  /*gtk_signal_connet_object (GTK_OBJECT (btnClear), "clicked",
+			    GTK_SIGNAL_FUNC (configure_event),
+			    GTK_OBJECT (window));*/
+  /*g_signal_connect (G_OBJECT (btnClear), "pressed",
+                      G_CALLBACK (clear_screen),
+                      NULL);*/
+  gtk_widget_show (btnClear);
+ 
+
+  
   gtk_widget_show (window);
 
   gtk_main ();
 
   return 0;
 }
-/* example-end */
