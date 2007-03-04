@@ -29,7 +29,6 @@ int main(){
 	}else{
 		while(!dataFile.eof()){
 			getline(dataFile, line);
-//			cout << line <<endl;
 			
 			//string handling
 			if(line.compare("<s>")==0){
@@ -42,8 +41,6 @@ int main(){
 				if(commaPosition != string::npos){
 					xtemp = line.substr(0,commaPosition);
 					ytemp = line.substr(commaPosition+1);
-//					cout<<xtemp<<endl;
-//					cout<<ytemp<<endl;
 					
 					//cast string to double
 					if(x1==-1){
@@ -54,12 +51,40 @@ int main(){
 						y1 = y2;
 						x2 = convertToDouble(xtemp);
 						y2 = convertToDouble(ytemp);
+						
+						//quantilise the features
+						double deltaX = x2-x1;
+						double deltaY = y2-y1;
+						double result = atan2(deltaY, deltaX);
+						
+						if(result<0){
+							result = result + 2*PI;
+						}
+						
+						if(result<(PI/8)) vector[0]++;
+						else if(result<(2*PI/8)) vector[1]++;
+						else if(result<(3*PI/8)) vector[2]++;
+						else if(result<(4*PI/8)) vector[3]++;
+						else if(result<(5*PI/8)) vector[4]++;
+						else if(result<(6*PI/8)) vector[5]++;
+						else if(result<(7*PI/8)) vector[6]++;
+						else if(result<(8*PI/8)) vector[7]++;
+						else if(result<(9*PI/8)) vector[8]++;
+						else if(result<(10*PI/8)) vector[9]++;
+						else if(result<(11*PI/8)) vector[10]++;
+						else if(result<(12*PI/8)) vector[11]++;
+						else if(result<(13*PI/8)) vector[12]++;
+						else if(result<(14*PI/8)) vector[13]++;
+						else if(result<(15*PI/8)) vector[14]++;
+						else vector[15]++;
 					}
-					cout<<x1<<", "<<y1<<endl;
 				}
 			}
 		}
 		dataFile.close();
+		for(int i=0 ; i<16; i++){
+			cout<<vector[i]<<endl;
+		}
 	}
 	
 	return 0;
