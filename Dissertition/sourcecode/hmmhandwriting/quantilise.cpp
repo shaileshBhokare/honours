@@ -28,7 +28,7 @@ int main(){
 	
 //	for(int i=0; i<8; i++){
 		
-		string line;
+		string line;	
 
 		char *inFile = "./data/trainingData/4.8.txt";
 		char *outFile = "./data/probability/4.8.txt";
