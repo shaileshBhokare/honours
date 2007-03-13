@@ -3,37 +3,57 @@
 #include <math.h>
 #include <fstream>
 #include "convert.h"
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/fstream.hpp>
+#include <boost/filesystem/path.hpp>
 //#include "state.h"
 //#include "stroke.h"
 
-
+namespace fs = boost::filesystem;
 using namespace std;
 
 double vector[16];
 const double PI= 4.0*atan(1.0);
 
 int main(){
+	//initialise the array
 	for(int i=0; i<16; i++){
 		vector[i] = 0;
-//		cout<<vector[i]<<endl;
 	}
+	
+	fs::path repository_path("./data/trainingData");//point to the trainning data direcotry
+	fs::path trainingFile_path;//current working file
 
-//	double x1,y1,x2,y2 = -1;
-	double x[100], y[100];//use array to stroe the data read from the file.
-						  //Using this way, we can just read the file once and use many times.
+//	double x[10], y[10];//use array to stroe the data read from the file.
+//						  //Using this way, we can just read the file once and use many times.
 	string xtemp, ytemp;
 	
+	string line;//used to retrieve each in a file
+		
+	//open file exception handling
+	if(!1fs::exists(repository_path)){
+		cout<<"Cannot read the direcotry"<<endl;
+		return 1;
+	}
 	
-	//temp code: use for loop to read in all the data file. Should be replaced with better way
+	fs::directory_iterator end_itr;//find out the end of direcotry
+	for(fs::directory_iterator itr(repository_path); itr!=end_itr; ++itr){
+		if(is_director(*itr)){
+			//do nothing, we only read files
+		}else{
+			trainingFile_path = *itr;
+			fs::ifstream file(trainingFile_path);//open the trainingFile
+			if(!
+		}
+	}
 	
 //	for(int i=0; i<8; i++){
 		
-		string line;	
-
-		char *inFile = "./data/trainingData/4.8.txt";
+		
+//		char *inFile = "./data/trainingData/4.8.txt";
 		char *outFile = "./data/probability/4.8.txt";
 		
-		ifstream dataFile(inFile);
+//		ifstream dataFile(inFile);
 		ofstream probabilityFile(outFile);
 		if(!dataFile){
 			cout << "Cannot open file.\n";
