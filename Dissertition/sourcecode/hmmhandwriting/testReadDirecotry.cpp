@@ -1,26 +1,29 @@
 #include <iostream>
 #include <string>
-#include <boost\filesystem\operations.hpp>
-#include <boost\filesystem\fstream.hpp>
-#include <boost\filesystem\path.hpp>
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/fstream.hpp>
+#include <boost/filesystem/path.hpp>
 
+namespace fs = boost::filesystem;
 using namespace std;
 
 int main(){
-	path repository("./data/trainingData");
+	fs::path repository("./data/trainingData");
+	fs::path file_path;
 	
-	if(!exists(repository)) return 1;
+	if(!fs::exists(repository)) return 1;
 	
 	string line;
-	directory_iterator end_itr;
-	for(directory_iterator itr(dir_path); itr != end_itr; ++itr){
+	fs::directory_iterator end_itr;
+	for(fs::directory_iterator itr(repository); itr != end_itr; ++itr){
 		if(is_directory(*itr)){
 			cout<<"Found one diretory"<<endl;
 		}else {
 			file_path = *itr;
-			ifstream file(file_path);
+			fs::ifstream file(file_path);
 			getline(file, line);
-			
+
+//			cout<<"Found one file"<<endl;
 			cout<<line<<endl;
 		}
 	}
