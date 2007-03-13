@@ -1,27 +1,28 @@
 #include <iostream>
 #include <string>
-#include "boost\filesystem\operations.hpp"
-#include "boost\filesystem\fstream.hpp"
-#include "boost\filesystem\path.hpp"
+#include <erron.h>
+#include <dirent.h>
+#include <stdio.h>
+#include <stlib.h>
 
 using namespace std;
 
 int main(){
-	path repository("./data/trainingData");
+	DIR *repository;
+	struct dirent *pent;
 	
-	if(!exists(repository)) return 1;
-	
-	string line;
-	directory_iterator end_itr;
-	for(directory_iterator itr(dir_path); itr != end_itr; ++itr){
-		if(is_directory(*itr)){
-			cout<<"Found one diretory"<<endl;
-		}else {
-			file_path = *itr;
-			ifstream file(file_path);
-			getline(file, line);
-			
-			cout<<line<<endl;
-		}
+	repository = opendir("./data/trainingData");
+	if(!repository){
+		cout<<"Opendir() failure; terminating");
+		exit(1);
 	}
+	erron=0;
+	while((pent=readdir(repository))){
+		cout<<pent->d_name;
+	}
+	if(errno){
+		cout<<"readdir() failure; terminating");
+		exit(1);
+	}
+	closedir(repository);
 }
