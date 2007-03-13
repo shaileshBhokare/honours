@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
-#include <erron.h>
-#include <dirent.h>
-#include <stdio.h>
+//#include <erron.h>
+//#include <dirent.h>
+//#include <stdio.h>
 #include <stlib.h>
 
 using namespace std;
