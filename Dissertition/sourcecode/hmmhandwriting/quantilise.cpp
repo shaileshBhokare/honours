@@ -39,7 +39,9 @@ int main(){
 	fs::directory_iterator end_itr;//find out the end of direcotry
 	for(fs::directory_iterator itr(repository_path); itr!=end_itr; ++itr){
 		if(is_director(*itr)){
-			//do nothing, we only read files
+			//handle subdirectory and retrieve the name
+			trainingFile_path = *itr;
+			
 		}else{
 			trainingFile_path = *itr;
 			fs::ifstream file(trainingFile_path);//open the trainingFile
