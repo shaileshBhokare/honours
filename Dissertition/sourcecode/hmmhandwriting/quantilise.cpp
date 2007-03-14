@@ -24,14 +24,14 @@ int main(){
 	fs::path repository_path("./data/trainingData");//point to the trainning data direcotry
 	fs::path trainingFile_path;//current working file
 
-//	double x[10], y[10];//use array to stroe the data read from the file.
+	double x[100], y[100];//use array to stroe the data read from the file.
 //						  //Using this way, we can just read the file once and use many times.
 	string xtemp, ytemp;
 	
 	string line;//used to retrieve each in a file
 		
 	//open file exception handling
-	if(!1fs::exists(repository_path)){
+	if(!fs::exists(repository_path)){
 		cout<<"Cannot read the direcotry"<<endl;
 		return 1;
 	}
@@ -40,29 +40,43 @@ int main(){
 	for(fs::directory_iterator itr(repository_path); itr!=end_itr; ++itr){
 		if(is_director(*itr)){
 			//handle subdirectory and retrieve the name
-			trainingFile_path = *itr;
-			
-		}else{
-			trainingFile_path = *itr;
-			fs::ifstream file(trainingFile_path);//open the trainingFile
-			if(!
+			string outFilePath = "./data/probability/"+itr->leaf+".txt";
+			fs::ofstream outFile(outFilePath);
+			if(!outFile){
+				cout << "Cannot write to file.\n";
+				return 1;
+			}
+			//trversal the subdirecotry
+			fs::directory_iterator end_sub_itr;
+			for(fs::direcotry_iterator sub_itr(itr); sub_itr!=end_sub_itr; ++sub_itr){
+				if(is_director(*sub_itr)){
+					//do nothing	
+				}else{
+					fs::ifstream trainingFile(*sub_itr);
+					if(!trainingFile){
+						cout<<"Cannot open file.\n";
+						return 1;
+					}else{
+						int count;
+					}
+				}
+			}
 		}
 	}
 	
 //	for(int i=0; i<8; i++){
-		
-		
+
 //		char *inFile = "./data/trainingData/4.8.txt";
-		char *outFile = "./data/probability/4.8.txt";
+//		char *outFile = "./data/probability/4.8.txt";
 		
 //		ifstream dataFile(inFile);
-		ofstream probabilityFile(outFile);
-		if(!dataFile){
-			cout << "Cannot open file.\n";
-			return 1;
-		}else if(!probabilityFile){
-			cout << "Cannot write to file.\n";
-			return 1;
+//		ofstream probabilityFile(outFile);
+//		if(!dataFile){
+//			cout << "Cannot open file.\n";
+//			return 1;
+//		}else if(!probabilityFile){
+//			cout << "Cannot write to file.\n";
+//			return 1;
 		}else{
 			int count; //use to count the number of the lines in each stroke
 			
@@ -245,40 +259,10 @@ int main(){
 						y[count] = convertToDouble(ytemp);
 						count++;
 					}else cout<<"Wrong file format";
-				}
-						//quantilise the features
-	//					double deltaX = x2-x1;
-	//					double deltaY = y2-y1;
-	//					double result = atan2(deltaY, deltaX);
-	//					
-	//					if(result<0){
-	//						result = result + 2*PI;
-	//					}
-	//					
-	//					if(result<(PI/8)) vector[0]++;
-	//					else if(result<(2*PI/8)) vector[1]++;
-	//					else if(result<(3*PI/8)) vector[2]++;
-	//					else if(result<(4*PI/8)) vector[3]++;
-	//					else if(result<(5*PI/8)) vector[4]++;
-	//					else if(result<(6*PI/8)) vector[5]++;
-	//					else if(result<(7*PI/8)) vector[6]++;
-	//					else if(result<(8*PI/8)) vector[7]++;
-	//					else if(result<(9*PI/8)) vector[8]++;
-	//					else if(result<(10*PI/8)) vector[9]++;
-	//					else if(result<(11*PI/8)) vector[10]++;
-	//					else if(result<(12*PI/8)) vector[11]++;
-	//					else if(result<(13*PI/8)) vector[12]++;
-	//					else if(result<(14*PI/8)) vector[13]++;
-	//					else if(result<(15*PI/8)) vector[14]++;
-	//					else vector[15]++;
-	//					}
-					
+				}	
 			}
 			dataFile.close();
 			probabilityFile.close();
-//			for(int i=0 ; i<16; i++){
-//				cout<<vector[i]<<endl;
-//			}
 		}
 		
 //	}
