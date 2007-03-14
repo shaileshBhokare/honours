@@ -58,36 +58,46 @@ int main(){
 						return 1;
 					}else{
 						int count;
+						
+						while(!trainingFile.eof()){
+							getline(trainingFile, line);
+							if(line.compare("<s>")==0){
+								cout<<"Stroke start\n";
+								count = 0; //reset the count
+							}else if(line.compare("</s>")==0){
+								cout<<"Stroke end\n";	
+								
+							}else{
+								//start stroke handling
+								int commaPosition = line.find(",");
+								
+								if(commaPosition != string::npos){
+									xtemp = line.substr(0,commaPosition);
+									ytemp = line.substr(commaPosition+1);
+									x[count] = convertToDouble(xtemp);
+									y[count] = convertToDouble(ytemp);
+									count++;
+								}else cout<<"Wrong file format";
+							}
+						}
 					}
 				}
 			}
 		}
 	}
 	
-//	for(int i=0; i<8; i++){
 
-//		char *inFile = "./data/trainingData/4.8.txt";
-//		char *outFile = "./data/probability/4.8.txt";
-		
-//		ifstream dataFile(inFile);
-//		ofstream probabilityFile(outFile);
-//		if(!dataFile){
-//			cout << "Cannot open file.\n";
-//			return 1;
-//		}else if(!probabilityFile){
-//			cout << "Cannot write to file.\n";
-//			return 1;
-		}else{
-			int count; //use to count the number of the lines in each stroke
-			
-			while(!dataFile.eof()){
-				getline(dataFile, line);
-				
-				//string handling
-				if(line.compare("<s>")==0){
-					cout<<"Stroke start\n";
-					count = 0; //reset the count
-				}else if(line.compare("</s>")==0){
+//		}else{
+//			int count; //use to count the number of the lines in each stroke
+//			
+//			while(!dataFile.eof()){
+//				getline(dataFile, line);
+//				
+//				//string handling
+//				if(line.compare("<s>")==0){
+//					cout<<"Stroke start\n";
+//					count = 0; //reset the count
+//				}else if(line.compare("</s>")==0){
 					cout<<"Stroke end\n";
 					//start calculate the probability
 	//				State state[3];
@@ -237,28 +247,19 @@ int main(){
 					//write end tags
 					probabilityFile << "</state>\n";
 					probabilityFile << "</s>\n";
-				}else{
-					//start stroke handling
-					
-					int commaPosition = line.find(",");
-					
-					if(commaPosition != string::npos){
-						xtemp = line.substr(0,commaPosition);
-						ytemp = line.substr(commaPosition+1);
-						
-						//cast string to double
-						/*if(x1==-1){
-							x1 = convertToDouble(xtemp);
-							y1 = convertToDouble(ytemp);
-						}else{
-						x1 = x2;
-						y1 = y2;
-						x2 = convertToDouble(xtemp);
-						y2 = convertToDouble(ytemp);*/
-						x[count] = convertToDouble(xtemp);
-						y[count] = convertToDouble(ytemp);
-						count++;
-					}else cout<<"Wrong file format";
+//				}else{
+//					//start stroke handling
+//					
+//					int commaPosition = line.find(",");
+//					
+//					if(commaPosition != string::npos){
+//						xtemp = line.substr(0,commaPosition);
+//						ytemp = line.substr(commaPosition+1);
+//						
+//						x[count] = convertToDouble(xtemp);
+//						y[count] = convertToDouble(ytemp);
+//						count++;
+//					}else cout<<"Wrong file format";
 				}	
 			}
 			dataFile.close();
