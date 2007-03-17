@@ -1,13 +1,13 @@
 #include <iostream>
 #include <string>
 #include <math.h>
-#include <fstream>
 #include "convert.h"
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/filesystem/path.hpp>
-//#include "state.h"
-//#include "stroke.h"
+#include "state.h"
+#include "stroke.h"
+#include "word.h"
 
 namespace fs = boost::filesystem;
 using namespace std;
