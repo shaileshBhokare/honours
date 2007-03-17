@@ -12,7 +12,7 @@ public:
 }
 
 Word::Word(){
-	
+	strokes = new vector<stroke>;
 }
 
 Word::~Word(){

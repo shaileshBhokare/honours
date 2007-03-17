@@ -12,7 +12,7 @@ public:
 
 Stroke::Stroke(){
 	for(int i=0; i<16; i++){
-		state[i] = NULL;
+		state[i] = new State();
 	}
 }
 
