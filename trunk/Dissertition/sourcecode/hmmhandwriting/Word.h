@@ -26,10 +26,11 @@ namespace redhat{
 	}
 	
 	Word::~Word(){
-		delete [] strokes;
+//		vector<rh::Stroke>().swap(strokes);
+//		cout<<"deleting...";
 	}
 	
-	void setStroke(rh::Stroke ob){
+	void Word::setStroke(rh::Stroke ob){
 		strokes.push_back(ob);
 	}
 	
@@ -38,8 +39,9 @@ namespace redhat{
 	}
 	
 	void Word::display(){
-		for(int i; i<strokes.size; i++){
-			
+		for(int i=0; i<strokes.size(); i++){
+			rh::Stroke tempStroke = strokes.at(i);
+			tempStroke.display();
 		}
 	}
 }
