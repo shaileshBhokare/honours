@@ -26,7 +26,7 @@ namespace redhat{
 	}
 	
 	Stroke::~Stroke(){
-		delete [] state;	
+//		delete [] state;	
 	}
 	
 	void Stroke::setState(int i, rh::State ob){

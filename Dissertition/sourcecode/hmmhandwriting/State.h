@@ -22,7 +22,7 @@ namespace redhat{
 	}
 	
 	State::~State(){
-		delete [] vector;
+//		delete [] vector;
 //		cout<<"deleting vector"<<endl;
 	}
 	
