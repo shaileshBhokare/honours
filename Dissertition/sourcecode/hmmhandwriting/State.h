@@ -1,20 +1,36 @@
+#ifndef __STATE__
+#define __STATE__
+
 #include <iostream>
+
 using namespace std;
 
-class State{
-public:
-	double vector[16];
+namespace redhat{
+	class State{
+	public:
+		double vector[16];
+		
+		State();
+		~State();
+		void display();
+	};
 	
-	State();
-	~State();
-};
-
-State::State(){
-	for(int i=0; i<16; i++){
-		vector[i] = 0;
+	State::State(){
+		for(int i=0; i<16; i++){
+			vector[i] = 0;
+		}
+	}
+	
+	State::~State(){
+		delete [] vector;
+//		cout<<"deleting vector"<<endl;
+	}
+	
+	void State::display(){
+		for(int i=0; i<16; i++){
+			cout<<vector[i]<<endl;
+		}
 	}
 }
 
-State::~State(){
-	delete [] vector;
-}
+#endif //__STATE__

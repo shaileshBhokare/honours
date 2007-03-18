@@ -1,21 +1,47 @@
+#ifndef __STROKE__
+#define __STROKE__
+
 #include <iostream>
-#include "state.h"
+#include "State.h"
+
+namespace rh = redhat;
 using namespace std;
 
-class Stroke{
-public:
-	State state[3];
+namespace redhat{
+	class Stroke{
+	public:
+		rh::State state[3];
+		
+		Stroke();
+		~Stroke();
+		void setState(int i, rh::State ob);
+		rh::State getState(int i);
+		void display();
+	};
 	
-	Stroke();
-	~Stroke();
-}
-
-Stroke::Stroke(){
-	for(int i=0; i<16; i++){
-		state[i] = new State();
+	Stroke::Stroke(){
+//		for(int i=0; i<3; i++){
+//			state[i] = new State();
+//		}
+	}
+	
+	Stroke::~Stroke(){
+		delete [] state;	
+	}
+	
+	void Stroke::setState(int i, rh::State ob){
+		state[i] = ob;
+	}
+	
+	rh::State Stroke::getState(int i){
+		return state[i];
+	}
+	
+	void Stroke::display(){
+		for(int i=0; i<3; i++){
+			state[i].display();	
+		}	
 	}
 }
 
-Stroke::~Stroke(){
-	delete [] state;	
-}
+#endif
