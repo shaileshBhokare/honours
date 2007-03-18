@@ -18,6 +18,8 @@ namespace redhat{
 		~Word();
 		void setStroke(rh::Stroke ob);
 		rh::Stroke getStroke(int i);
+		void increaseStroke();
+		void replace(rh::Stroke ob, int i);
 		void display();
 	};
 	
@@ -35,6 +37,18 @@ namespace redhat{
 	
 	rh::Stroke Word::getStroke(int i){
 		return strokes.at(i);
+	}
+	
+	void Word::increaseStroke(){
+		rh::Stroke newStroke;
+		Word::setStroke(newStroke);
+	}
+	
+	void Word::replace(rh::Stroke ob, int i){
+		vector<rh::Stroke>::iterator indexIterator;
+		indexIterator=strokes.begin()+i;
+		strokes.erase(indexIterator);
+		strokes.insert(indexIterator, ob);
 	}
 	
 	void Word::display(){

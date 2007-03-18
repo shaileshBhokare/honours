@@ -27,9 +27,17 @@ int main(){
 	tempStroke.setState(1,tempState[1]);
 	tempStroke.setState(2,tempState[2]);
 	
-	tempStroke.display();
+//	tempStroke.display();
 	
 	tempWord.setStroke(tempStroke);
+	tempWord.display();
+	cout<<"add a new stroke"<<endl;
+	
+	tempWord.increaseStroke();
+	tempWord.display();
+	
+	cout<<"test replace"<<endl;
+	tempWord.replace(tempStroke,1);
 	tempWord.display();
 	
 	return 0;
