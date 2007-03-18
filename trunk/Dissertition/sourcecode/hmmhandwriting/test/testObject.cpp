@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
-#include "../state.h"
-#include "../stroke.h"
-#include "../word.h"
+#include "../State.h"
+#include "../Stroke.h"
+#include "../Word.h"
 
 using namespace std;
 
