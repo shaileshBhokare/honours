@@ -7,24 +7,33 @@
 namespace fs = boost::filesystem;
 using namespace std;
 
+void traverseFile(fs::path dir_path);
+
 int main(){
-	fs::path repository("../data/trainingData");
-	fs::path file_path;
+	fs::path repository("../data/tempTrainingData");
+	traverseFile(repository);
 	
-	if(!fs::exists(repository)) return 1;
+	return 0;
+}
+
+void traverseFile(fs::path dir_path){
+	if(!fs::exists(dir_path)) cout<<"file doesn't exist";
 	
-	string line;
+//	string line;
 	fs::directory_iterator end_itr;
-	for(fs::directory_iterator itr(repository); itr != end_itr; ++itr){
+	for(fs::directory_iterator itr(dir_path); itr != end_itr; ++itr){
 		if(is_directory(*itr)){
 			cout<<itr->leaf()<<endl;
+			fs::path tempPath = *itr;
+			cout<<tempPath.leaf()<<endl;
+			cout<<tempPath.string()<<endl;
+			traverseFile(*itr);
 		}else {
-			file_path = *itr;
-			fs::ifstream file(file_path);
-			getline(file, line);
+//			fs::ifstream file(file_path);
+//			getline(file, line);
 
 			cout<<itr->leaf()<<endl;
-			cout<<line<<endl;
+//			cout<<line<<endl;
 		}
 	}
 }
