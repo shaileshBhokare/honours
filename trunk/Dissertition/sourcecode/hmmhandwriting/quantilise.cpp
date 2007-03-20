@@ -33,11 +33,15 @@ int main(){
 	}
 	
 	fs::directory_iterator end_itr;//find out the end of direcotry
-	for(fs::directory_iterator itr(repository_path); itr!=end_itr; ++itr){
-		if(fs::is_director(*itr)){
+	for(fs::directory_iterator itr(repository_path); itr!=end_itr; ++itr){	//each directory represent one character
+		if(fs::is_directory(*itr)){
+			//TEST
+			cout<<"direcotry name:"<<itr->leaf()<<endl;
 			//handle subdirectory and retrieve the name
-			string outFilePath = "./data/probability/"+itr->leaf+".txt";
+//			string outFilePath = "./data/probability/"+itr->leaf+".txt";
+			string outFilePath = "./data/probability/four.txt";
 			rh::Word newWord;
+			bool isFirstFile=true;
 			
 			fs::ofstream outFile(outFilePath);
 			if(!outFile){
@@ -46,12 +50,16 @@ int main(){
 			}
 			//trversal the subdirecotry
 			fs::directory_iterator end_sub_itr;
-			for(fs::directory_iterator sub_itr(itr); sub_itr!=end_sub_itr; ++sub_itr){
-				if(is_director(*sub_itr)){
+			for(fs::directory_iterator sub_itr(itr); sub_itr!=end_sub_itr; ++sub_itr){	//each file represent a training data file
+				if(is_directory(*sub_itr)){
 					//do nothing	
+					//TEST
+					cout<<"subdirectory name:"<<sub_itr->leaf()<<endl;
 				}else{
+					//TEST
+					cout<<"file name:"<<sub_itr->leaf()<<endl;
 					fs::ifstream trainingFile(*sub_itr);
-					bool isFirstFile=true;
+
 					if(!trainingFile){
 						cout<<"Cannot open file.\n";
 						return 1;
@@ -67,12 +75,16 @@ int main(){
 								strokeNum++;
 								if(isFirstFile){
 									newWord.increaseStroke();
+									//TEST
+									newWord.display();
 									isFirstFile=false;
 								}
 							}else if(line.compare("</s>")==0){
 								cout<<"Stroke end\n";	
 								
 								rh::Stroke tempStroke = newWord.getStroke(strokeNum-1);
+								//TEST
+								tempStroke.display();
 								//TODO: calcualte the overral probability
 								//TODO: write word to file
 								//first state
@@ -159,6 +171,7 @@ int main(){
 									else tempStroke.state[2].vector[15]++;
 								}
 								
+								tempStroke.display();
 								newWord.replace(tempStroke, strokeNum-1);
 								
 							}else{
