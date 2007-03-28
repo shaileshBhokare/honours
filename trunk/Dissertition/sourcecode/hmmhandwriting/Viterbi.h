@@ -11,8 +11,14 @@ namespace redhat{
 			double max(double a, double b, double c);
 	};
 	
-	Viterbi::Calculate_path_and_probability(){
+	Viterbi::Calculate_path_and_probability(vector<double> observation){
+		//initialization
+		double prob1 = log();
+		//recursion
 		
+		//terminiation
+		
+		//state path backtracking
 	}
 	
 	double Viterbi::max(double a, double b){
