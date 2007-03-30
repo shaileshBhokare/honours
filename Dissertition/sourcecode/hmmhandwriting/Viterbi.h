@@ -11,12 +11,19 @@ namespace redhat{
 			static Calculate_path_and_probability(rh::Stroke distributionProbability, vector<int> observation, double transitionProbability[3][3]);
 			double max(double a, double b);
 			double max(double a, double b, double c);
+			void insertIntoVector(int num, vector<int> pathVector);
 	};
 	
 	static Viterbi::Calculate_path_and_probability(rh::Stroke distributionProbability, vector<int> observation, double transitionProbability[3][3]){
 		int columns = observation.size();
 		int rows = 3;
 		Node matrix[3][columns];
+		
+		double maxProbability;
+		Node maxNode;
+		
+		vector <int> mostPossiblePath;
+		
 		//initialization
 		matrix[0][0].probability = log(distributionProbability.state[0].vector[observation.at[0]]);
 		matrix[0][0].path = 0;
@@ -27,7 +34,7 @@ namespace redhat{
 		matrix[2][0].probability = 0;
 		matrix[2][0].path = 0;
 		//recursion
-		for(int i=1; i<columns; i++){
+		for(int i=1; i<columns-1; i++){
 			for(int j=0; j<rows; j++){
 				double tempProb1 = log(matrix[i-1][j].probability)+log(transitionProbability[0][0])
 										+log(distributionProbability.state[0].vector[observation.at[i]]);
@@ -47,9 +54,21 @@ namespace redhat{
 			}
 		}
 		//terminiation
-		double maxProbability = max(matrix[0][columns-1].probability, matrix[1][columns-1].probability, matrix[2][columns-1].probability);
+		//get the max probability
+		maxProbability = max(matrix[0][columns-1].probability, matrix[1][columns-1].probability, matrix[2][columns-1].probability);
+		
+		//get the ending node at the max probability
+		if(maxProbability=matrix[0][columns-1].probability) maxNode = matrix[0][columns-1];
+		if(maxProbability=matrix[1][columns-1].probability) maxNode = matrix[1][columns-1];
+		else maxNode = matrix[2][columns-1];
 		
 		//state path backtracking
+//		mostPossiblePath.push_back(maxNode.path);
+		int previousPath = maxNode.path;
+		for(int i=columns-1; i>=0; i--){
+			insertIntoVector(previousPath, mostPossiblePath);
+			previousPath = matrix[i][previousPath].path
+		}
 	}
 	
 	double Viterbi::max(double a, double b){
@@ -60,6 +79,11 @@ namespace redhat{
 	double Viterbi::max(double a, double b, double c){
 		double temp = Viterbi::max(a,b);
 		Viterbi::max(temp,c);
+	}
+	
+	void Viterbi::insertIntoVector(int num, vector<int> pathVector){
+		vector<int>::iterator theIterator = pathVector.begin();
+		pathVector.insert(theIterator, num);
 	}
 	
 	class Node{
