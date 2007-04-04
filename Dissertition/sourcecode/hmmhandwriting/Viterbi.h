@@ -8,13 +8,13 @@ using namespace std;
 namespace redhat{
 	class Viterbi{
 		public:
-			static Calculate_path_and_probability(rh::Stroke distributionProbability, vector<int> observation, double transitionProbability[3][3]);
+			static Calculate_path_and_probability(rh::Word distributionProbability, vector<int> observation, double transitionProbability[3][3]);
 			double max(double a, double b);
 			double max(double a, double b, double c);
 			void insertIntoVector(int num, vector<int> pathVector);
 	};
 	
-	static Viterbi::Calculate_path_and_probability(rh::Stroke distributionProbability, vector<int> observation, double transitionProbability[3][3]){
+	static Viterbi::Calculate_path_and_probability(rh::Word distributionProbability, vector<int> observation, double transitionProbability[3][3]){
 		int columns = observation.size();
 		int rows = 3;
 		Node matrix[3][columns];
