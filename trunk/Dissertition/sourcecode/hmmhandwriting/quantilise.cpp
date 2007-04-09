@@ -174,8 +174,8 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 						if(commaPosition != string::npos){
 							xtemp = line.substr(0,commaPosition);
 							ytemp = line.substr(commaPosition+1);
-							x[count] = convertToDouble(xtemp);
-							y[count] = convertToDouble(ytemp);
+							x[count] = rh::convertToDouble(xtemp);
+							y[count] = rh::convertToDouble(ytemp);
 							count++;
 						}else cout<<"Wrong file format";
 					}
