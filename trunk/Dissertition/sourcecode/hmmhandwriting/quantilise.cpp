@@ -61,7 +61,7 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 								   */
 			string xtemp, ytemp;
 	
-			string line;//used to retrieve each in a file
+			string line;//used to retrieve each line in a file
 			
 			int count; //used to divide each stroke into three states
 			int strokeNum=0; //used to retrieve specific stroke from the word

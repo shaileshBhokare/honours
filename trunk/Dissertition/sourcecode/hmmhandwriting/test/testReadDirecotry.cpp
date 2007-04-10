@@ -10,7 +10,8 @@ using namespace std;
 void traverseFile(fs::path dir_path);
 
 int main(){
-	fs::path repository("../data/tempTrainingData");
+	string dirPath="../data/tempTrainingData";
+	fs::path repository(dirPath);
 	traverseFile(repository);
 	
 	return 0;
