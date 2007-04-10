@@ -1,62 +1,21 @@
 #include <iostream>
 #include <math.h>
 #include "Stroke.h"
-#include <string>
-#include <boost/filesystem/operations.hpp>
-#include <boost/filesystem/fstream.hpp>
-#include <boost/filesystem/path.hpp>
-#include "convert.h"
 
 namespace rh = redhat;
-namespace fs = boost::filesystem;
 using namespace std;
 
 namespace redhat{
 	class Viterbi{
 		public:
-			Calculate_path_and_probability(string distributionProbabilityFilePath, vector<int> observation, string transitionProbabilityFilePath);
+			Calculate_path_and_probability(rh::Word distributionProbability, vector<int> observation, double transitionProbability[3][3]);
 			double max(double a, double b);
 			double max(double a, double b, double c);
 			void insertIntoVector(int num, vector<int> pathVector);
 	};
 	
-	Viterbi::Calculate_path_and_probability(string distributionProbabilityFilePath, vector<int> observation, string transitionProbabilityFilePath){
-		
-		//create two 2D array to store the distribtion and transition probability
-		double disProb[100][16];
-		double tranProb[100][100];
-		
-		int disRow=0;//used to locate the value in the 2D array
-		int disColumn=0;
-		int tranRow=0;
-		int tranColumn=0;
-		
-		string line;//used to retrieve each line in a file
-		double num;// used to get double format value of line;
-		
-		//populate the two 2D arrays
-		fs::ifstream disProbFile(distributionProbabilityFilePath);
-		if(!disProbFile){
-			cout<<"Cannot ope file.\n";
-		}else{
-			while(!disProbFile.eof()){
-				getline(disProbFile, line);
-				num=rh::convertToDouble(line);
-				disProb[dirRow][disColumn]=num;
-				column++;
-				if(column==16) row++;
-				column = column%16;
-			}
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		/*int columns = observation.size();
+	Viterbi::Calculate_path_and_probability(rh::Word distributionProbability, vector<int> observation, double transitionProbability[3][3]){
+		int columns = observation.size();
 		int rows = 3;
 		Node matrix[3][columns];
 		
@@ -109,7 +68,7 @@ namespace redhat{
 		for(int i=columns-1; i>=0; i--){
 			insertIntoVector(previousPath, mostPossiblePath);
 			previousPath = matrix[i][previousPath].path
-		}*/
+		}
 	}
 	
 	double Viterbi::max(double a, double b){
