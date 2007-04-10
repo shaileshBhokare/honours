@@ -41,7 +41,7 @@ int main(){
 }
 
 void parseFile(fs::path repository_path){//handle subdirectory and retrieve the name
-	string outFilePath = "./data/probability/"+repository_path.leaf()+".xml";
+	string outFilePath = "./data/probability/"+repository_path.leaf()+".txt";
 	rh::Word newWord;
 	bool isFirstFile=true;
 	
@@ -200,26 +200,26 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 		}	
 		newWord.replace(probabilityStroke, i);
 	}
-	outFile<<"<word>\n";
+//	outFile<<"<word>\n";
 
 	for(int i=0; i<newWord.strokes.size(); i++){
 		rh::Stroke stroke = newWord.strokes.at(i);
-		outFile<<"<stroke>\n";
+//		outFile<<"<stroke>\n";
 		
 		for(int j=0; j<3; j++){
-			outFile<<"<state>\n";
+//			outFile<<"<state>\n";
 
 			for(int k=0; k<16; k++){
 				outFile<<stroke.state[j].vector[k]<<endl;
 			}
 			
-			outFile<<"</state>\n";
+//			outFile<<"</state>\n";
 		}
 		
-		outFile<<"</stroke>\n";
+//		outFile<<"</stroke>\n";
 	}
 	
-	outFile<<"</word>\n";
+//	outFile<<"</word>\n";
 	
 	outFile.close();
 }
