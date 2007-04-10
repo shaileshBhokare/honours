@@ -83,8 +83,8 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 						if(isFirstFile){
 							newWord.increaseStroke();
 						}
+//						featureFile<<"<s>"<<endl;
 					}else if(line.compare("</s>")==0){
-						
 						rh::Stroke tempStroke = newWord.getStroke(strokeNum-1);
 						//first state
 						for (int i=0; i<(count/3); i++){
@@ -314,7 +314,7 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 							}
 						}
 						newWord.replace(tempStroke, strokeNum-1);
-						
+//						featureFile<<"</s>"<<endl;
 					}else{
 						//start stroke handling
 						int commaPosition = line.find(",");
