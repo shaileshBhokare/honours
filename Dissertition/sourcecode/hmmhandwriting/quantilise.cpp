@@ -42,6 +42,8 @@ int main(){
 
 void parseFile(fs::path repository_path){//handle subdirectory and retrieve the name
 	string outFilePath = "./data/probability/"+repository_path.leaf()+".txt";
+	string featureDirectoryPath = "./data/featureData/"+repository_path.leaf();
+	fs::create_directory(featureDirectoryPath);
 	rh::Word newWord;
 	bool isFirstFile=true;
 	
@@ -67,8 +69,10 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 			int strokeNum=0; //used to retrieve specific stroke from the word
 			
 			fs::ifstream trainingFile(*sub_itr);
+			string featureFilePath = featureDirectoryPath+"/"+sub_itr->leaf();
+			fs::ofstream featureFile(featureFilePath);
 
-			if(!trainingFile){
+			if(!trainingFile||!featureFile){
 				cout<<"Cannot open file.\n";
 			}else{
 				while(!trainingFile.eof()){
@@ -92,22 +96,70 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 								result = result + 2*PI;
 							}
 							
-							if(result<(PI/8)) tempStroke.state[0].vector[0]++;
-							else if(result<(2*PI/8)) tempStroke.state[0].vector[1]++;
-							else if(result<(3*PI/8)) tempStroke.state[0].vector[2]++;
-							else if(result<(4*PI/8)) tempStroke.state[0].vector[3]++;
-							else if(result<(5*PI/8)) tempStroke.state[0].vector[4]++;
-							else if(result<(6*PI/8)) tempStroke.state[0].vector[5]++;
-							else if(result<(7*PI/8)) tempStroke.state[0].vector[6]++;
-							else if(result<(8*PI/8)) tempStroke.state[0].vector[7]++;
-							else if(result<(9*PI/8)) tempStroke.state[0].vector[8]++;
-							else if(result<(10*PI/8)) tempStroke.state[0].vector[9]++;
-							else if(result<(11*PI/8)) tempStroke.state[0].vector[10]++;
-							else if(result<(12*PI/8)) tempStroke.state[0].vector[11]++;
-							else if(result<(13*PI/8)) tempStroke.state[0].vector[12]++;
-							else if(result<(14*PI/8)) tempStroke.state[0].vector[13]++;
-							else if(result<(15*PI/8)) tempStroke.state[0].vector[14]++;
-							else tempStroke.state[0].vector[15]++;
+							if(result<(PI/8)) {
+								tempStroke.state[0].vector[0]++;
+								featureFile<<0<<endl;
+							}
+							else if(result<(2*PI/8)) {
+								tempStroke.state[0].vector[1]++;
+								featureFile<<1<<endl;
+							}
+							else if(result<(3*PI/8)) {
+								tempStroke.state[0].vector[2]++;
+								featureFile<<2<<endl;
+							}
+							else if(result<(4*PI/8)) {
+								tempStroke.state[0].vector[3]++;
+								featureFile<<3<<endl;
+							}
+							else if(result<(5*PI/8)) {
+								tempStroke.state[0].vector[4]++;
+								featureFile<<4<<endl;
+							}
+							else if(result<(6*PI/8)) {
+								tempStroke.state[0].vector[5]++;
+								featureFile<<5<<endl;
+							}
+							else if(result<(7*PI/8)) {
+								tempStroke.state[0].vector[6]++;
+								featureFile<<6<<endl;
+							}
+							else if(result<(8*PI/8)) {
+								tempStroke.state[0].vector[7]++;
+								featureFile<<7<<endl;
+							}
+							else if(result<(9*PI/8)) {
+								tempStroke.state[0].vector[8]++;
+								featureFile<<8<<endl;
+							}
+							else if(result<(10*PI/8)) {
+								tempStroke.state[0].vector[9]++;
+								featureFile<<9<<endl;
+							}
+							else if(result<(11*PI/8)) {
+								tempStroke.state[0].vector[10]++;
+								featureFile<<10<<endl;
+							}
+							else if(result<(12*PI/8)) {
+								tempStroke.state[0].vector[11]++;
+								featureFile<<11<<endl;
+							}
+							else if(result<(13*PI/8)) {
+								tempStroke.state[0].vector[12]++;
+								featureFile<<12<<endl;
+							}
+							else if(result<(14*PI/8)) {
+								tempStroke.state[0].vector[13]++;
+								featureFile<<13<<endl;
+							}
+							else if(result<(15*PI/8)) {
+								tempStroke.state[0].vector[14]++;
+								featureFile<<14<<endl;
+							}
+							else {
+								tempStroke.state[0].vector[15]++;
+								featureFile<<15<<endl;
+							}
 						}
 						
 						//second state
@@ -120,22 +172,70 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 								result = result + 2*PI;
 							}
 							
-							if(result<(PI/8)) tempStroke.state[1].vector[0]++;
-							else if(result<(2*PI/8)) tempStroke.state[1].vector[1]++;
-							else if(result<(3*PI/8)) tempStroke.state[1].vector[2]++;
-							else if(result<(4*PI/8)) tempStroke.state[1].vector[3]++;
-							else if(result<(5*PI/8)) tempStroke.state[1].vector[4]++;
-							else if(result<(6*PI/8)) tempStroke.state[1].vector[5]++;
-							else if(result<(7*PI/8)) tempStroke.state[1].vector[6]++;
-							else if(result<(8*PI/8)) tempStroke.state[1].vector[7]++;
-							else if(result<(9*PI/8)) tempStroke.state[1].vector[8]++;
-							else if(result<(10*PI/8)) tempStroke.state[1].vector[9]++;
-							else if(result<(11*PI/8)) tempStroke.state[1].vector[10]++;
-							else if(result<(12*PI/8)) tempStroke.state[1].vector[11]++;
-							else if(result<(13*PI/8)) tempStroke.state[1].vector[12]++;
-							else if(result<(14*PI/8)) tempStroke.state[1].vector[13]++;
-							else if(result<(15*PI/8)) tempStroke.state[1].vector[14]++;
-							else tempStroke.state[1].vector[15]++;
+							if(result<(PI/8)) {
+								tempStroke.state[1].vector[0]++;
+								featureFile<<0<<endl;
+							}
+							else if(result<(2*PI/8)) {
+								tempStroke.state[1].vector[1]++;
+								featureFile<<1<<endl;
+							}
+							else if(result<(3*PI/8)) {
+								tempStroke.state[1].vector[2]++;
+								featureFile<<2<<endl;
+							}
+							else if(result<(4*PI/8)) {
+								tempStroke.state[1].vector[3]++;
+								featureFile<<3<<endl;
+							}
+							else if(result<(5*PI/8)) {
+								tempStroke.state[1].vector[4]++;
+								featureFile<<4<<endl;
+							}
+							else if(result<(6*PI/8)) {
+								tempStroke.state[1].vector[5]++;
+								featureFile<<5<<endl;
+							}
+							else if(result<(7*PI/8)) {
+								tempStroke.state[1].vector[6]++;
+								featureFile<<6<<endl;
+							}
+							else if(result<(8*PI/8)) {
+								tempStroke.state[1].vector[7]++;
+								featureFile<<7<<endl;
+							}
+							else if(result<(9*PI/8)) {
+								tempStroke.state[1].vector[8]++;
+								featureFile<<8<<endl;
+							}
+							else if(result<(10*PI/8)) {
+								tempStroke.state[1].vector[9]++;
+								featureFile<<9<<endl;
+							}
+							else if(result<(11*PI/8)) {
+								tempStroke.state[1].vector[10]++;
+								featureFile<<10<<endl;
+							}
+							else if(result<(12*PI/8)) {
+								tempStroke.state[1].vector[11]++;
+								featureFile<<11<<endl;
+							}
+							else if(result<(13*PI/8)) {
+								tempStroke.state[1].vector[12]++;
+								featureFile<<12<<endl;
+							}
+							else if(result<(14*PI/8)) {
+								tempStroke.state[1].vector[13]++;
+								featureFile<<13<<endl;
+							}
+							else if(result<(15*PI/8)) {
+								tempStroke.state[1].vector[14]++;
+								featureFile<<14<<endl;
+							}
+							else {
+								tempStroke.state[1].vector[15]++;
+								featureFile<<15<<endl;
+							}
 						}
 						
 						//third state
@@ -148,22 +248,70 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 								result = result + 2*PI;
 							}
 							
-							if(result<(PI/8)) tempStroke.state[2].vector[0]++;
-							else if(result<(2*PI/8)) tempStroke.state[2].vector[1]++;
-							else if(result<(3*PI/8)) tempStroke.state[2].vector[2]++;
-							else if(result<(4*PI/8)) tempStroke.state[2].vector[3]++;
-							else if(result<(5*PI/8)) tempStroke.state[2].vector[4]++;
-							else if(result<(6*PI/8)) tempStroke.state[2].vector[5]++;
-							else if(result<(7*PI/8)) tempStroke.state[2].vector[6]++;
-							else if(result<(8*PI/8)) tempStroke.state[2].vector[7]++;
-							else if(result<(9*PI/8)) tempStroke.state[2].vector[8]++;
-							else if(result<(10*PI/8)) tempStroke.state[2].vector[9]++;
-							else if(result<(11*PI/8)) tempStroke.state[2].vector[10]++;
-							else if(result<(12*PI/8)) tempStroke.state[2].vector[11]++;
-							else if(result<(13*PI/8)) tempStroke.state[2].vector[12]++;
-							else if(result<(14*PI/8)) tempStroke.state[2].vector[13]++;
-							else if(result<(15*PI/8)) tempStroke.state[2].vector[14]++;
-							else tempStroke.state[2].vector[15]++;
+							if(result<(PI/8)) {
+								tempStroke.state[2].vector[0]++;
+								featureFile<<0<<endl;
+							}
+							else if(result<(2*PI/8)) {
+								tempStroke.state[2].vector[1]++;
+								featureFile<<1<<endl;
+							}
+							else if(result<(3*PI/8)) {
+								tempStroke.state[2].vector[2]++;
+								featureFile<<2<<endl;
+							}
+							else if(result<(4*PI/8)) {
+								tempStroke.state[2].vector[3]++;
+								featureFile<<3<<endl;
+							}
+							else if(result<(5*PI/8)) {
+								tempStroke.state[2].vector[4]++;
+								featureFile<<4<<endl;
+							}
+							else if(result<(6*PI/8)) {
+								tempStroke.state[2].vector[5]++;
+								featureFile<<5<<endl;
+							}
+							else if(result<(7*PI/8)) {
+								tempStroke.state[2].vector[6]++;
+								featureFile<<6<<endl;
+							}
+							else if(result<(8*PI/8)) {
+								tempStroke.state[2].vector[7]++;
+								featureFile<<7<<endl;
+							}
+							else if(result<(9*PI/8)) {
+								tempStroke.state[2].vector[8]++;
+								featureFile<<8<<endl;
+							}
+							else if(result<(10*PI/8)) {
+								tempStroke.state[2].vector[9]++;
+								featureFile<<9<<endl;
+							}
+							else if(result<(11*PI/8)) {
+								tempStroke.state[2].vector[10]++;
+								featureFile<<10<<endl;
+							}
+							else if(result<(12*PI/8)) {
+								tempStroke.state[2].vector[11]++;
+								featureFile<<11<<endl;
+							}
+							else if(result<(13*PI/8)) {
+								tempStroke.state[2].vector[12]++;
+								featureFile<<12<<endl;
+							}
+							else if(result<(14*PI/8)) {
+								tempStroke.state[2].vector[13]++;
+								featureFile<<13<<endl;
+							}
+							else if(result<(15*PI/8)) {
+								tempStroke.state[2].vector[14]++;
+								featureFile<<14<<endl;
+							}
+							else {
+								tempStroke.state[2].vector[15]++;
+								featureFile<<15<<endl;
+							}
 						}
 						newWord.replace(tempStroke, strokeNum-1);
 						
