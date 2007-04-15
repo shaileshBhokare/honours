@@ -1,19 +1,11 @@
-#include <stdio.h>
 #include <math.h>
+#include <iostream>
 
-double x, y, result, A;
-
+using namespace std;
 
 int main(void)
 {
-	x = -1;
-	y = -1;
-	
-//	result = y/x;
-	
-	A = atan2(y,x);
-	
-	printf("\n%f\n", A);
-	
+	double result = log(-0.9);
+	cout<<result<<endl;
 //	return 0;
 }

@@ -8,10 +8,11 @@ using namespace std;
 namespace redhat{
 	class State{
 	public:
-		double vector[16];
+		double vector[16];//used to store features
 		
 		State();
 		~State();
+
 		void display();
 	};
 	
