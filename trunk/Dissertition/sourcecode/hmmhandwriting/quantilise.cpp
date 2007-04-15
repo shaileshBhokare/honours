@@ -42,13 +42,15 @@ int main(){
 
 void parseFile(fs::path repository_path){//handle subdirectory and retrieve the name
 	string outFilePath = "./data/probability/"+repository_path.leaf()+".txt";
+	string transitionProbabilityFilePath = "./data/transitionProbability/"+repository_path.leaf()+".txt";
 	string featureDirectoryPath = "./data/featureData/"+repository_path.leaf();
 	fs::create_directory(featureDirectoryPath);
 	rh::Word newWord;
 	bool isFirstFile=true;
 	
 	fs::ofstream outFile(outFilePath);
-	if(!outFile){
+	fs::ofstream transitionProbabilityFile(transitionProbabilityFilePath);
+	if(!outFile||!transitionProbabilityFile){
 		cout << "Cannot write to file.\n";
 	}
 	
@@ -86,6 +88,8 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 //						featureFile<<"<s>"<<endl;
 					}else if(line.compare("</s>")==0){
 						rh::Stroke tempStroke = newWord.getStroke(strokeNum-1);
+						tempStroke.featureNum += count; // calculate trasition probabilityy
+						tempStroke.trainingTimes += 1;
 						//first state
 						for (int i=0; i<(count/3); i++){
 							double deltaX = x[i+1]-x[i];
@@ -334,9 +338,17 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 		}
 	}
 	
-	//change the count number to the probability fomat
+	int featureNumInStroke[50];//store the average number of features in each stroke
+	double matrixSource[100];//store the source number of each state
+	int featureArrayEnd=0;
+	int matrixArrayEnd=0;
+	double distributionMatrix[100][100];
+	//change the feature data to the probability fomat and output
 	for(int i=0; i<newWord.strokes.size(); i++){
 		rh::Stroke probabilityStroke = newWord.getStroke(i);
+//		transitionProbabilityFile<<probabilityStroke.getAverageNumOfFeatures()<<endl;
+		featureNumInStroke[featureArrayEnd]=probabilityStroke.getAverageNumOfFeatures();
+		featureArrayEnd++;
 		for(int j=0; j<3; j++){
 			double sum = 0;
 			for(int k=0; k<16; k++){
@@ -344,30 +356,62 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 			}
 			for(int k=0; k<16; k++){
 				probabilityStroke.state[j].vector[k] = probabilityStroke.state[j].vector[k]/sum;
+				outFile<<probabilityStroke.state[j].vector[k]<<endl;
 			}
 		}	
 		newWord.replace(probabilityStroke, i);
 	}
-//	outFile<<"<word>\n";
-
-	for(int i=0; i<newWord.strokes.size(); i++){
-		rh::Stroke stroke = newWord.strokes.at(i);
-//		outFile<<"<stroke>\n";
-		
-		for(int j=0; j<3; j++){
-//			outFile<<"<state>\n";
-
-			for(int k=0; k<16; k++){
-				outFile<<stroke.state[j].vector[k]<<endl;
-			}
-			
-//			outFile<<"</state>\n";
-		}
-		
-//		outFile<<"</stroke>\n";
+	
+	for(int i=0; i<featureArrayEnd; i++){
+		matrixSource[matrixArrayEnd]=featureNumInStroke[i]/3;
+		matrixArrayEnd++;
+		matrixSource[matrixArrayEnd]=featureNumInStroke[i]/3;
+		matrixArrayEnd++;
+		matrixSource[matrixArrayEnd]=featureNumInStroke[i]/3+featureNumInStroke[i]%3;
+		matrixArrayEnd++;
 	}
 	
-//	outFile<<"</word>\n";
+	//generate the distrubution matrix -- start
+	for(int i=0; i<matrixArrayEnd-1; i++){
+		cout<<matrixSource[i]<<endl;
+		distributionMatrix[i][i]=(matrixSource[i]-1)/matrixSource[i];
+		distributionMatrix[i][i+1]=1/matrixSource[i];
+	}
+	distributionMatrix[matrixArrayEnd-1][matrixArrayEnd-1]=1;
+	
+	for(int i=0; i<matrixArrayEnd; i++){
+		for(int j=0; j<matrixArrayEnd; j++){
+			transitionProbabilityFile<<distributionMatrix[i][j]<<endl;
+			cout<<distributionMatrix[i][j]<<endl;
+		}	
+		if(i!=matrixArrayEnd-1){
+			transitionProbabilityFile<<"newRow"<<endl;
+		}
+	}
+	//generate the distrubution matrix -- end
+	
+	
+	
+	
+////	outFile<<"<word>\n";
+//	for(int i=0; i<newWord.strokes.size(); i++){
+//		rh::Stroke stroke = newWord.strokes.at(i);
+////		transitionProbabilityFile<<stroke.featureNum<<endl;
+////		transitionProbabilityFile<<stroke.trainingTimes<<endl;
+//		transitionProbabilityFile<<stroke.getAverageNumOfFeatures()<<endl;
+////		outFile<<"<stroke>\n";
+//		for(int j=0; j<3; j++){
+////			outFile<<"<state>\n";
+//
+//			for(int k=0; k<16; k++){
+//				outFile<<stroke.state[j].vector[k]<<endl;
+//			}	
+////			outFile<<"</state>\n";
+//		}
+////		outFile<<"</stroke>\n";
+//	}
+////	outFile<<"</word>\n";
 	
 	outFile.close();
+	transitionProbabilityFile.close();
 }

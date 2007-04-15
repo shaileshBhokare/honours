@@ -16,11 +16,11 @@ using namespace std;
 namespace redhat{
 	class Viterbi{
 		public:
-			static vector<int> Calculate_path_and_probability(string distributionProbabilityFilePath, vector<int> observation, string transitionProbabilityFilePath);
+			static vector<int> Calculate_path_and_probability(string distributionProbabilityFilePath, string observationFilePath, string transitionProbabilityFilePath);
 			static void insertIntoVector(int num, vector<int> pathVector);
 	};
 	
-	vector<int> Viterbi::Calculate_path_and_probability(string distributionProbabilityFilePath, vector<int> observation, string transitionProbabilityFilePath){
+	vector<int> Viterbi::Calculate_path_and_probability(string distributionProbabilityFilePath, string observationFilePath, string transitionProbabilityFilePath){
 		
 		//create two 2D array to store the distribtion and transition probability
 		double disProb[100][16];
@@ -30,6 +30,8 @@ namespace redhat{
 		int disColumn=0;
 		int tranRow=0;//tranRow should equal tranColumn, since the transition probability matrix should be a square matrix.
 		int tranColumn=0;
+		
+		vector<int> observation;
 		
 		string line;//used to retrieve each line in a file
 		double num;// used to get double format value of line;
@@ -49,13 +51,34 @@ namespace redhat{
 			}
 		}
 		
-	/*	//for testing
+		//for testing
 		//testing start
+		/*cout<<"Distribution File:"<<endl<<endl;
 		for(int i=0; i<disRow; i++){
 			for(int j=0; j<16; j++){
-				cout<<disProb[i][j]<<endl;
+				cout<<disProb[i][j]<<"\t";
 			}
+			cout<<endl;
 		}//testing finish*/
+		
+		fs::ifstream observationFile(observationFilePath);
+		if(!observationFile){
+			cout<<"Cannot open file.\n";
+		}else{
+			while(!observationFile.eof()){
+				getline(observationFile, line);
+				num=rh::convertToDouble(line);
+				observation.push_back(num);
+			}
+		}
+		
+		/*cout<<"Observation File:"<<endl<<endl;
+		//for testing
+		//testing start
+		for(int i=0; i<observation.size(); i++){
+			cout<<observation.at(i)<<endl;
+		}//testing finish*/
+	
 		
 		fs::ifstream tranProbFile(transitionProbabilityFilePath);
 		if(!tranProbFile){
@@ -74,11 +97,13 @@ namespace redhat{
 			}
 		}
 
-		/*//testing start
+		/*cout<<"Transition File:"<<endl<<endl;
+		//testing start
 		for(int i=0; i<=tranRow; i++){
 			for(int j=0; j<tranColumn; j++){
-				cout<<tranProb[i][j]<<endl;
+				cout<<tranProb[i][j]<<"\t";
 			}
+			cout<<endl;
 		}//testing finish*/
 		
 		
@@ -135,12 +160,18 @@ namespace redhat{
 				double maxPathProbAtPresent = 0;
 				int maxPath = 0;//default is from the state one.
 				for(int k=0; k<tranColumn; k++){//calculate every previous node
-					double tempProb = log(matrix[i-1][k].probability)+log(tranProb[k][j])+log(disProb[j][observation.at(i)]);
-					double tempPathProb = log(matrix[i-1][k].probability)+log(tranProb[k][j]);
-					if (tempProb>maxProbAtPresent){
+					double tempProb = log(matrix[k][i-1].probability)+log(tranProb[k][j])+log(disProb[j][observation.at(i)]);
+					double tempPathProb = log(matrix[k][i-1].probability)+log(tranProb[k][j]);
+					if (maxProbAtPresent = 0){
 						maxProbAtPresent=tempProb;
 					}
-					if (tempPathProb > maxPathProbAtPresent){
+					if (maxPathProbAtPresent = 0){
+						maxPathProbAtPresent = tempPathProb;
+					}
+					if (tempProb>=maxProbAtPresent){
+						maxProbAtPresent=tempProb;
+					}
+					if (tempPathProb >= maxPathProbAtPresent){
 						maxPathProbAtPresent = tempPathProb;
 						maxPath = k;	
 					}
@@ -149,6 +180,24 @@ namespace redhat{
 				matrix[j][i].path = maxPath;
 			}
 		}
+		
+
+		cout<<"Viterbi File:"<<endl<<endl;
+		//for testing
+		//testing start
+		for(int i=0; i<tranColumn; i++){
+			for(int j=0; j<matrixColumn; j++){
+				cout<<matrix[i][j].probability<<"\t";
+			}
+			cout<<endl;
+		}//testing finish*/
+		
+				//test
+		double testProb = log(matrix[0][0].probability)+log(tranProb[0][0])+log(disProb[0][observation.at(2)]);
+		cout<<testProb<<endl;
+		cout<<log(matrix[0][0].probability)<<"\t"<<log(tranProb[0][0])<<"\t"<<log(disProb[0][observation.at(2)])<<endl;
+		//end test
+		
 		
 		//terminiation
 		//get the max probability

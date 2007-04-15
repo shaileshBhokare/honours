@@ -11,11 +11,14 @@ namespace redhat{
 	class Stroke{
 	public:
 		rh::State state[3];
+		int featureNum; //used to count the number of features and then used to find the transition probability
+		int trainingTimes; //used to count the number of training times and then used to find the transition probability
 		
 		Stroke();
 		~Stroke();
 		void setState(int i, rh::State ob);
 		rh::State getState(int i);
+		int getAverageNumOfFeatures();
 		void display();
 	};
 	
@@ -23,6 +26,8 @@ namespace redhat{
 //		for(int i=0; i<3; i++){
 //			state[i] = new State();
 //		}
+		featureNum=0;
+		trainingTimes=0;
 	}
 	
 	Stroke::~Stroke(){
@@ -35,6 +40,10 @@ namespace redhat{
 	
 	rh::State Stroke::getState(int i){
 		return state[i];
+	}
+		
+	int Stroke::getAverageNumOfFeatures(){
+		return featureNum/trainingTimes;
 	}
 	
 	void Stroke::display(){
