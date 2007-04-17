@@ -8,6 +8,7 @@
 #include <boost/filesystem/path.hpp>
 #include "convert.h"
 #include "Node.h"
+#include "Result.h"
 
 namespace rh = redhat;
 namespace fs = boost::filesystem;
@@ -16,11 +17,11 @@ using namespace std;
 namespace redhat{
 	class Viterbi{
 		public:
-			static vector<int> Calculate_path_and_probability(string distributionProbabilityFilePath, string observationFilePath, string transitionProbabilityFilePath);
+			static rh::Result Calculate_path_and_probability(string distributionProbabilityFilePath, string observationFilePath, string transitionProbabilityFilePath);
 			static void insertIntoVector(int num, vector<int> pathVector);
 	};
 	
-	vector<int> Viterbi::Calculate_path_and_probability(string distributionProbabilityFilePath, string observationFilePath, string transitionProbabilityFilePath){
+	rh::Result Viterbi::Calculate_path_and_probability(string distributionProbabilityFilePath, string observationFilePath, string transitionProbabilityFilePath){
 		
 		//create two 2D array to store the distribtion and transition probability
 		double disProb[100][16];
@@ -225,7 +226,10 @@ namespace redhat{
 			previousPath = matrix[previousPath][i].path;
 		}
 		
-		return mostPossiblePath;
+		rh::Result result;
+		result.probability = maxProbability;
+		result.path = mostPossiblePath
+		return result;
 	}
 	
 	
