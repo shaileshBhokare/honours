@@ -7,5 +7,6 @@ namespace redhat{
 		public:
 			double probability;
 			int path;
+			int currentPath;
 	};
 }
