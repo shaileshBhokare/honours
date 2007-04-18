@@ -12,10 +12,10 @@ namespace fs = boost::filesystem;
 using namespace std;
 
 int main(){
-	string disPath = "../data/featureData/four/four_dis.txt";
-	string obePath = "../data/featureData/four/feature/4.1.txt";
+	string disPath = "../data/trainingData/localInitialData/four_dis.txt";
+	string obePath = "../data/trainingData/localInitialData/four/4.8.txt";
 	rh::ViterbiResult result;
-	string tranPath="../data/featureData/four/four_tran.txt";
+	string tranPath= "../data/trainingData/localInitialData/four_tran.txt";
 	
 	string outViterbiPath = "../data/temp/viterbiPath.txt";
 	fs::ofstream outViterbiFile(outViterbiPath);
