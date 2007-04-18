@@ -131,30 +131,11 @@ namespace redhat{
 		matrix[0][0].currentPath = 0;
 		
 		for(int i=1; i<tranColumn; i++){
-			matrix[i][0].probability = -1000;
+			matrix[i][0].probability = log(0.0);
 			matrix[i][0].path = 0;
 		}
 		
 		//recursion
-		/*for(int i=1; i<columns-1; i++){
-			for(int j=0; j<rows; j++){
-				double tempProb1 = log(matrix[i-1][j].probability)+log(transitionProbability[0][0])
-										+log(distributionProbability.state[0].vector[observation.at[i]]);
-				double tempProb2 = log(matrix[i-1][j+1].probability)+log(transitionProbability[1][0])
-										+log(distributionProbability.state[1].vector[observation.at[i]]);
-				double tempProb3 = log(matrix[i-1][j+2].probability)+log(transitionProbability[2][0])
-										+log(distributionProbability.state[2].vector[observation.at[i]]);
-				matrix[i][j].probability = max(tempProb1, tempProb2, tempProb3);
-				
-				double tempPath1 = log(matrix[i-1][j].probability)+log(transitionProbability[0][0]);
-				double tempPath2 = log(matrix[i-1][j+1].probability)+log(transitionProbability[1][0]);
-				double tempPath3 = log(matrix[i-1][j+2].probability)+log(transitionProbability[2][0]);
-				
-				if((max(tempPath1, tempPath2, tempPath3)=tempPath1) matrix[i][j].path = 0;
-				else if((max(tempPath1, tempPath2, tempPath3)=tempPath2) matrix[i][j].path = 1;
-				else matrix[i][j].path = 2;
-			}
-		}*/
 		
 		for(int i=1; i<matrixColumn; i++){//calculate column by column
 			for(int j=0; j<tranColumn; j++){//calculate each node
@@ -197,20 +178,17 @@ namespace redhat{
 //		
 //		for(int i=0; i<tranColumn; i++){
 //			for(int j=0; j<matrixColumn; j++){
-//				outFile<<matrix[i][j].probability<<"\t";
+//				outFile<<matrix[i][j].probability<<" ss";
 //			}
 //			outFile<<endl;
-//		}//testing finish*/
+//		}
 //		outFile.close();
+//testing finish*/
 		
 		//test
-//		double testProb = matrix[0][0].probability+log(tranProb[0][3])+log(disProb[3][observation.at(2)]);
-//		cout<<testProb<<endl;
-//		cout<<tranProb[0][3]<<endl;
-//		cout<<disProb[3][observation.at(2)]<<endl;
-//		cout<<matrix[0][0].probability<<"\t"<<log(tranProb[0][3])<<"\t"<<log(disProb[3][observation.at(2)])<<endl;
-//		if(testProb>-1) cout<<"> -1";
-//		else cout<<"< -1";
+//		for(int i=0; i<tranColumn; i++){
+//			cout<<matrix[i][1].path<<" at "<<matrix[i][1].currentPath<<endl;	
+//		}
 		//end test
 		
 		
@@ -229,11 +207,12 @@ namespace redhat{
 		}
 		
 		//state path backtracking
+		mostPossiblePath.push_back(maxNode.path);
 		mostPossiblePath.push_back(maxNode.currentPath);
 		int previousPath = maxNode.path;
-		for(int i = matrixColumn-1; i > 0; i--){
-			mostPossiblePath = Viterbi::insertIntoVector(previousPath, mostPossiblePath);
+		for(int i = matrixColumn-2; i > 0; i--){
 			previousPath = matrix[previousPath][i].path;
+			mostPossiblePath = Viterbi::insertIntoVector(previousPath, mostPossiblePath);
 		}
 		
 		rh::ViterbiResult result;

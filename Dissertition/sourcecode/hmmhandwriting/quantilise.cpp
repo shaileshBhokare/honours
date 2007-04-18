@@ -342,7 +342,7 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 	double matrixSource[100];//store the source number of each state
 	int featureArrayEnd=0;
 	int matrixArrayEnd=0;
-	double distributionMatrix[100][100];
+	double transitionMatrix[100][100];
 	//change the feature data to the probability fomat and output
 	for(int i=0; i<newWord.strokes.size(); i++){
 		rh::Stroke probabilityStroke = newWord.getStroke(i);
@@ -371,24 +371,24 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 		matrixArrayEnd++;
 	}
 	
-	//generate the distrubution matrix -- start
+	//generate the transition matrix -- start
 	for(int i=0; i<matrixArrayEnd-1; i++){
 		cout<<matrixSource[i]<<endl;
-		distributionMatrix[i][i]=(matrixSource[i]-1)/matrixSource[i];
-		distributionMatrix[i][i+1]=1/matrixSource[i];
+		transitionMatrix[i][i]=(matrixSource[i]-1)/matrixSource[i];
+		transitionMatrix[i][i+1]=1/matrixSource[i];
 	}
-	distributionMatrix[matrixArrayEnd-1][matrixArrayEnd-1]=1;
+	transitionMatrix[matrixArrayEnd-1][matrixArrayEnd-1]=1;
 	
 	for(int i=0; i<matrixArrayEnd; i++){
 		for(int j=0; j<matrixArrayEnd; j++){
-			transitionProbabilityFile<<distributionMatrix[i][j]<<endl;
-			cout<<distributionMatrix[i][j]<<endl;
+			transitionProbabilityFile<<transitionMatrix[i][j]<<endl;
+			cout<<transitionMatrix[i][j]<<endl;
 		}	
 		if(i!=matrixArrayEnd-1){
 			transitionProbabilityFile<<"newRow"<<endl;
 		}
 	}
-	//generate the distrubution matrix -- end
+	//generate the transition matrix -- end
 	
 	
 	

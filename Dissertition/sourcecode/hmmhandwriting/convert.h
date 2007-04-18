@@ -15,7 +15,16 @@ namespace redhat{
 		double x;
 		char c;
 		if(!(i >> x) || (failIfLeftoverChars && i.get(c)))
-			 throw Conversion("convertToDouble(\""+ s + "\")");
+			 throw redhat::Conversion("convertToDouble(\""+ s + "\")");
+		return x;
+	}
+	
+	inline int convertToInt(const std::string& s, bool failIfLeftoverChars=true){
+		std::istringstream i(s);
+		int x;
+		char c;
+		if(!(i >> x) || (failIfLeftoverChars && i.get(c)))
+			 throw redhat::Conversion("convertToInt(\""+ s + "\")");
 		return x;
 	}
 }
