@@ -19,7 +19,7 @@ void parseFile(fs::path repository_path);
 
 int main(){
 	
-	fs::path repository_path("./data/tempTrainingData");//point to the trainning data direcotry
+	fs::path repository_path("./data/trainingData/rawData");//point to the trainning data direcotry
 
 
 
@@ -41,16 +41,16 @@ int main(){
 }
 
 void parseFile(fs::path repository_path){//handle subdirectory and retrieve the name
-	string outFilePath = "./data/probability/"+repository_path.leaf()+".txt";
-	string transitionProbabilityFilePath = "./data/transitionProbability/"+repository_path.leaf()+".txt";
-	string featureDirectoryPath = "./data/featureData/"+repository_path.leaf();
+	string distributionProbabilityFilePath = "./data/trainingData/localInitialData/"+repository_path.leaf()+"_dis.txt";
+	string transitionProbabilityFilePath = 	"./data/trainingData/localInitialData/"+repository_path.leaf()+"_tran.txt";
+	string featureDirectoryPath = "./data/trainingData/localInitialData/"+repository_path.leaf();
 	fs::create_directory(featureDirectoryPath);
 	rh::Word newWord;
 	bool isFirstFile=true;
 	
-	fs::ofstream outFile(outFilePath);
+	fs::ofstream distributionProbabilityFile(distributionProbabilityFilePath);
 	fs::ofstream transitionProbabilityFile(transitionProbabilityFilePath);
-	if(!outFile||!transitionProbabilityFile){
+	if(!distributionProbabilityFile||!transitionProbabilityFile){
 		cout << "Cannot write to file.\n";
 	}
 	
@@ -339,10 +339,10 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 	}
 	
 	int featureNumInStroke[50];//store the average number of features in each stroke
-	double matrixSource[100];//store the source number of each state
+	double tranMatrixSource[100];//store the source number of each state
 	int featureArrayEnd=0;
 	int matrixArrayEnd=0;
-	double transitionMatrix[100][100];
+	double transitionMatrix[300][300];
 	//change the feature data to the probability fomat and output
 	for(int i=0; i<newWord.strokes.size(); i++){
 		rh::Stroke probabilityStroke = newWord.getStroke(i);
@@ -356,33 +356,33 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 			}
 			for(int k=0; k<16; k++){
 				probabilityStroke.state[j].vector[k] = probabilityStroke.state[j].vector[k]/sum;
-				outFile<<probabilityStroke.state[j].vector[k]<<endl;
+				distributionProbabilityFile<<probabilityStroke.state[j].vector[k]<<endl;
 			}
 		}	
 		newWord.replace(probabilityStroke, i);
 	}
 	
 	for(int i=0; i<featureArrayEnd; i++){
-		matrixSource[matrixArrayEnd]=featureNumInStroke[i]/3;
+		tranMatrixSource[matrixArrayEnd]=featureNumInStroke[i]/3;
 		matrixArrayEnd++;
-		matrixSource[matrixArrayEnd]=featureNumInStroke[i]/3;
+		tranMatrixSource[matrixArrayEnd]=featureNumInStroke[i]/3;
 		matrixArrayEnd++;
-		matrixSource[matrixArrayEnd]=featureNumInStroke[i]/3+featureNumInStroke[i]%3;
+		tranMatrixSource[matrixArrayEnd]=featureNumInStroke[i]/3+featureNumInStroke[i]%3;
 		matrixArrayEnd++;
 	}
 	
 	//generate the transition matrix -- start
 	for(int i=0; i<matrixArrayEnd-1; i++){
-		cout<<matrixSource[i]<<endl;
-		transitionMatrix[i][i]=(matrixSource[i]-1)/matrixSource[i];
-		transitionMatrix[i][i+1]=1/matrixSource[i];
+//		cout<<tranMatrixSource[i]<<endl;
+		transitionMatrix[i][i]=(tranMatrixSource[i]-1)/tranMatrixSource[i];
+		transitionMatrix[i][i+1]=1/tranMatrixSource[i];
 	}
 	transitionMatrix[matrixArrayEnd-1][matrixArrayEnd-1]=1;
 	
 	for(int i=0; i<matrixArrayEnd; i++){
 		for(int j=0; j<matrixArrayEnd; j++){
 			transitionProbabilityFile<<transitionMatrix[i][j]<<endl;
-			cout<<transitionMatrix[i][j]<<endl;
+//			cout<<transitionMatrix[i][j]<<endl;
 		}	
 		if(i!=matrixArrayEnd-1){
 			transitionProbabilityFile<<"newRow"<<endl;
@@ -393,25 +393,25 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 	
 	
 	
-////	outFile<<"<word>\n";
+////	distributionProbabilityFile<<"<word>\n";
 //	for(int i=0; i<newWord.strokes.size(); i++){
 //		rh::Stroke stroke = newWord.strokes.at(i);
 ////		transitionProbabilityFile<<stroke.featureNum<<endl;
 ////		transitionProbabilityFile<<stroke.trainingTimes<<endl;
 //		transitionProbabilityFile<<stroke.getAverageNumOfFeatures()<<endl;
-////		outFile<<"<stroke>\n";
+////		distributionProbabilityFile<<"<stroke>\n";
 //		for(int j=0; j<3; j++){
-////			outFile<<"<state>\n";
+////			distributionProbabilityFile<<"<state>\n";
 //
 //			for(int k=0; k<16; k++){
-//				outFile<<stroke.state[j].vector[k]<<endl;
+//				distributionProbabilityFile<<stroke.state[j].vector[k]<<endl;
 //			}	
-////			outFile<<"</state>\n";
+////			distributionProbabilityFile<<"</state>\n";
 //		}
-////		outFile<<"</stroke>\n";
+////		distributionProbabilityFile<<"</stroke>\n";
 //	}
-////	outFile<<"</word>\n";
+////	distributionProbabilityFile<<"</word>\n";
 	
-	outFile.close();
+	distributionProbabilityFile.close();
 	transitionProbabilityFile.close();
 }
