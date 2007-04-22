@@ -43,13 +43,14 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 	int tranState[150]; //used to calculate transition probabilityy
 	int trainingTimes = 0; //used to calculate transition probability
 	double optimisedTranMatrixSource[100]; 
-	double optimisedTransitionMatrix[100][100];
-	//initilised optimisedTransitionMatrix
-	for(int i=0; i<100; i++){
-		for(int j=0; j<100; j++){
-			optimisedTransitionMatrix[i][j]=-1;
-		}
-	}
+	double optimisedTransitionMatrix[100][100];// = new double[100][100];
+	
+//	for(int i=0; i<15; i++){
+//		for(int j=0; j<15; j++){
+//			cout<<optimisedTransitionMatrix[i][j]<<"\t";
+//		}
+//		cout<<endl;
+//	}
 	
 	//trversal the subdirecotry
 	fs::directory_iterator end_sub_itr;
@@ -99,6 +100,15 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 			}
 		}
 		trainingTimes++;
+//		//tst
+//		cout<<trainingTimes<<endl;
+//		for(int i=0; i<15; i++){
+//			for(int j=0; j<15; j++){
+//				cout<<optimisedTransitionMatrix[i][j]<<"\t";
+//			}
+//							cout<<endl;
+//		}
+//		//tst end
 	}
 	
 	fs::ofstream optimisedDistributionFile("./data/trainingData/localOptimisedData/"+repository_path.leaf()+"_dis.txt");
@@ -122,14 +132,16 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 //		cout<<"average :"<<optimisedTranMatrixSource[i]<<endl;
 	}
 
+	//initilised optimisedTransitionMatrix
+	for(int i=0; i<100; i++){
+		for(int j=0; j<100; j++){
+			optimisedTransitionMatrix[i][j]=0;
+		}
+	}
 	for(int i=0; i<=numOfState-1; i++){
 		optimisedTransitionMatrix[i][i]=(optimisedTranMatrixSource[i]-1)/optimisedTranMatrixSource[i];
 		optimisedTransitionMatrix[i][i+1]=1/optimisedTranMatrixSource[i];
 	}
-	
-	//tst
-	optimisedTransitionMatrix[0][2]=100;
-	//end tst
 	
 	optimisedTransitionMatrix[numOfState][numOfState]=1;
 	//output to file
