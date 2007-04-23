@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!--
+	- Application context definition for "springapp" DispatcherServlet.
+-->
+
+<beans>
+	<bean id="springappController"
+		class="org.smarteda.web.SpringappController">
+		<property name="productManager">
+			<ref bean="prodMan" />
+		</property>
+	</bean>
+
+	<bean id="prodMan" class="org.smarteda.bus.ProductManager">
+		<property name="products">
+			<list>
+				<ref bean="product1" />
+				<ref bean="product2" />
+				<ref bean="product3" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="product1" class="org.smarteda.bus.Product">
+		<property name="description">
+			<value>Lamp</value>
+		</property>
+		<property name="price">
+			<value>5.75</value>
+		</property>
+	</bean>
+
+	<bean id="product2" class="org.smarteda.bus.Product">
+		<property name="description">
+			<value>Table</value>
+		</property>
+		<property name="price">
+			<value>75.25</value>
+		</property>
+	</bean>
+
+	<bean id="product3" class="org.smarteda.bus.Product">
+		<property name="description">
+			<value>Chair</value>
+		</property>
+		<property name="price">
+			<value>22.79</value>
+		</property>
+	</bean>
+	
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename"><value>messages</value></property>
+    </bean>
+
+	<bean id="urlMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/hello.htm">springappController</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass">
+			<value>org.springframework.web.servlet.view.JstlView</value>
+		</property>
+		<property name="prefix">
+			<value>/jsp/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+</beans>
