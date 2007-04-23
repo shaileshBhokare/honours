@@ -9,14 +9,14 @@ import junit.framework.TestCase;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
-import org.smarteda.bus.Product;;
+import org.smarteda.bus.Product;
 import org.smarteda.web.*;
 
 public class TestSpringappController extends TestCase{
 	private ApplicationContext ac;
 	
 	public void setUp() throws IOException {
-        ac = new FileSystemXmlApplicationContext("/WEB-INF/springapp-servlet.xml");
+        ac = new FileSystemXmlApplicationContext("/src/main/webapp/WEB-INF/springapp-servlet.xml");
     }
 	
 	 public void testHandleRequest() throws ServletException, IOException {
