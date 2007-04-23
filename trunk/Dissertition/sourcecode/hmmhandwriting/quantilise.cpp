@@ -14,6 +14,7 @@ namespace rh = redhat;
 using namespace std;
 
 const double PI= 4.0*atan(1.0);
+const int STATENO = 5;
 
 void parseFile(fs::path repository_path);
 
@@ -67,7 +68,7 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 	
 			string line;//used to retrieve each line in a file
 			
-			int count; //used to divide each stroke into three states
+			int count; //used to divide each stroke into several states
 			int strokeNum=0; //used to retrieve specific stroke from the word
 			
 			fs::ifstream trainingFile(*sub_itr);
