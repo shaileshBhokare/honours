@@ -154,7 +154,4 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 			optimisedTransitionFile<<"newRow"<<endl;
 		}
 	}
-	
-	//remember release
-	delete [] optimisedTransitionMatrix;
 }

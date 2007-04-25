@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "State.h"
+#include "Constants.h"
 
 namespace rh = redhat;
 using namespace std;
@@ -10,7 +11,7 @@ using namespace std;
 namespace redhat{
 	class Stroke{
 	public:
-		rh::State state[3];
+		rh::State state[rh::STATENO];
 		int featureNum; //used to count the number of features and then used to find the transition probability
 		int trainingTimes; //used to count the number of training times and then used to find the transition probability
 		
@@ -47,7 +48,7 @@ namespace redhat{
 	}
 	
 	void Stroke::display(){
-		for(int i=0; i<3; i++){
+		for(int i=0; i<rh::STATENO; i++){
 			state[i].display();	
 		}	
 	}
