@@ -14,15 +14,12 @@ namespace rh = redhat;
 using namespace std;
 
 const double PI= 4.0*atan(1.0);
-const int STATENO = 5;
 
 void parseFile(fs::path repository_path);
 
 int main(){
 	
-	fs::path repository_path("./data/trainingData/rawData");//point to the trainning data direcotry
-
-
+	fs::path repository_path("./data/trainingData/localRawData");//point to the trainning data direcotry
 
 	//open file exception handling
 	if(!fs::exists(repository_path)){
@@ -91,6 +88,9 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 						rh::Stroke tempStroke = newWord.getStroke(strokeNum-1);
 						tempStroke.featureNum += count; // calculate trasition probabilityy
 						tempStroke.trainingTimes += 1;
+						
+						
+						/*//need remove -- start
 						//first state
 						for (int i=0; i<(count/3); i++){
 							double deltaX = x[i+1]-x[i];
@@ -318,6 +318,85 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 								featureFile<<15<<endl;
 							}
 						}
+						//need remove -- end*/
+						
+						for(int i=0; i<rh::STATENO; i++){
+							for (int j=((i*count)/rh::STATENO); j<(((i+1)*count)/rh::STATENO); j++){
+								double deltaX = x[j+1]-x[j];
+								double deltaY = y[j+1]-y[j];
+								double result = atan2(deltaY, deltaX);
+								
+								if(result<0){
+									result = result + 2*PI;
+								}
+								
+								if(result<(PI/8)) {
+									tempStroke.state[i].vector[0]++;
+									featureFile<<0<<endl;
+								}
+								else if(result<(2*PI/8)) {
+									tempStroke.state[i].vector[1]++;
+									featureFile<<1<<endl;
+								}
+								else if(result<(3*PI/8)) {
+									tempStroke.state[i].vector[2]++;
+									featureFile<<2<<endl;
+								}
+								else if(result<(4*PI/8)) {
+									tempStroke.state[i].vector[3]++;
+									featureFile<<3<<endl;
+								}
+								else if(result<(5*PI/8)) {
+									tempStroke.state[i].vector[4]++;
+									featureFile<<4<<endl;
+								}
+								else if(result<(6*PI/8)) {
+									tempStroke.state[i].vector[5]++;
+									featureFile<<5<<endl;
+								}
+								else if(result<(7*PI/8)) {
+									tempStroke.state[i].vector[6]++;
+									featureFile<<6<<endl;
+								}
+								else if(result<(8*PI/8)) {
+									tempStroke.state[i].vector[7]++;
+									featureFile<<7<<endl;
+								}
+								else if(result<(9*PI/8)) {
+									tempStroke.state[i].vector[8]++;
+									featureFile<<8<<endl;
+								}
+								else if(result<(10*PI/8)) {
+									tempStroke.state[i].vector[9]++;
+									featureFile<<9<<endl;
+								}
+								else if(result<(11*PI/8)) {
+									tempStroke.state[i].vector[10]++;
+									featureFile<<10<<endl;
+								}
+								else if(result<(12*PI/8)) {
+									tempStroke.state[i].vector[11]++;
+									featureFile<<11<<endl;
+								}
+								else if(result<(13*PI/8)) {
+									tempStroke.state[i].vector[12]++;
+									featureFile<<12<<endl;
+								}
+								else if(result<(14*PI/8)) {
+									tempStroke.state[i].vector[13]++;
+									featureFile<<13<<endl;
+								}
+								else if(result<(15*PI/8)) {
+									tempStroke.state[i].vector[14]++;
+									featureFile<<14<<endl;
+								}
+								else {
+									tempStroke.state[i].vector[15]++;
+									featureFile<<15<<endl;
+								}
+							}
+						}
+						
 						newWord.replace(tempStroke, strokeNum-1);
 //						featureFile<<"</s>"<<endl;
 					}else{
@@ -344,39 +423,62 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 	int featureArrayEnd=0;
 	int matrixArrayEnd=0;
 	double transitionMatrix[300][300];
+	
+	//generate the distribution matrix --begin
 	//change the feature data to the probability fomat and output
 	for(int i=0; i<newWord.strokes.size(); i++){
 		rh::Stroke probabilityStroke = newWord.getStroke(i);
 //		transitionProbabilityFile<<probabilityStroke.getAverageNumOfFeatures()<<endl;
 		featureNumInStroke[featureArrayEnd]=probabilityStroke.getAverageNumOfFeatures();
 		featureArrayEnd++;
-		for(int j=0; j<3; j++){
+		for(int j=0; j<rh::STATENO; j++){
 			double sum = 0;
+			int numOfZero = 0;//used to change all the zero to 1/(80*numberOfZero)
 			for(int k=0; k<16; k++){
 				sum += probabilityStroke.state[j].vector[k];
+				if(probabilityStroke.state[j].vector[k]==0){
+					numOfZero++;	
+				}
 			}
 			for(int k=0; k<16; k++){
-				probabilityStroke.state[j].vector[k] = probabilityStroke.state[j].vector[k]/sum;
+				if(probabilityStroke.state[j].vector[k]==0){
+					probabilityStroke.state[j].vector[k] = 1.0/(80*numOfZero);
+				}else{
+					probabilityStroke.state[j].vector[k] = probabilityStroke.state[j].vector[k]/sum;
+				}
 				distributionProbabilityFile<<probabilityStroke.state[j].vector[k]<<endl;
 			}
 		}	
 		newWord.replace(probabilityStroke, i);
 	}
+	//generate the distribution matrix -- end
 	
+	//generate the transition matrix -- start
 	for(int i=0; i<featureArrayEnd; i++){
+	/*	//need remove --start
 		tranMatrixSource[matrixArrayEnd]=featureNumInStroke[i]/3;
 		matrixArrayEnd++;
 		tranMatrixSource[matrixArrayEnd]=featureNumInStroke[i]/3;
 		matrixArrayEnd++;
 		tranMatrixSource[matrixArrayEnd]=featureNumInStroke[i]/3+featureNumInStroke[i]%3;
 		matrixArrayEnd++;
+		//need remove --end*/
+		
+		for(int j=0; j<rh::STATENO-1; j++){
+			tranMatrixSource[matrixArrayEnd]=featureNumInStroke[i]/rh::STATENO;
+			cout<<featureNumInStroke[i]<<"\t";
+			cout<<tranMatrixSource[matrixArrayEnd]<<endl;
+			matrixArrayEnd++;
+		}
+		tranMatrixSource[matrixArrayEnd]=featureNumInStroke[i]/rh::STATENO+featureNumInStroke[i]%rh::STATENO;
+		matrixArrayEnd++;
 	}
 	
-	//generate the transition matrix -- start
 	for(int i=0; i<matrixArrayEnd-1; i++){
 //		cout<<tranMatrixSource[i]<<endl;
 		transitionMatrix[i][i]=(tranMatrixSource[i]-1)/tranMatrixSource[i];
 		transitionMatrix[i][i+1]=1/tranMatrixSource[i];
+		cout<<i<<"\t"<<transitionMatrix[i][i]<<"\t"<<transitionMatrix[i][i+1]<<"\t"<<tranMatrixSource[i]<<endl;
 	}
 	transitionMatrix[matrixArrayEnd-1][matrixArrayEnd-1]=1;
 	
