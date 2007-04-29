@@ -77,7 +77,7 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 						
 			rh::ViterbiResult result = rh::Viterbi::Calculate_path_and_probability(disProbFilePath, observationPath, tranProbFilePath);
 			
-			//intermedia value -- start
+			//intermedia value: the state sequence  -- start
 			string stateSequanceDirectoryPath = "./data/trainingData/localOptimisedData/"+repository_path.leaf();
 			fs::create_directory(stateSequanceDirectoryPath);
 			string stateSequencePath = stateSequanceDirectoryPath+"/"+sub_itr->leaf();
@@ -89,7 +89,8 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 				stateSequence<<result.path.at(i)<<endl;
 				tranState[result.path.at(i)]++;//calculate the total number of the feature in each state
 			}
-			stateSequence.close();//intermedia value -- end
+			stateSequence.close();
+			//intermedia value -- end
 			
 			for(int i=0; i<result.path.size(); i++){
 				int stateIndex = result.path.at(i);
@@ -115,13 +116,27 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 	//calculate distribution probability
 	for(int i=0; i<=numOfState; i++){
 		double sum = 0;
+		int numOfZero = 0;//used to change all the zero to 1/(80*numberOfZero)
 		for(int k=0; k<16; k++){
 			sum += state[i].vector[k];
+			if(state[i].vector[k]==0){
+				numOfZero++;
+			}
 		}
+//		cout<<sum<<endl;
 		for(int k=0; k<16; k++){
-			state[i].vector[k] = state[i].vector[k]/sum;
+//			cout<<state[i].vector[k]<<" ";
+			if(state[i].vector[k]==0){
+				state[i].vector[k]=1.0/(80*numOfZero);
+				cout<<numOfZero<<" "<<state[i].vector[k]<<"\t";
+			}else{
+				state[i].vector[k] = state[i].vector[k]/sum;
+			}
+//			cout<<sum<<" "<<state[i].vector[k]<<"\t";
 			optimisedDistributionFile<<state[i].vector[k]<<endl;
+//			cout<<state[i].vector[k]<<" ";
 		}
+		cout<<endl;
 	}
 	
 	//calculate the transition probability
