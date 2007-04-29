@@ -423,6 +423,7 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 	int featureArrayEnd=0;
 	int matrixArrayEnd=0;
 	double transitionMatrix[300][300];
+	double transitionMatrixNormolisation[300];
 	
 	//generate the distribution matrix --begin
 	//change the feature data to the probability fomat and output
@@ -466,20 +467,51 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 		
 		for(int j=0; j<rh::STATENO-1; j++){
 			tranMatrixSource[matrixArrayEnd]=featureNumInStroke[i]/rh::STATENO;
-			cout<<featureNumInStroke[i]<<"\t";
-			cout<<tranMatrixSource[matrixArrayEnd]<<endl;
+//			cout<<featureNumInStroke[i]<<"\t";
+//			cout<<tranMatrixSource[matrixArrayEnd]<<endl;
 			matrixArrayEnd++;
 		}
 		tranMatrixSource[matrixArrayEnd]=featureNumInStroke[i]/rh::STATENO+featureNumInStroke[i]%rh::STATENO;
+//		cout<<featureNumInStroke[i]<<"\t";
+//			cout<<tranMatrixSource[matrixArrayEnd]<<endl;
 		matrixArrayEnd++;
 	}
 	
+	//initialise transitionMatrixNormolisation
+	for(int i=0; i<matrixArrayEnd-1; i++){
+		transitionMatrixNormolisation[i]=0;
+	}
+
 	for(int i=0; i<matrixArrayEnd-1; i++){
 //		cout<<tranMatrixSource[i]<<endl;
-		transitionMatrix[i][i]=(tranMatrixSource[i]-1)/tranMatrixSource[i];
-		transitionMatrix[i][i+1]=1/tranMatrixSource[i];
-		cout<<i<<"\t"<<transitionMatrix[i][i]<<"\t"<<transitionMatrix[i][i+1]<<"\t"<<tranMatrixSource[i]<<endl;
+		if(tranMatrixSource[i]==0){
+			transitionMatrix[i][i]=0;//can be removed, since the default value is zero
+		}else if(tranMatrixSource[i]==1){
+			transitionMatrix[i][i]=0;
+			transitionMatrix[i][i+1]=1;
+			transitionMatrixNormolisation[i]+=transitionMatrix[i][i+1];//calculate the normalisation value.
+			for(int j=2; j<=rh::JUMPNO; j++){
+				transitionMatrix[i][i+j]=0.5*transitionMatrix[i][i+j-1];
+				transitionMatrixNormolisation[i]+=transitionMatrix[i][i+j];
+			}
+		}else{
+			transitionMatrix[i][i]=(tranMatrixSource[i]-1)/tranMatrixSource[i];
+			transitionMatrixNormolisation[i]+=transitionMatrix[i][i];
+			for(int j=1; j<=rh::JUMPNO; j++){
+				transitionMatrix[i][i+j]=0.5*transitionMatrix[i][i+j-1];
+				transitionMatrixNormolisation[i]+=transitionMatrix[i][i+j];
+			}
+		}
+//		cout<<i<<"\t"<<transitionMatrix[i][i]<<"\t"<<transitionMatrix[i][i+1]<<"\t"<<tranMatrixSource[i]<<endl;
 	}
+	
+	//normalise the transitionn matrix
+	for(int i=0; i<matrixArrayEnd-1; i++){
+		for(int j=0; j<=rh::JUMPNO; j++){
+			transitionMatrix[i][i+j]*=1/transitionMatrixNormolisation[i];
+		}
+	}
+	
 	transitionMatrix[matrixArrayEnd-1][matrixArrayEnd-1]=1;
 	
 	for(int i=0; i<matrixArrayEnd; i++){
