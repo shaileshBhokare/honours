@@ -11,6 +11,7 @@ namespace redhat{
 		public:
 			double probability;
 			vector<int> path;
+			string character;
 	};
 }
 
