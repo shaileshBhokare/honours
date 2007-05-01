@@ -54,6 +54,7 @@ namespace redhat{
 				}
 			}
 		}
+		disProbFile.close();
 		
 		//for testing
 		//testing start
@@ -78,6 +79,7 @@ namespace redhat{
 				}
 			}
 		}
+		observationFile.close();
 		
 		/*cout<<"Observation File:"<<endl<<endl;
 		//for testing
@@ -104,6 +106,7 @@ namespace redhat{
 				}
 			}
 		}
+		tranProbFile.close();
 
 //		cout<<"Transition File:"<<endl<<endl;
 //		//testing start

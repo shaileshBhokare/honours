@@ -74,6 +74,7 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 					}
 				}
 			}
+			observationFile.close();
 						
 			rh::ViterbiResult result = rh::Viterbi::Calculate_path_and_probability(disProbFilePath, observationPath, tranProbFilePath);
 			
@@ -138,6 +139,7 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 		}
 		cout<<endl;
 	}
+	optimisedDistributionFile.close();
 	
 	//calculate the transition probability
 	for(int i=0; i<=numOfState; i++){
@@ -153,12 +155,15 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 			optimisedTransitionMatrix[i][j]=0;
 		}
 	}
+	/* fix later
 	for(int i=0; i<=numOfState-1; i++){
 		optimisedTransitionMatrix[i][i]=(optimisedTranMatrixSource[i]-1)/optimisedTranMatrixSource[i];
 		optimisedTransitionMatrix[i][i+1]=1/optimisedTranMatrixSource[i];
 	}
 	
 	optimisedTransitionMatrix[numOfState][numOfState]=1;
+	//fix later */
+	
 	//output to file
 	fs::ofstream optimisedTransitionFile("./data/trainingData/localOptimisedData/"+repository_path.leaf()+"_tran.txt");
 	for(int i=0; i<=numOfState; i++){
@@ -169,4 +174,5 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 			optimisedTransitionFile<<"newRow"<<endl;
 		}
 	}
+	optimisedTransitionFile.close();
 }
