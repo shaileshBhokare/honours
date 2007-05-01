@@ -16,7 +16,14 @@ using namespace std;
 vector<rh::ViterbiResult> insert(vector<rh::ViterbiResult> resultSequence, rh::ViterbiResult item, int i);
 
 int main(){
-	string recognitionData_path("./data/recognitionData/localFeatureData/1.1/1.1.9.txt");
+	fs::path configFilePath("./data/recognitionData/path.txt");
+	fs::ifstream configFile(configFilePath);
+	string line;
+	while(!configFile.eof()){
+		getline(configFile, line);
+	}
+	
+	string recognitionData_path=line;
 	fs::path optimisedData_path("./data/trainingData/localOptimisedData/");
 	vector<rh::ViterbiResult> recognitionResult;
 	
@@ -33,21 +40,36 @@ int main(){
 			string tranPath = "./data/trainingData/localInitialData/"+itr->leaf()+"_tran.txt";//tempararily use initial transition probability
 			
 			rh::ViterbiResult result = rh::Viterbi::Calculate_path_and_probability(disPath, recognitionData_path, tranPath);
+			result.character=itr->leaf();
 			
+//			cout<<result.probability<<endl;
+//			cout<<recognitionResult.size()<<endl;
 			if(recognitionResult.size()==0){
 				recognitionResult.push_back(result);
+//				cout<<recognitionResult.size()<<endl;
 			}else{
-				for(int i=0; i<recognitionResult.size(); i++){
+				int i=0;
+				bool keepGoing=true;
+				while(i<recognitionResult.size()&&keepGoing){
 					if(recognitionResult.at(i).probability<result.probability){
 						recognitionResult = insert(recognitionResult, result, i);
+						keepGoing=false;
+					}else if(i==(recognitionResult.size()-1)){
+						recognitionResult.push_back(result);
+						keepGoing=false;
 					}
+					i++;
 				}
 			}
 		}
 	}
-	
 	for(int i=0; i<recognitionResult.size(); i++){
-		cout<<recognitionResult.at(i).character<<endl;
+		cout<<recognitionResult.at(i).probability<<endl;
+	}
+	
+	cout<<"For character: "<<line<<endl;
+	for(int i=0; i<recognitionResult.size(); i++){
+		cout<<i+1<<"\t"<<recognitionResult.at(i).character<<endl;
 	}
 	return 0;
 }

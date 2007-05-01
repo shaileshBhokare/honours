@@ -172,6 +172,7 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 				isFirstFile=false;
 			}
 			trainingFile.close();
+			featureFile.close();
 		}
 	}
 }
