@@ -19,11 +19,16 @@ int main(){
 	fs::path configFilePath("./data/recognitionData/path.txt");
 	fs::ifstream configFile(configFilePath);
 	string line;
-	while(!configFile.eof()){
-		getline(configFile, line);
-	}
+	string line1;
+	string line2;
+//	while(!configFile.eof()){
+//		getline(configFile, line);
+//	}
+	getline(configFile, line1);
+	getline(configFile, line2);
+	line=line1+"/"+line2+".txt";
 	
-	string recognitionData_path=line;
+	string recognitionData_path="./data/recognitionData/localFeatureData/"+line;
 	fs::path optimisedData_path("./data/trainingData/localOptimisedData/");
 	vector<rh::ViterbiResult> recognitionResult;
 	
@@ -68,8 +73,8 @@ int main(){
 //	}
 	
 	//output results
-	fs::path resultFilePath("./data/recognitionData/results/result.txt");
-	fs::ofstream resultFile(configFilePath);
+	fs::path resultFilePath("./data/recognitionData/results/"+line2+".txt");
+	fs::ofstream resultFile(resultFilePath);
 	
 	resultFile<<"For character: "<<line<<endl;
 	for(int i=0; i<recognitionResult.size(); i++){
