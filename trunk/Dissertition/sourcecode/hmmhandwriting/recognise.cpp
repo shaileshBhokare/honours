@@ -63,14 +63,21 @@ int main(){
 			}
 		}
 	}
+//	for(int i=0; i<recognitionResult.size(); i++){
+//		cout<<recognitionResult.at(i).probability<<endl;
+//	}
+	
+	//output results
+	fs::path resultFilePath("./data/recognitionData/results/result.txt");
+	fs::ofstream resultFile(configFilePath);
+	
+	resultFile<<"For character: "<<line<<endl;
 	for(int i=0; i<recognitionResult.size(); i++){
-		cout<<recognitionResult.at(i).probability<<endl;
+		resultFile<<i+1<<"\t"<<recognitionResult.at(i).character<<endl;
 	}
 	
-	cout<<"For character: "<<line<<endl;
-	for(int i=0; i<recognitionResult.size(); i++){
-		cout<<i+1<<"\t"<<recognitionResult.at(i).character<<endl;
-	}
+	resultFile.close();
+	
 	return 0;
 }
 
