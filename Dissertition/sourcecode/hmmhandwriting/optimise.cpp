@@ -149,20 +149,51 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 //		cout<<"average :"<<optimisedTranMatrixSource[i]<<endl;
 	}
 
+	double optimisedTransitionNormalisation[100];//used to normalise the transition matrix
 	//initilised optimisedTransitionMatrix
-	for(int i=0; i<100; i++){
-		for(int j=0; j<100; j++){
+	for(int i=0; i<=numOfState; i++){
+		for(int j=0; j<=numOfState; j++){
 			optimisedTransitionMatrix[i][j]=0;
 		}
 	}
-	/* fix later
+	
+	for(int i=0; i<=numOfState-1; i++){
+		if(optimisedTranMatrixSource[i]==0){
+			optimisedTransitionMatrix[i][i]=0;
+		}else if(optimisedTranMatrixSource[i]==1){
+			optimisedTransitionMatrix[i][i]=0;
+			optimisedTransitionMatrix[i][i+1]=1;
+			optimisedTransitionNormalisation[i]+=optimisedTransitionMatrix[i][i+1];
+			for(int j=2; j<=rh::JUMPNO; j++){
+				optimisedTransitionMatrix[i][i+j]=0.5*optimisedTransitionMatrix[i][i+j-1];
+				optimisedTransitionNormalisation[i]+=optimisedTransitionMatrix[i][i+1];
+			}
+		}else{
+			optimisedTransitionMatrix[i][i]=(optimisedTranMatrixSource[i]-1)/optimisedTranMatrixSource[i];
+			optimisedTransitionNormalisation[i]+=optimisedTransitionMatrix[i][i];
+			for(int j=1; j<=rh::JUMPNO; j++){
+				optimisedTransitionMatrix[i][i+j]=0.5*optimisedTransitionMatrix[i][i+j-1];
+				optimisedTransitionNormalisation[i]+=optimisedTransitionMatrix[i][i+1];
+			}
+		}
+	}
+	/* fix later --need remove start
 	for(int i=0; i<=numOfState-1; i++){
 		optimisedTransitionMatrix[i][i]=(optimisedTranMatrixSource[i]-1)/optimisedTranMatrixSource[i];
 		optimisedTransitionMatrix[i][i+1]=1/optimisedTranMatrixSource[i];
+	}*///need remove end
+	
+	//normalise the transition matrix
+	for(int i=0; i<=numOfState-1; i++){
+		for(int j=0; j<=rh::JUMPNO; j++){
+			if(optimisedTransitionNormalisation[i]!=0){
+				optimisedTransitionMatrix[i][i+j]*=(1/optimisedTransitionNormalisation[i]);
+			}
+		}
 	}
 	
 	optimisedTransitionMatrix[numOfState][numOfState]=1;
-	//fix later */
+	//fix later 
 	
 	//output to file
 	fs::ofstream optimisedTransitionFile("./data/trainingData/localOptimisedData/"+repository_path.leaf()+"_tran.txt");

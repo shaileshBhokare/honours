@@ -242,15 +242,6 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 	//generate the transition matrix -- start
 	try{
 		for(int i=0; i<featureArrayEnd; i++){
-		/*	//need remove --start
-			tranMatrixSource[matrixArrayEnd]=featureNumInStroke[i]/3;
-			matrixArrayEnd++;
-			tranMatrixSource[matrixArrayEnd]=featureNumInStroke[i]/3;
-			matrixArrayEnd++;
-			tranMatrixSource[matrixArrayEnd]=featureNumInStroke[i]/3+featureNumInStroke[i]%3;
-			matrixArrayEnd++;
-			//need remove --end*/
-			
 			for(int j=0; j<rh::STATENO-1; j++){
 				tranMatrixSource[matrixArrayEnd]=featureNumInStroke[i]/rh::STATENO;
 	//			cout<<featureNumInStroke[i]<<"\t";
@@ -291,7 +282,7 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 //			cout<<i<<"\t"<<transitionMatrix[i][i]<<"\t"<<transitionMatrix[i][i+1]<<"\t"<<tranMatrixSource[i]<<endl;
 		}
 		
-		//normalise the transitionn matrix
+		//normalise the transition matrix
 		for(int i=0; i<matrixArrayEnd-1; i++){
 			for(int j=0; j<=rh::JUMPNO; j++){
 				if(transitionMatrixNormolisation[i]!=0){
