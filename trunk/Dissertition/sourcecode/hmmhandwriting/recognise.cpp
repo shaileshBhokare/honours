@@ -42,7 +42,7 @@ int main(){
 		if(fs::is_directory(*itr)){
 			//TEST
 			string disPath = "./data/trainingData/localOptimisedData/"+itr->leaf()+"_dis.txt";
-			string tranPath = "./data/trainingData/localInitialData/"+itr->leaf()+"_tran.txt";//tempararily use initial transition probability
+			string tranPath = "./data/trainingData/localOptimisedData/"+itr->leaf()+"_tran.txt";//tempararily use initial transition probability
 			
 			rh::ViterbiResult result = rh::Viterbi::Calculate_path_and_probability(disPath, recognitionData_path, tranPath);
 			result.character=itr->leaf();
@@ -71,6 +71,10 @@ int main(){
 //	for(int i=0; i<recognitionResult.size(); i++){
 //		cout<<recognitionResult.at(i).probability<<endl;
 //	}
+	cout<<"For character: "<<line<<endl;
+	for(int i=0; i<recognitionResult.size(); i++){
+		cout<<i+1<<"\t"<<recognitionResult.at(i).character<<endl;
+	}
 	
 	//output results
 	fs::path resultFilePath("./data/recognitionData/results/"+line2+".txt");
