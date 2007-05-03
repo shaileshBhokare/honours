@@ -129,7 +129,7 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 //			cout<<state[i].vector[k]<<" ";
 			if(state[i].vector[k]==0){
 				state[i].vector[k]=1.0/(80*numOfZero);
-				cout<<numOfZero<<" "<<state[i].vector[k]<<"\t";
+//				cout<<numOfZero<<" "<<state[i].vector[k]<<"\t";
 			}else{
 				state[i].vector[k] = state[i].vector[k]/sum;
 			}
@@ -137,7 +137,7 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 			optimisedDistributionFile<<state[i].vector[k]<<endl;
 //			cout<<state[i].vector[k]<<" ";
 		}
-		cout<<endl;
+//		cout<<endl;
 	}
 	optimisedDistributionFile.close();
 	
@@ -166,14 +166,14 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 			optimisedTransitionNormalisation[i]+=optimisedTransitionMatrix[i][i+1];
 			for(int j=2; j<=rh::JUMPNO; j++){
 				optimisedTransitionMatrix[i][i+j]=0.5*optimisedTransitionMatrix[i][i+j-1];
-				optimisedTransitionNormalisation[i]+=optimisedTransitionMatrix[i][i+1];
+				optimisedTransitionNormalisation[i]+=optimisedTransitionMatrix[i][i+j];
 			}
 		}else{
 			optimisedTransitionMatrix[i][i]=(optimisedTranMatrixSource[i]-1)/optimisedTranMatrixSource[i];
 			optimisedTransitionNormalisation[i]+=optimisedTransitionMatrix[i][i];
 			for(int j=1; j<=rh::JUMPNO; j++){
 				optimisedTransitionMatrix[i][i+j]=0.5*optimisedTransitionMatrix[i][i+j-1];
-				optimisedTransitionNormalisation[i]+=optimisedTransitionMatrix[i][i+1];
+				optimisedTransitionNormalisation[i]+=optimisedTransitionMatrix[i][i+j];
 			}
 		}
 	}
@@ -187,7 +187,10 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 	for(int i=0; i<=numOfState-1; i++){
 		for(int j=0; j<=rh::JUMPNO; j++){
 			if(optimisedTransitionNormalisation[i]!=0){
-				optimisedTransitionMatrix[i][i+j]*=(1/optimisedTransitionNormalisation[i]);
+//				cout<<optimisedTransitionNormalisation[i]<<endl;
+//				cout<<optimisedTransitionMatrix[i][i+j]<<endl;
+				optimisedTransitionMatrix[i][i+j]*=(1.0/optimisedTransitionNormalisation[i]);
+//				cout<<optimisedTransitionMatrix[i][i+j]<<endl<<endl;
 			}
 		}
 	}

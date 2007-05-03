@@ -4,5 +4,5 @@ using namespace std;
 
 namespace redhat{
 	const int STATENO = 5;
-	const int JUMPNO = 5;
+	const int JUMPNO = 2;
 }
