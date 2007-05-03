@@ -286,7 +286,7 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 		for(int i=0; i<matrixArrayEnd-1; i++){
 			for(int j=0; j<=rh::JUMPNO; j++){
 				if(transitionMatrixNormolisation[i]!=0){
-					transitionMatrix[i][i+j]*=(1/transitionMatrixNormolisation[i]);
+					transitionMatrix[i][i+j]*=(1.0/transitionMatrixNormolisation[i]);
 				}
 			}
 		}
