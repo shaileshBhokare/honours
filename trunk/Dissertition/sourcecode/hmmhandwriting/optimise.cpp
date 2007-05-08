@@ -149,7 +149,7 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 //		cout<<"average :"<<optimisedTranMatrixSource[i]<<endl;
 	}
 
-	double optimisedTransitionNormalisation[100];//used to normalise the transition matrix
+//	double optimisedTransitionNormalisation[100];//used to normalise the transition matrix
 	//initilised optimisedTransitionMatrix
 	for(int i=0; i<=numOfState; i++){
 		for(int j=0; j<=numOfState; j++){
@@ -158,23 +158,42 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 	}
 	
 	for(int i=0; i<=numOfState-1; i++){
+		int actualJumpNo;
+		double optimisedTransitionNormalisation=0;//used to normalise the transition matrix
+		actualJumpNo = rh::STATENO - (i%rh::STATENO) - 1;
+		if(actualJumpNo>rh::JUMPNO){
+			actualJumpNo=rh::JUMPNO;
+		}
+		
 		if(optimisedTranMatrixSource[i]==0){
 			optimisedTransitionMatrix[i][i]=0;
 		}else if(optimisedTranMatrixSource[i]==1){
 			optimisedTransitionMatrix[i][i]=0;
 			optimisedTransitionMatrix[i][i+1]=1;
-			optimisedTransitionNormalisation[i]+=optimisedTransitionMatrix[i][i+1];
-			for(int j=2; j<=rh::JUMPNO; j++){
+			optimisedTransitionNormalisation+=optimisedTransitionMatrix[i][i+1];
+			for(int j=2; j<=actualJumpNo; j++){
 				optimisedTransitionMatrix[i][i+j]=0.5*optimisedTransitionMatrix[i][i+j-1];
-				optimisedTransitionNormalisation[i]+=optimisedTransitionMatrix[i][i+j];
+				optimisedTransitionNormalisation+=optimisedTransitionMatrix[i][i+j];
 			}
 		}else{
 			optimisedTransitionMatrix[i][i]=(optimisedTranMatrixSource[i]-1)/optimisedTranMatrixSource[i];
-			optimisedTransitionNormalisation[i]+=optimisedTransitionMatrix[i][i];
-			for(int j=1; j<=rh::JUMPNO; j++){
+			optimisedTransitionNormalisation+=optimisedTransitionMatrix[i][i];
+			for(int j=1; j<=actualJumpNo; j++){
 				optimisedTransitionMatrix[i][i+j]=0.5*optimisedTransitionMatrix[i][i+j-1];
-				optimisedTransitionNormalisation[i]+=optimisedTransitionMatrix[i][i+j];
+				optimisedTransitionNormalisation+=optimisedTransitionMatrix[i][i+j];
 			}
+		}
+		
+		//normalise the transition matrix
+		for(int j=0; j<=actualJumpNo; j++){
+			if(optimisedTransitionNormalisation!=0){
+				optimisedTransitionMatrix[i][i+j]*=(1.0/optimisedTransitionNormalisation);
+			}
+		}
+		
+		//handle the last state transition in each stroke
+		if(i%rh::STATENO==4){
+			optimisedTransitionMatrix[i][i+1]=1;	
 		}
 	}
 	/* fix later --need remove start
@@ -184,16 +203,16 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 	}*///need remove end
 	
 	//normalise the transition matrix
-	for(int i=0; i<=numOfState-1; i++){
-		for(int j=0; j<=rh::JUMPNO; j++){
-			if(optimisedTransitionNormalisation[i]!=0){
-//				cout<<optimisedTransitionNormalisation[i]<<endl;
-//				cout<<optimisedTransitionMatrix[i][i+j]<<endl;
-				optimisedTransitionMatrix[i][i+j]*=(1.0/optimisedTransitionNormalisation[i]);
-//				cout<<optimisedTransitionMatrix[i][i+j]<<endl<<endl;
-			}
-		}
-	}
+//	for(int i=0; i<=numOfState-1; i++){
+//		for(int j=0; j<=rh::JUMPNO; j++){
+//			if(optimisedTransitionNormalisation[i]!=0){
+////				cout<<optimisedTransitionNormalisation[i]<<endl;
+////				cout<<optimisedTransitionMatrix[i][i+j]<<endl;
+//				optimisedTransitionMatrix[i][i+j]*=(1.0/optimisedTransitionNormalisation[i]);
+////				cout<<optimisedTransitionMatrix[i][i+j]<<endl<<endl;
+//			}
+//		}
+//	}
 	
 	optimisedTransitionMatrix[numOfState][numOfState]=1;
 	//fix later 
