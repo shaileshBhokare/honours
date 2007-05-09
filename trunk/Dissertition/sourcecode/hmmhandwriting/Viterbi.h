@@ -128,7 +128,6 @@ namespace redhat{
 		
 		vector <int> mostPossiblePath;
 		
-		//*restructure the viterbi algorithm
 		//initialization viterbi
 		matrix[0][0].probability = log(disProb[0][observation.at(0)]);
 		matrix[0][0].path = 0;
@@ -140,76 +139,124 @@ namespace redhat{
 		}
 		
 		//recursion
-		
-		for(int i=1; i<matrixColumn; i++){//calculate column by column
-			for(int j=0; j<tranColumn; j++){//calculate each node
-				double maxProbAtPresent = 0;
-				double maxPathProbAtPresent = 0;
-				int maxPath = 0;//default is from the state one.
-				for(int k=0; k<tranColumn; k++){//calculate every previous node
-					double tempProb = matrix[k][i-1].probability+log(tranProb[k][j])+log(disProb[j][observation.at(i)]);
-					double tempPathProb = matrix[k][i-1].probability+log(tranProb[k][j]);
-					if (maxProbAtPresent == 0){
-						maxProbAtPresent=tempProb;
-					}
-					if (maxPathProbAtPresent == 0){
-						maxPathProbAtPresent=tempPathProb;
-					}
-					if (tempProb>=maxProbAtPresent){
-						maxProbAtPresent=tempProb;
-					}
-					if (tempPathProb >= maxPathProbAtPresent){
-						maxPathProbAtPresent = tempPathProb;
-						maxPath = k;	
-					}
-				}
-				matrix[j][i].probability = maxProbAtPresent;
-				matrix[j][i].path = maxPath;
-				matrix[j][i].currentPath = j;
-			}
-		}
-		
-//		//new viterbi algorithm
-//		for(int i=0; i<matrixColumn; i++){//calculate column by column
-//			if(
-//				//initialization each stroke
-//				matrix[i][i].probability = log(disProb[i][observation.at(i)]);
-//				matrix[i][i].path = 0;
-//				matrix[i][i].currentPath = 0;
-//				
-//				for(int j=1; j<tranColumn; j++){
-//					matrix[j][i].probability = log(0.0);
-//					matrix[j][i].path = 0;
-//				}
-//			}else{
-//				//recursion
-//				for(int j=0; j<tranColumn; j++){//calculate each node
-//					double maxProbAtPresent = 0;
-//					double maxPathProbAtPresent = 0;
-//					int maxPath = 0;//default is from the state one.
-//					for(int k=0; k<tranColumn; k++){//calculate every previous node
-//						double tempProb = matrix[k][i-1].probability+log(tranProb[k][j])+log(disProb[j][observation.at(i)]);
-//						double tempPathProb = matrix[k][i-1].probability+log(tranProb[k][j]);
-//						if (maxProbAtPresent == 0){
-//							maxProbAtPresent=tempProb;
-//						}
-//						if (maxPathProbAtPresent == 0){
-//							maxPathProbAtPresent=tempPathProb;
-//						}
-//						if (tempProb>=maxProbAtPresent){
-//							maxProbAtPresent=tempProb;
-//						}
-//						if (tempPathProb >= maxPathProbAtPresent){
-//							maxPathProbAtPresent = tempPathProb;
-//							maxPath = k;	
-//						}
+//		for(int i=1; i<matrixColumn; i++){//calculate column by column
+//			for(int j=0; j<tranColumn; j++){//calculate each node //tranColumn represent the row number
+//				double maxProbAtPresent = 0;
+//				double maxPathProbAtPresent = 0;
+//				int maxPath = 0;//default is from the state one.
+//				for(int k=0; k<tranColumn; k++){//calculate every previous node
+//					double tempProb = matrix[k][i-1].probability+log(tranProb[k][j])+log(disProb[j][observation.at(i)]);
+//					double tempPathProb = matrix[k][i-1].probability+log(tranProb[k][j]);
+//					if (maxProbAtPresent == 0){
+//						maxProbAtPresent=tempProb;
 //					}
-//					matrix[j][i].probability = maxProbAtPresent;
-//					matrix[j][i].path = maxPath;
-//					matrix[j][i].currentPath = j;
+//					if (maxPathProbAtPresent == 0){
+//						maxPathProbAtPresent=tempPathProb;
+//					}
+//					if (tempProb>=maxProbAtPresent){
+//						maxProbAtPresent=tempProb;
+//					}
+//					if (tempPathProb >= maxPathProbAtPresent){
+//						maxPathProbAtPresent = tempPathProb;
+//						maxPath = k;	
+//					}
 //				}
+//				matrix[j][i].probability = maxProbAtPresent;
+//				matrix[j][i].path = maxPath;
+//				matrix[j][i].currentPath = j;
 //			}
 //		}
+		
+		//restructure the recursion
+		int currentStrokeNum = 1;
+		for(int i=1; i<matrixColumn; i++){//calculate column by column
+			for(int j=0; j<tranColumn; j++){//calculate each node //tranColumn represent the row number
+				if(stroke-beginning){
+					currentStrokeNum++;
+					if(j==(currentStrokeNum-1)*5)){
+						double maxProbAtPresent = 0;
+						double maxPathProbAtPresent = 0;
+						int maxPath = 0;//default is from the state one.
+						for(int k=0; k<tranColumn; k++){//calculate every previous node
+							double tempProb = matrix[k][i-1].probability+log(tranProb[k][j])+log(disProb[j][observation.at(i)]);
+							double tempPathProb = matrix[k][i-1].probability+log(tranProb[k][j]);
+							if (maxProbAtPresent == 0){
+								maxProbAtPresent=tempProb;
+							}
+							if (maxPathProbAtPresent == 0){
+								maxPathProbAtPresent=tempPathProb;
+							}
+							if (tempProb>=maxProbAtPresent){
+								maxProbAtPresent=tempProb;
+							}
+							if (tempPathProb >= maxPathProbAtPresent){
+								maxPathProbAtPresent = tempPathProb;
+								maxPath = k;	
+							}
+						}
+						matrix[j][i].probability = maxProbAtPresent;
+						matrix[j][i].path = maxPath;
+						matrix[j][i].currentPath = j;
+					}else{
+						matrix[j][i].probability=log(0.0);
+						matrix[j][i].path = -1;
+					}
+				}else if(stoke-ending){
+					if(j==(currentStrokeNum*5)-1){
+						double maxProbAtPresent = 0;
+						double maxPathProbAtPresent = 0;
+						int maxPath = 0;//default is from the state one.
+						for(int k=0; k<tranColumn; k++){//calculate every previous node
+							double tempProb = matrix[k][i-1].probability+log(tranProb[k][j])+log(disProb[j][observation.at(i)]);
+							double tempPathProb = matrix[k][i-1].probability+log(tranProb[k][j]);
+							if (maxProbAtPresent == 0){
+								maxProbAtPresent=tempProb;
+							}
+							if (maxPathProbAtPresent == 0){
+								maxPathProbAtPresent=tempPathProb;
+							}
+							if (tempProb>=maxProbAtPresent){
+								maxProbAtPresent=tempProb;
+							}
+							if (tempPathProb >= maxPathProbAtPresent){
+								maxPathProbAtPresent = tempPathProb;
+								maxPath = k;	
+							}
+						}
+						matrix[j][i].probability = maxProbAtPresent;
+						matrix[j][i].path = maxPath;
+						matrix[j][i].currentPath = j;
+					}else{
+						matrix[j][i].probability=log(0.0);
+						matrix[j][i].path = -1;
+					}
+				}else{
+					double maxProbAtPresent = 0;
+						double maxPathProbAtPresent = 0;
+						int maxPath = 0;//default is from the state one.
+						for(int k=0; k<tranColumn; k++){//calculate every previous node
+							double tempProb = matrix[k][i-1].probability+log(tranProb[k][j])+log(disProb[j][observation.at(i)]);
+							double tempPathProb = matrix[k][i-1].probability+log(tranProb[k][j]);
+							if (maxProbAtPresent == 0){
+								maxProbAtPresent=tempProb;
+							}
+							if (maxPathProbAtPresent == 0){
+								maxPathProbAtPresent=tempPathProb;
+							}
+							if (tempProb>=maxProbAtPresent){
+								maxProbAtPresent=tempProb;
+							}
+							if (tempPathProb >= maxPathProbAtPresent){
+								maxPathProbAtPresent = tempPathProb;
+								maxPath = k;	
+							}
+						}
+						matrix[j][i].probability = maxProbAtPresent;
+						matrix[j][i].path = maxPath;
+						matrix[j][i].currentPath = j;
+				}
+			}
+		}		
 		
 
 //		//for testing
