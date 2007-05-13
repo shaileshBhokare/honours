@@ -78,8 +78,13 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 					}else if(line.compare("</s>")==0){
 						rh::Stroke tempStroke = newWord.getStroke(strokeNum-1);
 						
-						for(int i=0; i<rh::STATENO; i++){
-							for (int j=((i*count)/rh::STATENO); j<(((i+1)*count)/rh::STATENO); j++){
+						int tempStateNo = rh::STATENO;
+						if(count<tempStateNo){
+							tempStateNo=count;
+						}
+						for(int i=0; i<tempStateNo; i++){
+							for (int j=((i*count)/tempStateNo); j<(((i+1)*count)/tempStateNo); j++){
+//										cout<<i<<"\t"<<j<<endl;
 								double deltaX = x[j+1]-x[j];
 								double deltaY = y[j+1]-y[j];
 								double result = atan2(deltaY, deltaX);
@@ -90,129 +95,129 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 								
 								if(result<(PI/8)) {
 									tempStroke.state[i].vector[0]++;
-									if(i==0&&j==(i*count)/rh::STATENO){
+									if(i==0&&j==0){
 										featureFile<<16<<endl;
-									}else if(i==(rh::STATENO-1)&&j==((i+1)*count)/rh::STATENO-1){
+									}else if(i==(tempStateNo-1)&&j==((i+1)*count)/tempStateNo-1){
 										featureFile<<-16<<endl;
 									}else featureFile<<0<<endl;
 								}
 								else if(result<(2*PI/8)) {
 									tempStroke.state[i].vector[1]++;
-									if(i==0&&j==(i*count)/rh::STATENO){
+									if(i==0&&j==0){
 										featureFile<<17<<endl;
-									}else if(i==(rh::STATENO-1)&&j==((i+1)*count)/rh::STATENO-1){
+									}else if(i==(tempStateNo-1)&&j==((i+1)*count)/tempStateNo-1){
 										featureFile<<-15<<endl;
 									}else featureFile<<1<<endl;
 								}
 								else if(result<(3*PI/8)) {
 									tempStroke.state[i].vector[2]++;
-									if(i==0&&j==(i*count)/rh::STATENO){
+									if(i==0&&j==0){
 										featureFile<<18<<endl;
-									}else if(i==(rh::STATENO-1)&&j==((i+1)*count)/rh::STATENO-1){
+									}else if(i==(tempStateNo-1)&&j==((i+1)*count)/tempStateNo-1){
 										featureFile<<-14<<endl;
 									}else featureFile<<2<<endl;
 								}
 								else if(result<(4*PI/8)) {
 									tempStroke.state[i].vector[3]++;
-									if(i==0&&j==(i*count)/rh::STATENO){
+									if(i==0&&j==0){
 										featureFile<<19<<endl;
-									}else if(i==(rh::STATENO-1)&&j==((i+1)*count)/rh::STATENO-1){
+									}else if(i==(tempStateNo-1)&&j==((i+1)*count)/tempStateNo-1){
 										featureFile<<-13<<endl;
 									}else featureFile<<3<<endl;
 								}
 								else if(result<(5*PI/8)) {
 									tempStroke.state[i].vector[4]++;
-									if(i==0&&j==(i*count)/rh::STATENO){
+									if(i==0&&j==0){
 										featureFile<<20<<endl;
-									}else if(i==(rh::STATENO-1)&&j==((i+1)*count)/rh::STATENO-1){
+									}else if(i==(tempStateNo-1)&&j==((i+1)*count)/tempStateNo-1){
 										featureFile<<-12<<endl;
 									}else featureFile<<4<<endl;
 								}
 								else if(result<(6*PI/8)) {
 									tempStroke.state[i].vector[5]++;
-									if(i==0&&j==(i*count)/rh::STATENO){
+									if(i==0&&j==0){
 										featureFile<<21<<endl;
-									}else if(i==(rh::STATENO-1)&&j==((i+1)*count)/rh::STATENO-1){
+									}else if(i==(tempStateNo-1)&&j==((i+1)*count)/tempStateNo-1){
 										featureFile<<-11<<endl;
 									}else featureFile<<5<<endl;
 								}
 								else if(result<(7*PI/8)) {
 									tempStroke.state[i].vector[6]++;
-									if(i==0&&j==(i*count)/rh::STATENO){
+									if(i==0&&j==0){
 										featureFile<<22<<endl;
-									}else if(i==(rh::STATENO-1)&&j==((i+1)*count)/rh::STATENO-1){
+									}else if(i==(tempStateNo-1)&&j==((i+1)*count)/tempStateNo-1){
 										featureFile<<-10<<endl;
 									}else featureFile<<6<<endl;
 								}
 								else if(result<(8*PI/8)) {
 									tempStroke.state[i].vector[7]++;
-									if(i==0&&j==(i*count)/rh::STATENO){
+									if(i==0&&j==0){
 										featureFile<<23<<endl;
-									}else if(i==(rh::STATENO-1)&&j==((i+1)*count)/rh::STATENO-1){
+									}else if(i==(tempStateNo-1)&&j==((i+1)*count)/tempStateNo-1){
 										featureFile<<-9<<endl;
 									}else featureFile<<7<<endl;
 								}
 								else if(result<(9*PI/8)) {
 									tempStroke.state[i].vector[8]++;
-									if(i==0&&j==(i*count)/rh::STATENO){
+									if(i==0&&j==0){
 										featureFile<<24<<endl;
-									}else if(i==(rh::STATENO-1)&&j==((i+1)*count)/rh::STATENO-1){
+									}else if(i==(tempStateNo-1)&&j==((i+1)*count)/tempStateNo-1){
 										featureFile<<-8<<endl;
 									}else featureFile<<8<<endl;
 								}
 								else if(result<(10*PI/8)) {
 									tempStroke.state[i].vector[9]++;
-									if(i==0&&j==(i*count)/rh::STATENO){
+									if(i==0&&j==0){
 										featureFile<<25<<endl;
-									}else if(i==(rh::STATENO-1)&&j==((i+1)*count)/rh::STATENO-1){
+									}else if(i==(tempStateNo-1)&&j==((i+1)*count)/tempStateNo-1){
 										featureFile<<-7<<endl;
 									}else featureFile<<9<<endl;
 								}
 								else if(result<(11*PI/8)) {
 									tempStroke.state[i].vector[10]++;
-									if(i==0&&j==(i*count)/rh::STATENO){
+									if(i==0&&j==0){
 										featureFile<<26<<endl;
-									}else if(i==(rh::STATENO-1)&&j==((i+1)*count)/rh::STATENO-1){
+									}else if(i==(tempStateNo-1)&&j==((i+1)*count)/tempStateNo-1){
 										featureFile<<-6<<endl;
 									}else featureFile<<10<<endl;
 								}
 								else if(result<(12*PI/8)) {
 									tempStroke.state[i].vector[11]++;
-									if(i==0&&j==(i*count)/rh::STATENO){
+									if(i==0&&j==0){
 										featureFile<<27<<endl;
-									}else if(i==(rh::STATENO-1)&&j==((i+1)*count)/rh::STATENO-1){
+									}else if(i==(tempStateNo-1)&&j==((i+1)*count)/tempStateNo-1){
 										featureFile<<-5<<endl;
 									}else featureFile<<11<<endl;
 								}
 								else if(result<(13*PI/8)) {
 									tempStroke.state[i].vector[12]++;
-									if(i==0&&j==(i*count)/rh::STATENO){
+									if(i==0&&j==0){
 										featureFile<<28<<endl;
-									}else if(i==(rh::STATENO-1)&&j==((i+1)*count)/rh::STATENO-1){
+									}else if(i==(tempStateNo-1)&&j==((i+1)*count)/tempStateNo-1){
 										featureFile<<-4<<endl;
 									}else featureFile<<12<<endl;
 								}
 								else if(result<(14*PI/8)) {
 									tempStroke.state[i].vector[13]++;
-									if(i==0&&j==(i*count)/rh::STATENO){
+									if(i==0&&j==0){
 										featureFile<<29<<endl;
-									}else if(i==(rh::STATENO-1)&&j==((i+1)*count)/rh::STATENO-1){
+									}else if(i==(tempStateNo-1)&&j==((i+1)*count)/tempStateNo-1){
 										featureFile<<-3<<endl;
 									}else featureFile<<13<<endl;
 								}
 								else if(result<(15*PI/8)) {
 									tempStroke.state[i].vector[14]++;
-									if(i==0&&j==(i*count)/rh::STATENO){
+									if(i==0&&j==0){
 										featureFile<<30<<endl;
-									}else if(i==(rh::STATENO-1)&&j==((i+1)*count)/rh::STATENO-1){
+									}else if(i==(tempStateNo-1)&&j==((i+1)*count)/tempStateNo-1){
 										featureFile<<-2<<endl;
 									}else featureFile<<14<<endl;
 								}
 								else {
 									tempStroke.state[i].vector[15]++;
-									if(i==0&&j==(i*count)/rh::STATENO){
+									if(i==0&&j==0){
 										featureFile<<31<<endl;
-									}else if(i==(rh::STATENO-1)&&j==((i+1)*count)/rh::STATENO-1){
+									}else if(i==(tempStateNo-1)&&j==((i+1)*count)/tempStateNo-1){
 										featureFile<<-1<<endl;
 									}else featureFile<<15<<endl;
 								}

@@ -8,5 +8,13 @@ namespace redhat{
 			double probability;
 			int path;
 			int currentPath;
+			
+			Node();
 	};
+	
+	Node::Node(){
+		probability=log(0.0);
+		path=-1;
+		currentPath=-1;	
+	}
 }

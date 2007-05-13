@@ -43,7 +43,7 @@ namespace redhat{
 		return state[i];
 	}
 		
-	int Stroke::getAverageNumOfFeatures(){
+	int Stroke::getAverageNumOfFeatures(){//used not be used anymore
 		return featureNum/trainingTimes;
 	}
 	
