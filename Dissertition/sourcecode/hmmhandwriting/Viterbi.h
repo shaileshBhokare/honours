@@ -79,6 +79,12 @@ namespace redhat{
 				}
 			}
 		}
+		//tst
+//		for(int i=0; i<observation.size(); i++){
+//			cout<<i<<" "<<observation.at(i)<<"\t";	
+//		}
+//		cout<<endl;
+		//end tst
 		observationFile.close();
 		
 		/*cout<<"Observation File:"<<endl<<endl;
@@ -107,7 +113,7 @@ namespace redhat{
 			}
 		}
 		tranProbFile.close();
-
+		
 //		cout<<"Transition File:"<<endl<<endl;
 //		//testing start
 //		for(int i=0; i<=tranRow; i++){
@@ -137,7 +143,6 @@ namespace redhat{
 			matrix[i][0].probability = log(0.0);
 			matrix[i][0].path = 0;
 		}
-		
 		//recursion
 //		for(int i=1; i<matrixColumn; i++){//calculate column by column
 //			for(int j=0; j<tranColumn; j++){//calculate each node //tranColumn represent the row number
@@ -169,10 +174,12 @@ namespace redhat{
 		
 		//restructure the recursion
 		int currentStrokeNum = 1;
+//		cout<<"initial stroke number: "<<currentStrokeNum<<endl;
 		for(int i=1; i<matrixColumn; i++){//calculate column by column
-			for(int j=0; j<tranColumn; j++){//calculate each node //tranColumn represent the row number
-				if(observation.at(i)>15){//process the first state in each stroke: the staring state = vector number+16
-					currentStrokeNum++;
+			if(observation.at(i)>15){//process the first state in each stroke: the staring state = vector number+16
+				currentStrokeNum++;
+//				cout<<"stroke number: "<<currentStrokeNum<<endl;
+				for(int j=0; j<tranColumn; j++){//calculate each node //tranColumn represent the row number	
 					if(j==(currentStrokeNum-1)*rh::STATENO){
 						double maxProbAtPresent = 0;
 						double maxPathProbAtPresent = 0;
@@ -191,17 +198,22 @@ namespace redhat{
 							}
 							if (tempPathProb >= maxPathProbAtPresent){
 								maxPathProbAtPresent = tempPathProb;
-								maxPath = k;	
+								maxPath = k;
 							}
 						}
 						matrix[j][i].probability = maxProbAtPresent;
 						matrix[j][i].path = maxPath;
 						matrix[j][i].currentPath = j;
+//						//tst
+//						cout<<"begin at "<<i<<endl;
+//						//tst end
 					}else{
 						matrix[j][i].probability=log(0.0);
 						matrix[j][i].path = -1;
 					}
-				}else if(observation.at(i)<0){//process the last state in each stroke: the ending state = vector number -16
+				}
+			}else if(observation.at(i)<0){//process the last state in each stroke: the ending state = vector number -16
+				for(int j=0; j<tranColumn; j++){//calculate each node //tranColumn represent the row number	
 					if(j==(currentStrokeNum*rh::STATENO)-1){
 						double maxProbAtPresent = 0;
 						double maxPathProbAtPresent = 0;
@@ -223,14 +235,22 @@ namespace redhat{
 								maxPath = k;	
 							}
 						}
+//						cout<<maxProbAtPresent<<endl;
 						matrix[j][i].probability = maxProbAtPresent;
 						matrix[j][i].path = maxPath;
 						matrix[j][i].currentPath = j;
+//						//tst
+//						cout<<"end at "<<i<<endl;
+//						cout<<"state end at "<<j<<endl;
+//						cout<<matrix[j][i].probability<<endl<<endl;;
 					}else{
 						matrix[j][i].probability=log(0.0);
 						matrix[j][i].path = -2;
 					}
-				}else{
+				}
+			}else{
+				for(int j=0; j<tranColumn; j++){//calculate each node //tranColumn represent the row number	
+//					cout<<"good so far4\n";
 					//for normal state processing
 					double maxProbAtPresent = 0;
 					double maxPathProbAtPresent = 0;
@@ -257,9 +277,8 @@ namespace redhat{
 					matrix[j][i].currentPath = j;
 				}
 			}
-		}		
+		}	
 		
-
 //		//for testing
 //				//testing start
 //		string outFilePath = "../data/temp/viterbiResult.txt";
@@ -290,23 +309,34 @@ namespace redhat{
 		//get the max probability
 //		maxProbability = max(matrix[0][columns-1].probability, matrix[1][columns-1].probability, matrix[2][columns-1].probability);
 		
-		
-		//get the max probability and the max node
-		for(int i=0; i<tranColumn; i++){
-			if(matrix[i][matrixColumn-1].probability>maxProbability||maxProbability==0){
-				maxProbability = matrix[i][matrixColumn-1].probability;
-				maxNode = matrix[i][matrixColumn-1];
-			}
-//			cout<<matrix[i][matrixColumn-1].probability<<endl;
+		try{
+			//get the max probability and the max node
+//			for(int i=0; i<tranColumn; i++){
+//				if(matrix[i][matrixColumn-1].probability>maxProbability||maxProbability==0){
+//					maxProbability = matrix[i][matrixColumn-1].probability;
+//					maxNode = matrix[i][matrixColumn-1];
+//				}
+//			}
+			//it should always be ending at the last state.
+			maxProbability = matrix[tranColumn-1][matrixColumn-1].probability;
+			maxNode = matrix[tranColumn-1][matrixColumn-1];
+		}catch(...){
+			cout<<"Exception while gettign the max node\n";
 		}
 		
-		//state path backtracking
-		mostPossiblePath.push_back(maxNode.path);
-		mostPossiblePath.push_back(maxNode.currentPath);
-		int previousPath = maxNode.path;
-		for(int i = matrixColumn-2; i > 0; i--){
-			previousPath = matrix[previousPath][i].path;
-			mostPossiblePath = Viterbi::insertIntoVector(previousPath, mostPossiblePath);
+		try{
+			//state path backtracking
+			mostPossiblePath.push_back(maxNode.path);
+			mostPossiblePath.push_back(maxNode.currentPath);
+//			cout<<maxNode.path<<"\t"<<maxNode.currentPath<<endl;
+			int previousPath = maxNode.path;
+			for(int i = matrixColumn-2; i > 0; i--){
+//				cout<<previousPath<<endl;
+				previousPath = matrix[previousPath][i].path;
+				mostPossiblePath = Viterbi::insertIntoVector(previousPath, mostPossiblePath);
+			}
+		}catch(...){
+//			cout<<"Execption while backtracking for file: "+observationFilePath+"\n";//used for debug
 		}
 		
 		rh::ViterbiResult result;

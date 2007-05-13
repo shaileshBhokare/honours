@@ -75,8 +75,15 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 					}
 				}
 				observationFile.close();
-							
-				rh::ViterbiResult result = rh::Viterbi::Calculate_path_and_probability(disProbFilePath, observationPath, tranProbFilePath);
+				
+				rh::ViterbiResult result;
+				
+				try{
+					result = rh::Viterbi::Calculate_path_and_probability(disProbFilePath, observationPath, tranProbFilePath);
+//					cout<<"finish processing: "<<observationPath<<endl;
+				}catch(...){
+					cout<<"Viterbi Exception when processing file "+observationPath+".\n";
+				}
 				
 				//intermedia value: the state sequence  -- start
 				string stateSequanceDirectoryPath = "./data/trainingData/localOptimisedData/"+repository_path.leaf();
@@ -101,7 +108,7 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 					state[stateIndex].vector[feature[stateIndex]]++;
 				}
 			}
-			trainingTimes++;
+//			trainingTimes++;//should not be used anymore
 	//		//tst
 	//		cout<<trainingTimes<<endl;
 	//		for(int i=0; i<15; i++){
@@ -113,7 +120,7 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 	//		//tst end
 		}
 	}catch(...){
-		cout<<"Exception when calculating viterbi\n";
+		cout<<"Exception when calculating viterbi for "+disProbFilePath+"\n";
 	} 
 	
 	try{
@@ -151,7 +158,7 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 	try{
 		//calculate the transition probability
 		for(int i=0; i<=numOfState; i++){
-			optimisedTranMatrixSource[i] = tranState[i]/trainingTimes;
+			optimisedTranMatrixSource[i] = tranState[i];
 	//		cout<<"feature: "<<tranState[i]<<endl;
 	//		cout<<"training times: "<<trainingTimes<<endl;
 	//		cout<<"average :"<<optimisedTranMatrixSource[i]<<endl;
