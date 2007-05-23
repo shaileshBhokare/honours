@@ -68,9 +68,10 @@ int main(){
 			}
 		}
 	}
-//	for(int i=0; i<recognitionResult.size(); i++){
-//		cout<<recognitionResult.at(i).probability<<endl;
-//	}
+	//tst display the probability
+	for(int i=0; i<recognitionResult.size(); i++){
+		cout<<recognitionResult.at(i).probability<<endl;
+	}
 	cout<<"For character: "<<line<<endl;
 	for(int i=0; i<recognitionResult.size(); i++){
 		cout<<i+1<<"\t"<<recognitionResult.at(i).character<<endl;
