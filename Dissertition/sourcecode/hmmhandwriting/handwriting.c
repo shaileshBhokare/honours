@@ -186,13 +186,16 @@ motion_notify_event (GtkWidget *widget, GdkEventMotion *event)
 	      if(fp != NULL && training == True)
 	      {
 	        fprintf(fp, "\n%d,%d",xii, yii);
-	        fprintf(ffp, "\n%d,%d",xii, yii);
 	      }
 	      
 	      xtemp=xii;
 	      ytemp=yii;
  	 }
-    }
+     if(fp != NULL && training == True)
+      {
+        fprintf(ffp, "\n%d,%d",xii, yii);
+      }
+   }
   
   return TRUE;
 }
