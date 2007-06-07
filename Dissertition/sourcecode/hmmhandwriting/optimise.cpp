@@ -128,6 +128,7 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 		//calculate distribution probability
 		for(int i=0; i<=numOfState; i++){
 			double sum = 0;
+			double sumIncludeZero = 0;
 			int numOfZero = 0;//used to change all the zero to 1/(80*numberOfZero)
 			for(int k=0; k<16; k++){
 				sum += state[i].vector[k];
@@ -145,8 +146,12 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 					state[i].vector[k] = state[i].vector[k]/sum;
 				}
 	//			cout<<sum<<" "<<state[i].vector[k]<<"\t";
-				optimisedDistributionFile<<state[i].vector[k]<<endl;
+				sumIncludeZero += state[i].vector[k];
 	//			cout<<state[i].vector[k]<<" ";
+			}
+			for(int k=0; k<16; k++){
+				state[i].vector[k] /= sumIncludeZero;
+				optimisedDistributionFile<<state[i].vector[k]<<endl;
 			}
 	//		cout<<endl;
 		}
@@ -207,7 +212,7 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 			}
 			
 			//handle the last state transition in each stroke
-			if(i%rh::STATENO==4){
+			if(i%rh::STATENO==(rh::STATENO-1)){
 				optimisedTransitionMatrix[i][i+1]=1;	
 			}
 		}
