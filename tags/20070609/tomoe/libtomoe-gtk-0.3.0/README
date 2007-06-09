@@ -1,0 +1,5 @@
+a class library for tomoe's GTK+ GUI parts
+ libtomoe-gtk is a class library for tomoe
+ that online handwriting recognition engine.
+ It offers GTK+ GUI parts and is useful for
+ making another applications using tomoe.
