@@ -286,7 +286,7 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 			featureArrayEnd++;
 			for(int j=0; j<rh::STATENO; j++){
 				double sum = 0;
-				double sumIncludeZero = 0;
+//				double sumIncludeZero = 0; //used for distribution normalisation
 				int numOfZero = 0;//used to change all the zero to 1/(80*numberOfZero)
 				for(int k=0; k<16; k++){
 					sum += probabilityStroke.state[j].vector[k];
@@ -300,10 +300,10 @@ void parseFile(fs::path repository_path){//handle subdirectory and retrieve the 
 					}else{
 						probabilityStroke.state[j].vector[k] = probabilityStroke.state[j].vector[k]/sum;
 					}
-					sumIncludeZero += probabilityStroke.state[j].vector[k];
-				}
-				for(int k=0; k<16; k++){
-					probabilityStroke.state[j].vector[k] /= sumIncludeZero;
+//					sumIncludeZero += probabilityStroke.state[j].vector[k];
+//				}
+//				for(int k=0; k<16; k++){
+//					probabilityStroke.state[j].vector[k] /= sumIncludeZero;
 					distributionProbabilityFile<<probabilityStroke.state[j].vector[k]<<endl;
 				}
 			}	

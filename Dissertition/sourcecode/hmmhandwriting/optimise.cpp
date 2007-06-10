@@ -146,13 +146,14 @@ void parseFile(fs::path repository_path, string disProbFilePath, string tranProb
 					state[i].vector[k] = state[i].vector[k]/sum;
 				}
 	//			cout<<sum<<" "<<state[i].vector[k]<<"\t";
-				sumIncludeZero += state[i].vector[k];
+//				sumIncludeZero += state[i].vector[k];
+				optimisedDistributionFile<<state[i].vector[k]<<endl;
 	//			cout<<state[i].vector[k]<<" ";
 			}
-			for(int k=0; k<16; k++){
-				state[i].vector[k] /= sumIncludeZero;
-				optimisedDistributionFile<<state[i].vector[k]<<endl;
-			}
+//			for(int k=0; k<16; k++){
+//				state[i].vector[k] /= sumIncludeZero;
+//				optimisedDistributionFile<<state[i].vector[k]<<endl;
+//			}
 	//		cout<<endl;
 		}
 		optimisedDistributionFile.close();
