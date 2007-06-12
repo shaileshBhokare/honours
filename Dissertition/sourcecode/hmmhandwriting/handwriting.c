@@ -31,9 +31,7 @@ static int xtemp ; //this is a intermedia temp point, used for smooth feature.
 static int ytemp ; 
 static int training ;
 static char *file = "./data/data.txt";
-static char *fullFile = ".data/fullData/data.txt";
 static FILE *fp;
-static FILE *ffp;
 static int firstStroke = True;
 
 /* Create a new backing pixmap of the appropriate size */
@@ -139,12 +137,10 @@ button_press_event (GtkWidget *widget, GdkEventButton *event)
        if(fp != NULL && training == True && firstStroke == True)
       	{
         	fprintf(fp, "<s>\n%d,%d", xii, yii);
-        	fprintf(ffp, "<s>\n%d,%d", xii, yii);
         	firstStroke = False;
       	}else if(fp != NULL && training == True)
       	{
       		fprintf(fp, "\n</s>\n<s>\n%d,%d", xii, yii);
-      		fprintf(ffp, "\n</s>\n<s>\n%d,%d", xii, yii);
       	}
       	
       	xtemp = xii;
@@ -191,11 +187,7 @@ motion_notify_event (GtkWidget *widget, GdkEventMotion *event)
 	      xtemp=xii;
 	      ytemp=yii;
  	 }
-     if(fp != NULL && training == True)
-      {
-        fprintf(ffp, "\n%d,%d",xii, yii);
-      }
-   }
+    }
   
   return TRUE;
 }
@@ -212,7 +204,6 @@ train_function ()
 {
   training = True;
   fp = fopen(file, "w");
-  ffp = fopen(file, "w");
 }
 
 void
@@ -220,9 +211,7 @@ save_function ()
 {
   training = False;
   fprintf(fp, "\n</s>");
-  fprintf(ffp, "\n</s>");
   fclose(fp);
-  fclose(ffp);
 }
 
 int
