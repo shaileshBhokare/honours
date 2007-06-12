@@ -1,7 +1,0 @@
-Overview of Changes from libtomoegtk-0.1.0 to libtomoegtk-0.3.0
-==============================================================
-* Adaptation to TOMOE-0.3.0.
-* List view of the contents of each dictionary.
-* Searching the characters which has the readings you specify.
-* Selection dictionary which you use.
-* Editing character information, strokes, readings, character.
