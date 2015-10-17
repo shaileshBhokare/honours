@@ -1,0 +1,1 @@
+This project is to develop a open source chinese handwriting software using SCIM for Linux.
